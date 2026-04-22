@@ -8,28 +8,33 @@
 <meta property="og:title" content="Maksym Stroievus · Senior QA Engineer"/>
 <meta property="og:description" content="Senior QA Engineer specialising in AI &amp; Platform Quality."/>
 <meta property="og:type" content="website"/>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%238b5cf6'/><text x='16' y='21' font-size='14' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'>MS</text></svg>"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%232563eb'/><text x='16' y='21' font-size='14' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'>MS</text></svg>"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
 :root {
-  --bg:       #06040f;
-  --bg2:      #0a0818;
-  --surface:  rgba(255,255,255,.04);
-  --surface2: rgba(255,255,255,.07);
-  --border:   rgba(255,255,255,.08);
-  --border2:  rgba(167,139,250,.25);
-  --violet:   #a78bfa;
-  --violet2:  #8b5cf6;
-  --cyan:     #06b6d4;
-  --green:    #22c55e;
-  --amber:    #f59e0b;
-  --text:     #f0eeff;
-  --text2:    rgba(255,255,255,.55);
-  --text3:    rgba(255,255,255,.28);
-  --glow:     rgba(139,92,246,.18);
-  --glow2:    rgba(167,139,250,.08);
-  --mono:     'JetBrains Mono', monospace;
-  --sans:     'Inter', sans-serif;
+  --bg:       #eef1f5;
+  --bg2:      #dfe3eb;
+  --surface:  rgba(15,23,42,.03);
+  --surface2: rgba(15,23,42,.055);
+  --border:   rgba(15,23,42,.09);
+  --border2:  rgba(59,130,246,.30);
+  --violet:   #2563eb;
+  --violet2:  #1d4ed8;
+  --cyan:     #0284c7;
+  --green:    #16a34a;
+  --amber:    #d97706;
+  --slate:    #475569;
+  --text:     #0f172a;
+  --text2:    rgba(15,23,42,.62);
+  --text3:    rgba(15,23,42,.40);
+  --glow:     rgba(59,130,246,.14);
+  --glow2:    rgba(59,130,246,.06);
+  --mono:     'Geist Mono', ui-monospace, SFMono-Regular, monospace;
+  --sans:     'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --display:  'Outfit', 'Instrument Sans', sans-serif;
+  --serif:    'Instrument Serif', Georgia, serif;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -38,17 +43,22 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--sans);
+  font-feature-settings: "ss01", "ss02", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   overflow-x: hidden;
   min-height: 100vh;
 }
+h1, h2, h3, h4, .sec-label .hi, .contact-title, .proj-name, .job-title { font-family: var(--display); letter-spacing: -.015em; }
 
 /* Atmosphere */
 body::before {
   content: '';
   position: fixed; inset: 0; z-index: 0;
   background:
-    radial-gradient(ellipse 70% 50% at 20% 10%, rgba(139,92,246,.08) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(6,182,212,.05) 0%, transparent 60%);
+    radial-gradient(ellipse 70% 50% at 20% 10%, rgba(59,130,246,.06) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(2,132,199,.04) 0%, transparent 60%);
   pointer-events: none;
 }
 
@@ -56,7 +66,7 @@ body::before {
 body::after {
   content: '';
   position: fixed; inset: 0; z-index: 0;
-  background-image: radial-gradient(rgba(255,255,255,.04) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(15,23,42,.06) 1px, transparent 1px);
   background-size: 32px 32px;
   pointer-events: none;
 }
@@ -64,12 +74,14 @@ body::after {
 /* ── NAV ── */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  height: 52px;
-  background: rgba(6,4,15,.8);
-  backdrop-filter: blur(16px);
+  height: 56px;
+  background: rgba(238,241,245,.78);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
   border-bottom: 1px solid var(--border);
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 2rem;
+  font-family: var(--sans);
 }
 .nav-name { font-size: 14px; font-weight: 600; color: var(--text); }
 .nav-name span { color: var(--violet); }
@@ -77,15 +89,15 @@ nav {
 .nav-links a { color: var(--text3); font-size: 13px; text-decoration: none; transition: color .2s; }
 .nav-links a:hover { color: var(--violet); }
 .nav-cta {
-  background: rgba(139,92,246,.15);
-  border: 1px solid rgba(139,92,246,.3);
+  background: rgba(59,130,246,.15);
+  border: 1px solid rgba(59,130,246,.3);
   color: var(--violet);
   font-size: 12px; font-weight: 500;
   padding: .35rem 1rem; border-radius: 6px;
   text-decoration: none;
   transition: background .2s, border-color .2s;
 }
-.nav-cta:hover { background: rgba(139,92,246,.25); border-color: var(--violet); }
+.nav-cta:hover { background: rgba(59,130,246,.25); border-color: var(--violet); }
 @media (max-width: 700px) { .nav-links { display: none; } }
 
 /* ── SHARED LAYOUT ── */
@@ -115,8 +127,8 @@ section { padding: 5rem 0 3rem; }
 }
 .glass-hover:hover {
   transform: translateY(-6px) translateZ(0);
-  box-shadow: 0 24px 60px rgba(139,92,246,.15), 0 0 0 1px rgba(167,139,250,.15);
-  border-color: rgba(167,139,250,.2);
+  box-shadow: 0 24px 60px rgba(59,130,246,.15), 0 0 0 1px rgba(96,165,250,.15);
+  border-color: rgba(96,165,250,.2);
 }
 
 /* ── HERO ── */
@@ -132,8 +144,8 @@ section { padding: 5rem 0 3rem; }
 
 .hero-badge {
   display: inline-flex; align-items: center; gap: .5rem;
-  background: rgba(139,92,246,.1);
-  border: 1px solid rgba(139,92,246,.25);
+  background: rgba(59,130,246,.1);
+  border: 1px solid rgba(59,130,246,.25);
   color: var(--violet);
   font-size: 11px; font-weight: 500;
   padding: .3rem .9rem; border-radius: 20px;
@@ -144,14 +156,15 @@ section { padding: 5rem 0 3rem; }
 @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
 
 .hero-name {
-  font-size: clamp(36px, 6vw, 68px);
+  font-family: var(--display);
+  font-size: clamp(44px, 7.2vw, 88px);
   font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -.03em;
+  line-height: .95;
+  letter-spacing: -.045em;
   color: var(--text);
-  margin-bottom: .75rem;
+  margin-bottom: 1rem;
 }
-.hero-name .accent { color: var(--violet); }
+.hero-name .accent { color: var(--violet); font-weight: 300; letter-spacing: -.04em; }
 
 .hero-role {
   font-size: clamp(15px, 2vw, 19px);
@@ -181,9 +194,9 @@ section { padding: 5rem 0 3rem; }
   padding: .7rem 1.75rem; border-radius: 10px;
   text-decoration: none; border: none; cursor: pointer;
   transition: background .2s, box-shadow .2s, transform .15s;
-  box-shadow: 0 4px 20px rgba(139,92,246,.3);
+  box-shadow: 0 4px 20px rgba(59,130,246,.3);
 }
-.btn-primary:hover { background: var(--violet); box-shadow: 0 8px 30px rgba(139,92,246,.4); transform: translateY(-1px); }
+.btn-primary:hover { background: var(--violet); box-shadow: 0 8px 30px rgba(59,130,246,.4); transform: translateY(-1px); }
 
 .btn-ghost {
   background: transparent;
@@ -208,7 +221,7 @@ section { padding: 5rem 0 3rem; }
   backdrop-filter: blur(20px);
   transform-style: preserve-3d;
   animation: heroFloat 6s ease-in-out infinite;
-  box-shadow: 0 30px 80px rgba(139,92,246,.2), 0 0 0 1px rgba(167,139,250,.1) inset;
+  box-shadow: 0 30px 80px rgba(59,130,246,.2), 0 0 0 1px rgba(96,165,250,.1) inset;
   position: relative;
 }
 @keyframes heroFloat {
@@ -219,20 +232,20 @@ section { padding: 5rem 0 3rem; }
 .hc-glow {
   position: absolute; top: -1px; left: -1px; right: -1px; bottom: -1px;
   border-radius: 20px;
-  background: linear-gradient(135deg, rgba(167,139,250,.2), transparent 50%, rgba(6,182,212,.1));
+  background: linear-gradient(135deg, rgba(96,165,250,.2), transparent 50%, rgba(2,132,199,.1));
   pointer-events: none;
 }
 .hc-label { font-family: var(--mono); font-size: 10px; color: var(--violet); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 16px; }
 .hc-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
 .hc-stat {
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(255,255,255,.06);
+  background: rgba(15,23,42,.04);
+  border: 1px solid rgba(15,23,42,.06);
   border-radius: 10px; padding: 12px;
 }
 .hc-stat-n { font-size: 22px; font-weight: 700; color: var(--violet); line-height: 1; }
 .hc-stat-l { font-size: 9px; color: var(--text3); margin-top: 3px; line-height: 1.3; }
 .hc-divider { height: 1px; background: var(--border); margin: 12px 0; }
-.hc-tag { display: inline-flex; align-items: center; gap: .4rem; background: rgba(6,182,212,.1); border: 1px solid rgba(6,182,212,.2); color: var(--cyan); font-size: 10px; font-family: var(--mono); padding: .25rem .6rem; border-radius: 6px; margin: 2px; }
+.hc-tag { display: inline-flex; align-items: center; gap: .4rem; background: rgba(2,132,199,.1); border: 1px solid rgba(2,132,199,.2); color: var(--cyan); font-size: 10px; font-family: var(--mono); padding: .25rem .6rem; border-radius: 6px; margin: 2px; }
 .hc-status { display: flex; align-items: center; gap: .5rem; font-size: 11px; color: var(--text2); margin-top: 12px; }
 .hc-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); flex-shrink: 0; animation: pulse 2s ease infinite; }
 
@@ -255,7 +268,7 @@ section { padding: 5rem 0 3rem; }
   opacity: 0;
   transition: opacity .3s;
 }
-.job-card:hover { border-color: rgba(167,139,250,.2); box-shadow: 0 16px 40px rgba(139,92,246,.1); transform: translateX(4px); }
+.job-card:hover { border-color: rgba(96,165,250,.2); box-shadow: 0 16px 40px rgba(59,130,246,.1); transform: translateX(4px); }
 .job-card:hover::before { opacity: 1; }
 
 .job-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
@@ -263,8 +276,8 @@ section { padding: 5rem 0 3rem; }
 .job-company { color: var(--violet); font-size: 14px; font-weight: 500; }
 .job-sub { color: var(--text3); font-size: 12px; margin-top: .2rem; }
 .job-date {
-  background: rgba(139,92,246,.1);
-  border: 1px solid rgba(139,92,246,.2);
+  background: rgba(59,130,246,.1);
+  border: 1px solid rgba(59,130,246,.2);
   color: var(--violet); font-size: 11px; font-family: var(--mono);
   padding: .25rem .75rem; border-radius: 6px; white-space: nowrap; flex-shrink: 0;
 }
@@ -276,13 +289,13 @@ section { padding: 5rem 0 3rem; }
 
 .job-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.25rem; }
 .jtag {
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(255,255,255,.07);
+  background: rgba(15,23,42,.04);
+  border: 1px solid rgba(15,23,42,.07);
   color: var(--text3); font-size: 11px; font-family: var(--mono);
   padding: .2rem .6rem; border-radius: 6px;
   transition: border-color .2s, color .2s;
 }
-.job-card:hover .jtag { border-color: rgba(167,139,250,.15); color: var(--text2); }
+.job-card:hover .jtag { border-color: rgba(96,165,250,.15); color: var(--text2); }
 
 /* ── SKILLS ── */
 .skills-grid {
@@ -301,8 +314,8 @@ section { padding: 5rem 0 3rem; }
   transition: border-color .3s, box-shadow .3s, transform .3s;
 }
 .skill-card:hover {
-  border-color: rgba(167,139,250,.25);
-  box-shadow: 0 16px 40px rgba(139,92,246,.1);
+  border-color: rgba(96,165,250,.25);
+  box-shadow: 0 16px 40px rgba(59,130,246,.1);
   transform: translateY(-4px) rotateX(2deg);
 }
 .sc-head {
@@ -322,7 +335,7 @@ section { padding: 5rem 0 3rem; }
   transition: background .15s;
   position: relative;
 }
-.sk:hover { background: rgba(255,255,255,.04); }
+.sk:hover { background: rgba(15,23,42,.04); }
 .sk-dot { font-size: 8px; flex-shrink: 0; }
 .sk-dot.c { color: var(--violet); }
 .sk-dot.w { color: var(--amber); }
@@ -338,15 +351,16 @@ section { padding: 5rem 0 3rem; }
 /* Tooltip */
 .tip {
   position: fixed;
-  background: rgba(15,10,28,.95);
-  border: 1px solid rgba(167,139,250,.3);
+  background: rgba(238,241,245,.96);
+  border: 1px solid rgba(59,130,246,.25);
   border-radius: 10px; padding: .75rem 1rem;
   font-size: 12px; color: var(--text);
   max-width: 260px; line-height: 1.55;
-  box-shadow: 0 16px 40px rgba(139,92,246,.2);
+  box-shadow: 0 20px 48px rgba(15,23,42,.12), 0 2px 8px rgba(15,23,42,.06);
   pointer-events: none; z-index: 9999;
   opacity: 0; transition: opacity .15s;
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
 }
 .tip.on { opacity: 1; }
 .tip strong { color: var(--violet); display: block; margin-bottom: .25rem; font-size: 12.5px; }
@@ -364,15 +378,28 @@ section { padding: 5rem 0 3rem; }
   text-decoration: none;
   color: inherit;
   display: block;
+  cursor: pointer;
+  position: relative;
 }
+.proj-card::after {
+  content: 'click to expand ↗';
+  position: absolute; top: .6rem; left: .6rem; z-index: 3;
+  background: rgba(238,241,245,.85); backdrop-filter: blur(4px);
+  border: 1px solid rgba(15,23,42,.1);
+  color: var(--text2); font-family: var(--mono); font-size: 9.5px;
+  padding: .22rem .55rem; border-radius: 4px;
+  opacity: 0; transform: translateY(-4px); transition: opacity .25s, transform .25s;
+  pointer-events: none; letter-spacing: .04em;
+}
+.proj-card:hover::after { opacity: 1; transform: translateY(0); }
 .proj-card:hover {
-  border-color: rgba(167,139,250,.25);
-  box-shadow: 0 20px 50px rgba(139,92,246,.12);
+  border-color: rgba(96,165,250,.25);
+  box-shadow: 0 20px 50px rgba(59,130,246,.12);
   transform: translateY(-5px);
 }
 .proj-preview {
   height: 160px;
-  background: linear-gradient(135deg, rgba(139,92,246,.08) 0%, rgba(6,182,212,.05) 100%);
+  background: linear-gradient(135deg, rgba(59,130,246,.08) 0%, rgba(2,132,199,.05) 100%);
   border-bottom: 1px solid var(--border);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: .5rem; position: relative; overflow: hidden;
@@ -380,14 +407,15 @@ section { padding: 5rem 0 3rem; }
 .proj-preview::before {
   content: '';
   position: absolute; inset: 0;
-  background-image: radial-gradient(rgba(255,255,255,.03) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(15,23,42,.035) 1px, transparent 1px);
   background-size: 20px 20px;
 }
 .gif-badge {
   position: absolute; top: .6rem; right: .6rem;
-  background: rgba(0,0,0,.6); border: 1px solid rgba(255,255,255,.1);
-  color: var(--text3); font-size: 9px; font-family: var(--mono);
+  background: rgba(238,241,245,.85); border: 1px solid rgba(15,23,42,.12);
+  color: var(--text2); font-size: 9px; font-family: var(--mono);
   padding: .2rem .5rem; border-radius: 4px;
+  backdrop-filter: blur(4px);
   z-index: 2;
 }
 .proj-icon { font-size: 32px; position: relative; z-index: 1; }
@@ -402,13 +430,13 @@ section { padding: 5rem 0 3rem; }
   padding: .2rem .65rem; border-radius: 6px; text-decoration: none;
   transition: color .2s, border-color .2s;
 }
-.proj-link:hover { color: var(--violet); border-color: rgba(167,139,250,.3); }
+.proj-link:hover { color: var(--violet); border-color: rgba(96,165,250,.3); }
 
 /* ── METRICS ── */
 #metrics {
-  background: rgba(139,92,246,.04);
-  border-top: 1px solid rgba(139,92,246,.1);
-  border-bottom: 1px solid rgba(139,92,246,.1);
+  background: rgba(59,130,246,.04);
+  border-top: 1px solid rgba(59,130,246,.1);
+  border-bottom: 1px solid rgba(59,130,246,.1);
   padding: 3.5rem 0;
   position: relative; z-index: 1;
 }
@@ -421,20 +449,20 @@ section { padding: 5rem 0 3rem; }
 
 .metric-card {
   background: var(--surface);
-  border: 1px solid rgba(139,92,246,.12);
+  border: 1px solid rgba(59,130,246,.12);
   border-radius: 14px; padding: 1.25rem 1rem;
   text-align: center;
   transition: border-color .25s, box-shadow .25s, transform .25s;
 }
 .metric-card:hover {
-  border-color: rgba(167,139,250,.3);
-  box-shadow: 0 12px 30px rgba(139,92,246,.12);
+  border-color: rgba(96,165,250,.3);
+  box-shadow: 0 12px 30px rgba(59,130,246,.12);
   transform: translateY(-4px);
 }
 .metric-num {
   font-size: clamp(24px, 3vw, 36px); font-weight: 800;
   color: var(--violet);
-  text-shadow: 0 0 20px rgba(139,92,246,.4);
+  text-shadow: 0 0 20px rgba(59,130,246,.4);
   line-height: 1;
 }
 .metric-label { font-size: 10.5px; color: var(--text3); margin-top: .5rem; line-height: 1.4; }
@@ -447,9 +475,9 @@ section { padding: 5rem 0 3rem; }
   padding: 1.1rem 1.25rem;
   transition: border-color .25s, transform .25s;
 }
-.ach-item:hover { border-color: rgba(167,139,250,.2); transform: translateX(4px); }
+.ach-item:hover { border-color: rgba(96,165,250,.2); transform: translateX(4px); }
 .ach-num {
-  background: rgba(139,92,246,.12); border: 1px solid rgba(139,92,246,.2);
+  background: rgba(59,130,246,.12); border: 1px solid rgba(59,130,246,.2);
   color: var(--violet); font-family: var(--mono); font-size: 11px; font-weight: 600;
   min-width: 2rem; height: 2rem; border-radius: 8px;
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
@@ -466,7 +494,7 @@ section { padding: 5rem 0 3rem; }
 .log-line {
   display: flex; gap: 1rem; align-items: baseline;
   font-size: 13px; padding: .5rem 0;
-  border-bottom: 1px solid rgba(255,255,255,.04);
+  border-bottom: 1px solid rgba(15,23,42,.04);
   line-height: 1.5;
 }
 .log-line:last-child { border-bottom: none; }
@@ -495,13 +523,13 @@ section { padding: 5rem 0 3rem; }
 .contact-links { display: flex; flex-direction: column; gap: .75rem; }
 .contact-link {
   display: flex; align-items: center; gap: .75rem;
-  background: rgba(255,255,255,.03); border: 1px solid var(--border);
+  background: rgba(15,23,42,.035); border: 1px solid var(--border);
   border-radius: 10px; padding: .8rem 1rem;
   text-decoration: none; color: var(--text2);
   transition: border-color .2s, color .2s, background .2s;
   font-size: 13px;
 }
-.contact-link:hover { border-color: rgba(167,139,250,.3); color: var(--violet); background: rgba(139,92,246,.05); }
+.contact-link:hover { border-color: rgba(96,165,250,.3); color: var(--violet); background: rgba(59,130,246,.05); }
 .contact-link .icon { font-size: 16px; flex-shrink: 0; }
 .cta-big {
   display: block; text-align: center;
@@ -509,9 +537,9 @@ section { padding: 5rem 0 3rem; }
   padding: 1rem; border-radius: 12px; text-decoration: none;
   margin-top: 1.5rem;
   transition: background .2s, box-shadow .2s, transform .15s;
-  box-shadow: 0 4px 20px rgba(139,92,246,.3);
+  box-shadow: 0 4px 20px rgba(59,130,246,.3);
 }
-.cta-big:hover { background: var(--violet); box-shadow: 0 8px 30px rgba(139,92,246,.4); transform: translateY(-2px); }
+.cta-big:hover { background: var(--violet); box-shadow: 0 8px 30px rgba(59,130,246,.4); transform: translateY(-2px); }
 
 .contact-side { display: flex; flex-direction: column; gap: 1rem; }
 .side-card {
@@ -520,7 +548,7 @@ section { padding: 5rem 0 3rem; }
   flex: 1;
   transition: border-color .2s;
 }
-.side-card:hover { border-color: rgba(167,139,250,.2); }
+.side-card:hover { border-color: rgba(96,165,250,.2); }
 .side-title { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--text3); font-weight: 600; margin-bottom: .75rem; }
 .side-langs { display: flex; flex-direction: column; gap: .4rem; }
 .lang-row { display: flex; justify-content: space-between; font-size: 13px; }
@@ -532,6 +560,89 @@ section { padding: 5rem 0 3rem; }
   padding: 2rem 0 1rem;
   position: relative; z-index: 1;
 }
+
+/* ── PROJECT MODAL ── */
+.pm-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(15,23,42,.55);
+  backdrop-filter: blur(8px) saturate(140%);
+  -webkit-backdrop-filter: blur(8px) saturate(140%);
+  display: flex; align-items: center; justify-content: center;
+  padding: 2rem;
+  opacity: 0; pointer-events: none;
+  transition: opacity .25s ease;
+}
+.pm-overlay.on { opacity: 1; pointer-events: auto; }
+.pm-dialog {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  width: min(920px, 100%);
+  max-height: calc(100vh - 4rem);
+  overflow: hidden; position: relative;
+  display: grid; grid-template-rows: auto 1fr auto;
+  box-shadow: 0 40px 100px rgba(15,23,42,.25), 0 0 0 1px rgba(15,23,42,.05);
+  transform: translateY(18px) scale(.98); transition: transform .3s cubic-bezier(.2,0,.2,1);
+}
+.pm-overlay.on .pm-dialog { transform: translateY(0) scale(1); }
+.pm-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.pm-head-meta { display: flex; flex-direction: column; gap: .2rem; }
+.pm-type { font-size: 10.5px; font-family: var(--mono); color: var(--text3); letter-spacing: .04em; }
+.pm-name { font-family: var(--display); font-size: 22px; font-weight: 700; color: var(--text); letter-spacing: -.015em; }
+.pm-close {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: var(--surface); border: 1px solid var(--border);
+  color: var(--text2); font-size: 16px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color .2s, color .2s, background .2s;
+}
+.pm-close:hover { border-color: var(--border2); color: var(--violet); background: var(--surface2); }
+.pm-body { overflow-y: auto; padding: 0; }
+.pm-canvas-wrap {
+  height: 300px; background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  position: relative; overflow: hidden;
+}
+.pm-canvas-wrap canvas { width: 100%; height: 100%; display: block; }
+.pm-content { padding: 1.75rem; display: grid; gap: 1.5rem; }
+.pm-desc { font-size: 14px; color: var(--text2); line-height: 1.65; }
+.pm-desc strong { color: var(--text); font-weight: 600; }
+.pm-features { display: grid; gap: .75rem; }
+.pm-feat {
+  display: grid; grid-template-columns: auto 1fr; gap: 1rem;
+  padding: .85rem 1rem;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+}
+.pm-feat-idx { font-family: var(--mono); font-size: 10.5px; color: var(--violet); padding-top: .15rem; }
+.pm-feat-title { font-weight: 600; font-size: 13.5px; color: var(--text); margin-bottom: .2rem; }
+.pm-feat-desc { font-size: 12.5px; color: var(--text2); line-height: 1.55; }
+.pm-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+.pm-tag {
+  font-family: var(--mono); font-size: 10.5px;
+  color: var(--text2); background: var(--surface);
+  border: 1px solid var(--border);
+  padding: .25rem .6rem; border-radius: 6px;
+}
+.pm-foot {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+.pm-foot-note { font-size: 11.5px; font-family: var(--mono); color: var(--text3); }
+.pm-gh-btn {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: var(--violet); color: #fff; font-weight: 600; font-size: 13px;
+  padding: .65rem 1.15rem; border-radius: 10px; text-decoration: none;
+  transition: background .2s, box-shadow .2s, transform .15s;
+  box-shadow: 0 4px 16px rgba(59,130,246,.25);
+}
+.pm-gh-btn:hover { background: var(--violet2); box-shadow: 0 8px 24px rgba(59,130,246,.35); transform: translateY(-1px); }
+body.pm-open { overflow: hidden; }
 
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
@@ -685,8 +796,8 @@ section { padding: 5rem 0 3rem; }
   <div class="sec-label"><span class="hi">Projects</span></div>
   <div class="projects-grid">
 
-    <a class="proj-card" href="https://github.com/MStroievus/playwright-aqa-plugin" target="_blank" rel="noopener">
-      <div class="proj-preview" style="padding:0;background:#07050f;position:relative;overflow:hidden;">
+    <article class="proj-card" data-project="playwright-aqa" tabindex="0" role="button" aria-label="Expand playwright-aqa details">
+      <div class="proj-preview" style="padding:0;background:#dfe3eb;position:relative;overflow:hidden;">
         <canvas id="term-canvas" style="width:100%;height:160px;display:block;"></canvas>
       </div>
       <div class="proj-body">
@@ -694,14 +805,14 @@ section { padding: 5rem 0 3rem; }
         <div class="proj-name">playwright-aqa</div>
         <div class="proj-desc">A Claude Skill encapsulating Page Object Model, fixtures, and API testing patterns. Lets Claude generate production-grade Playwright tests on demand. Focus on trigger precision and scope isolation.</div>
         <div class="proj-links">
-          <span class="proj-link">github →</span>
+          <a class="proj-link" href="https://github.com/MStroievus/playwright-aqa-plugin" target="_blank" rel="noopener" onclick="event.stopPropagation()">github →</a>
           <span style="font-size:11px;color:var(--text3);font-family:var(--mono)">TypeScript · Claude Skills</span>
         </div>
       </div>
-    </a>
+    </article>
 
-    <a class="proj-card" href="https://github.com/MStroievus/confluence-lanchain-ts" target="_blank" rel="noopener">
-      <div class="proj-preview" style="padding:0;background:#060410;position:relative;overflow:hidden;">
+    <article class="proj-card" data-project="confluence-rag" tabindex="0" role="button" aria-label="Expand Confluence LangChain Bot details">
+      <div class="proj-preview" style="padding:0;background:#dfe3eb;position:relative;overflow:hidden;">
         <canvas id="vec-canvas" style="width:100%;height:160px;display:block;"></canvas>
       </div>
       <div class="proj-body">
@@ -709,14 +820,14 @@ section { padding: 5rem 0 3rem; }
         <div class="proj-name">Confluence LangChain Bot</div>
         <div class="proj-desc">TypeScript chatbot that loads Confluence pages, converts them to vector embeddings via LangChain, and enables RAG-based Q&amp;A over your documentation. Built with LangGraph for stateful multi-step agent flows.</div>
         <div class="proj-links">
-          <span class="proj-link">github →</span>
+          <a class="proj-link" href="https://github.com/MStroievus/confluence-lanchain-ts" target="_blank" rel="noopener" onclick="event.stopPropagation()">github →</a>
           <span style="font-size:11px;color:var(--text3);font-family:var(--mono)">TypeScript · LangChain · LangGraph · RAG</span>
         </div>
       </div>
-    </a>
+    </article>
 
-    <a class="proj-card" href="https://github.com/MStroievus/my-foodie-bot" target="_blank" rel="noopener">
-      <div class="proj-preview" style="padding:0;background:#07050f;position:relative;overflow:hidden;">
+    <article class="proj-card" data-project="foodie-bot" tabindex="0" role="button" aria-label="Expand my-foodie-bot details">
+      <div class="proj-preview" style="padding:0;background:#dfe3eb;position:relative;overflow:hidden;">
         <canvas id="obs-canvas" style="width:100%;height:160px;display:block;"></canvas>
       </div>
       <div class="proj-body">
@@ -724,14 +835,39 @@ section { padding: 5rem 0 3rem; }
         <div class="proj-name">my-foodie-bot</div>
         <div class="proj-desc">AI food assistant with persistent <strong style="color:var(--text)">memO</strong> memory and long-term user context. Instrumented with <strong style="color:var(--text)">LangFuse</strong> for prompt tracing, cost tracking, and eval scoring — measuring hallucination rate, groundedness, and latency per release.</div>
         <div class="proj-links">
-          <span class="proj-link">github →</span>
+          <a class="proj-link" href="https://github.com/MStroievus/my-foodie-bot" target="_blank" rel="noopener" onclick="event.stopPropagation()">github →</a>
           <span style="font-size:11px;color:var(--text3);font-family:var(--mono)">Python · memO · LangFuse · LangChain · Eval</span>
         </div>
       </div>
-    </a>
+    </article>
 
   </div>
 </section>
+
+<!-- ══ PROJECT MODAL ══ -->
+<div class="pm-overlay" id="pm-overlay" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="pm-dialog" role="document">
+    <div class="pm-head">
+      <div class="pm-head-meta">
+        <div class="pm-type" id="pm-type"></div>
+        <div class="pm-name" id="pm-name"></div>
+      </div>
+      <button class="pm-close" id="pm-close" aria-label="Close">✕</button>
+    </div>
+    <div class="pm-body">
+      <div class="pm-canvas-wrap"><canvas id="pm-canvas"></canvas></div>
+      <div class="pm-content">
+        <div class="pm-desc" id="pm-desc"></div>
+        <div class="pm-features" id="pm-features"></div>
+        <div class="pm-tags" id="pm-tags"></div>
+      </div>
+    </div>
+    <div class="pm-foot">
+      <span class="pm-foot-note" id="pm-foot-note">// source of truth →</span>
+      <a class="pm-gh-btn" id="pm-gh" href="#" target="_blank" rel="noopener">⌥ View on GitHub</a>
+    </div>
+  </div>
+</div>
 
 <!-- ══ SKILLS ══ -->
 <section id="skills">
@@ -953,7 +1089,7 @@ if (heroWrap && heroCard) {
   ctx.scale(dpr, dpr);
 
   const words = ['test plan', 'confluence', 'QA report', 'bug ticket', 'release note'];
-  const colors = ['#a78bfa','#06b6d4','#f59e0b','#22c55e','#f472b6'];
+  const colors = ['#2563eb','#0284c7','#d97706','#16a34a','#db2777'];
   let wordIdx = 0;
   let phase = 0; // 0=word, 1=arrow, 2=vector
   let phaseT = 0;
@@ -969,7 +1105,7 @@ if (heroWrap && heroCard) {
     ctx.clearRect(0, 0, W, H);
 
     // Background grid
-    ctx.strokeStyle = 'rgba(167,139,250,.06)';
+    ctx.strokeStyle = 'rgba(96,165,250,.06)';
     ctx.lineWidth = 1;
     for (let x = 0; x < W; x += 24) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke(); }
     for (let y = 0; y < H; y += 24) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke(); }
@@ -981,12 +1117,12 @@ if (heroWrap && heroCard) {
     if (phase === 0) {
       const alpha = phaseT < .2 ? phaseT/.2 : phaseT > .8 ? 1-(phaseT-.8)/.2 : 1;
       ctx.globalAlpha = alpha;
-      ctx.font = 'bold 22px Inter, sans-serif';
+      ctx.font = 'bold 22px Outfit, sans-serif';
       ctx.fillStyle = col;
       ctx.textAlign = 'center';
       ctx.fillText('"' + word + '"', W/2, H/2 + 8);
-      ctx.font = '10px JetBrains Mono, monospace';
-      ctx.fillStyle = 'rgba(255,255,255,.3)';
+      ctx.font = '10px Geist Mono, monospace';
+      ctx.fillStyle = 'rgba(15,23,42,.3)';
       ctx.fillText('input text', W/2, H/2 + 28);
       ctx.globalAlpha = 1;
     } else if (phase === 1) {
@@ -994,7 +1130,7 @@ if (heroWrap && heroCard) {
       const cx = W/2, cy = H/2;
       const len = prog * (W * .32);
       ctx.globalAlpha = 1 - prog;
-      ctx.font = 'bold 18px Inter, sans-serif';
+      ctx.font = 'bold 18px Outfit, sans-serif';
       ctx.fillStyle = col;
       ctx.textAlign = 'center';
       ctx.fillText('"' + word + '"', cx - 90, cy + 6);
@@ -1010,8 +1146,8 @@ if (heroWrap && heroCard) {
         ctx.beginPath(); ctx.moveTo(ax, cy); ctx.lineTo(ax-7, cy-5); ctx.lineTo(ax-7, cy+5); ctx.closePath();
         ctx.fillStyle = col; ctx.fill();
       }
-      ctx.font = '9px JetBrains Mono, monospace';
-      ctx.fillStyle = 'rgba(255,255,255,.35)';
+      ctx.font = '9px Geist Mono, monospace';
+      ctx.fillStyle = 'rgba(15,23,42,.35)';
       ctx.textAlign = 'center';
       ctx.fillText('embedding', cx, cy - 12);
     } else {
@@ -1027,18 +1163,18 @@ if (heroWrap && heroCard) {
         const bh = Math.abs(val) * maxH * prog;
         const x = startX + i * (barW + gap);
         const y = H/2;
-        const barCol = val >= 0 ? col : '#ff6b6b';
+        const barCol = val >= 0 ? col : '#dc2626';
         ctx.fillStyle = barCol + '33';
         ctx.fillRect(x, y - maxH, barW, maxH * 2);
         ctx.fillStyle = barCol;
         ctx.fillRect(x, val >= 0 ? y - bh : y, barW, bh);
-        ctx.font = '7px JetBrains Mono, monospace';
-        ctx.fillStyle = 'rgba(255,255,255,.4)';
+        ctx.font = '7px Geist Mono, monospace';
+        ctx.fillStyle = 'rgba(15,23,42,.4)';
         ctx.textAlign = 'center';
         ctx.fillText(v, x + barW/2, val >= 0 ? y - bh - 3 : y + bh + 10);
       });
-      ctx.font = '9px JetBrains Mono, monospace';
-      ctx.fillStyle = 'rgba(255,255,255,.25)';
+      ctx.font = '9px Geist Mono, monospace';
+      ctx.fillStyle = 'rgba(15,23,42,.25)';
       ctx.textAlign = 'center';
       ctx.fillText('vector[' + vec.length + '] → Confluence RAG', W/2, H - 10);
       ctx.globalAlpha = 1;
@@ -1087,17 +1223,17 @@ if (heroWrap && heroCard) {
   ];
 
   const COLORS = {
-    bg:     '#07050f',
-    border: 'rgba(167,139,250,.12)',
-    prompt: '#22c55e',
-    user:   'rgba(255,255,255,.92)',
-    claude: '#a78bfa',
-    claudeMuted: 'rgba(167,139,250,.75)',
-    skill:  '#06b6d4',
-    code:   'rgba(255,255,255,.55)',
-    codeKw: '#f472b6',
-    ok:     '#22c55e',
-    dim:    'rgba(255,255,255,.3)',
+    bg:     '#e6eaf1',
+    border: 'rgba(37,99,235,.18)',
+    prompt: '#15803d',
+    user:   'rgba(15,23,42,.92)',
+    claude: '#1d4ed8',
+    claudeMuted: 'rgba(15,23,42,.55)',
+    skill:  '#0369a1',
+    code:   'rgba(15,23,42,.60)',
+    codeKw: '#be185d',
+    ok:     '#15803d',
+    dim:    'rgba(15,23,42,.35)',
   };
 
   const LINE_H = 15;
@@ -1128,7 +1264,7 @@ if (heroWrap && heroCard) {
 
     if (line.type === 'prompt') {
       // split into "$" and rest
-      ctx.font = '500 11.5px JetBrains Mono, monospace';
+      ctx.font = '500 11.5px Geist Mono, monospace';
       ctx.textBaseline = 'middle';
       const m = shown.match(/^(\$)(.*)$/);
       if (m) {
@@ -1141,7 +1277,7 @@ if (heroWrap && heroCard) {
         ctx.fillText(shown, x, y);
       }
     } else if (line.type === 'claude') {
-      ctx.font = '500 11.5px JetBrains Mono, monospace';
+      ctx.font = '500 11.5px Geist Mono, monospace';
       ctx.textBaseline = 'middle';
       // "Claude →" prefix in violet, rest muted
       const prefix = 'Claude →';
@@ -1155,7 +1291,7 @@ if (heroWrap && heroCard) {
         ctx.fillText(shown.slice(prefix.length), x + ctx.measureText(prefix).width, y);
       }
     } else if (line.type === 'skill') {
-      ctx.font = '600 11.5px JetBrains Mono, monospace';
+      ctx.font = '600 11.5px Geist Mono, monospace';
       ctx.textBaseline = 'middle';
       // "● " dot in cyan, name in white-ish
       const dot = '● ';
@@ -1165,11 +1301,11 @@ if (heroWrap && heroCard) {
       } else {
         ctx.fillStyle = COLORS.skill;
         ctx.fillText(dot, x, y);
-        ctx.fillStyle = '#f0eeff';
+        ctx.fillStyle = '#0f172a';
         ctx.fillText(shown.slice(dot.length), x + ctx.measureText(dot).width, y);
       }
     } else if (line.type === 'code') {
-      ctx.font = '400 11px JetBrains Mono, monospace';
+      ctx.font = '400 11px Geist Mono, monospace';
       ctx.textBaseline = 'middle';
       // Simple keyword highlight: test, await, expect, async
       const kw = /\b(test|await|expect|async|const|await)\b/g;
@@ -1193,7 +1329,7 @@ if (heroWrap && heroCard) {
         dx += ctx.measureText(s[c]).width;
       }
     } else if (line.type === 'ok') {
-      ctx.font = '600 11.5px JetBrains Mono, monospace';
+      ctx.font = '600 11.5px Geist Mono, monospace';
       ctx.textBaseline = 'middle';
       ctx.fillStyle = COLORS.ok;
       ctx.fillText(shown, x, y);
@@ -1209,9 +1345,9 @@ if (heroWrap && heroCard) {
     ctx.fillRect(0, 0, W, H);
 
     // Top fake window chrome
-    ctx.fillStyle = 'rgba(255,255,255,.03)';
+    ctx.fillStyle = 'rgba(15,23,42,.06)';
     ctx.fillRect(0, 0, W, 22);
-    ctx.fillStyle = 'rgba(255,255,255,.06)';
+    ctx.fillStyle = 'rgba(15,23,42,.12)';
     ctx.fillRect(0, 22, W, 1);
     // traffic lights
     const dots = [ ['#ff5f57', 12], ['#febc2e', 26], ['#28c840', 40] ];
@@ -1221,7 +1357,7 @@ if (heroWrap && heroCard) {
       ctx.fillStyle = c;
       ctx.fill();
     });
-    ctx.font = '500 9.5px JetBrains Mono, monospace';
+    ctx.font = '500 9.5px Geist Mono, monospace';
     ctx.fillStyle = COLORS.dim;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
@@ -1254,7 +1390,7 @@ if (heroWrap && heroCard) {
       const w = ctx.measureText(lastLine.text).width;
       let baseX = PAD_L;
       // for prompt type, prefix rendered separately
-      ctx.fillStyle = 'rgba(167,139,250,.9)';
+      ctx.fillStyle = 'rgba(96,165,250,.9)';
       ctx.fillRect(baseX + w + 2, y - 6, 6, 12);
     }
 
@@ -1355,17 +1491,17 @@ if (heroWrap && heroCard) {
   // colors
   const C = {
     bg:        '#07050f',
-    chrome:    'rgba(255,255,255,.03)',
-    line:      'rgba(255,255,255,.05)',
-    dim:       'rgba(255,255,255,.3)',
-    label:     'rgba(255,255,255,.55)',
-    violet:    '#a78bfa',
-    cyan:      '#06b6d4',
-    green:     '#22c55e',
-    amber:     '#f59e0b',
+    chrome:    'rgba(15,23,42,.035)',
+    line:      'rgba(15,23,42,.05)',
+    dim:       'rgba(15,23,42,.3)',
+    label:     'rgba(15,23,42,.55)',
+    violet:    '#2563eb',
+    cyan:      '#0284c7',
+    green:     '#16a34a',
+    amber:     '#d97706',
     red:       '#f87171',
-    text:      '#f0eeff',
-    trackBg:   'rgba(255,255,255,.05)',
+    text:      '#0f172a',
+    trackBg:   'rgba(15,23,42,.05)',
   };
 
   function statusColor(s) {
@@ -1379,7 +1515,7 @@ if (heroWrap && heroCard) {
     // title bar
     ctx.fillStyle = C.chrome;
     ctx.fillRect(0, 0, W, 22);
-    ctx.fillStyle = 'rgba(255,255,255,.06)';
+    ctx.fillStyle = 'rgba(15,23,42,.06)';
     ctx.fillRect(0, 22, W, 1);
 
     // live dot
@@ -1389,7 +1525,7 @@ if (heroWrap && heroCard) {
     ctx.fillStyle = `rgba(34,197,94,${pulse})`;
     ctx.fill();
 
-    ctx.font = '600 9.5px JetBrains Mono, monospace';
+    ctx.font = '600 9.5px Geist Mono, monospace';
     ctx.textBaseline = 'middle';
     ctx.fillStyle = C.violet;
     ctx.fillText('LangFuse', 22, 11);
@@ -1402,7 +1538,7 @@ if (heroWrap && heroCard) {
     const rightX = W - 8;
     ctx.textAlign = 'right';
     ctx.fillStyle = C.dim;
-    ctx.font = '500 9px JetBrains Mono, monospace';
+    ctx.font = '500 9px Geist Mono, monospace';
     ctx.fillText('eval', rightX - 34, 11);
     // mini bar
     const barW = 28, barH = 5;
@@ -1424,7 +1560,7 @@ if (heroWrap && heroCard) {
     ctx.globalAlpha = alpha;
 
     // top label: prompt name + status dot + latency
-    ctx.font = '600 10px JetBrains Mono, monospace';
+    ctx.font = '600 10px Geist Mono, monospace';
     ctx.textBaseline = 'middle';
 
     // status dot
@@ -1433,12 +1569,12 @@ if (heroWrap && heroCard) {
 
     // prompt name
     ctx.fillStyle = C.text;
-    ctx.font = '500 10px JetBrains Mono, monospace';
+    ctx.font = '500 10px Geist Mono, monospace';
     ctx.fillText(row.name, 22, y + 7);
 
     // right-side: latency + tokens + cost
     ctx.textAlign = 'right';
-    ctx.font = '400 9px JetBrains Mono, monospace';
+    ctx.font = '400 9px Geist Mono, monospace';
     const rightX = W - 10;
     const lat = row.latency < 1000 ? Math.round(row.latency) + 'ms' : (row.latency/1000).toFixed(1) + 's';
     const latCol = row.latency < 700 ? C.green : row.latency < 1500 ? C.amber : C.red;
@@ -1470,11 +1606,11 @@ if (heroWrap && heroCard) {
     const p = Math.min(1, Math.max(0, row.progress));
     const grad = ctx.createLinearGradient(barX, 0, barX + barW, 0);
     if (row.status === 'ok') {
-      grad.addColorStop(0, 'rgba(167,139,250,.9)');
-      grad.addColorStop(1, 'rgba(6,182,212,.9)');
+      grad.addColorStop(0, 'rgba(96,165,250,.9)');
+      grad.addColorStop(1, 'rgba(2,132,199,.9)');
     } else if (row.status === 'warn') {
       grad.addColorStop(0, 'rgba(245,158,11,.9)');
-      grad.addColorStop(1, 'rgba(167,139,250,.6)');
+      grad.addColorStop(1, 'rgba(96,165,250,.6)');
     } else {
       grad.addColorStop(0, 'rgba(248,113,113,.9)');
       grad.addColorStop(1, 'rgba(245,158,11,.7)');
@@ -1487,7 +1623,7 @@ if (heroWrap && heroCard) {
     if (p > 0.85) {
       const pillAlpha = Math.min(1, (p - 0.85) / 0.15);
       ctx.globalAlpha = alpha * pillAlpha;
-      ctx.font = '500 8.5px JetBrains Mono, monospace';
+      ctx.font = '500 8.5px Geist Mono, monospace';
       ctx.textAlign = 'right';
       ctx.fillStyle = C.label;
       ctx.fillText('score', W - 44, y + 30.5);
@@ -1514,7 +1650,7 @@ if (heroWrap && heroCard) {
     // a subtle token-cost sparkline at the very bottom
     const y0 = H - 14;
     const y1 = H - 2;
-    ctx.strokeStyle = 'rgba(167,139,250,.25)';
+    ctx.strokeStyle = 'rgba(96,165,250,.25)';
     ctx.lineWidth = 1;
     ctx.beginPath();
     const pts = 40;
@@ -1527,7 +1663,7 @@ if (heroWrap && heroCard) {
     }
     ctx.stroke();
 
-    ctx.font = '500 8px JetBrains Mono, monospace';
+    ctx.font = '500 8px Geist Mono, monospace';
     ctx.textBaseline = 'bottom';
     ctx.fillStyle = C.dim;
     ctx.fillText('cost · 24h', 8, H - 2);
@@ -1564,6 +1700,784 @@ if (heroWrap && heroCard) {
     requestAnimationFrame(draw);
   }
   draw();
+})();
+
+// ── PROJECT MODAL ──
+(function () {
+  const overlay = document.getElementById('pm-overlay');
+  if (!overlay) return;
+  const dialog = overlay.querySelector('.pm-dialog');
+  const closeBtn = document.getElementById('pm-close');
+  const typeEl = document.getElementById('pm-type');
+  const nameEl = document.getElementById('pm-name');
+  const descEl = document.getElementById('pm-desc');
+  const featEl = document.getElementById('pm-features');
+  const tagsEl = document.getElementById('pm-tags');
+  const ghBtn = document.getElementById('pm-gh');
+  const canvas = document.getElementById('pm-canvas');
+
+  const data = {
+    'playwright-aqa': {
+      type: '// open source · Claude Skill · deep-dive',
+      name: 'playwright-aqa',
+      repo: 'https://github.com/MStroievus/playwright-aqa-plugin',
+      desc: 'A <strong>Claude Skill</strong> that encapsulates Page Object Model, typed fixtures, and API-testing patterns so Claude generates production-grade Playwright suites on demand — without re-inventing folder structure, selector strategy, or reporter plumbing every time.',
+      features: [
+        ['Trigger precision', 'Loads only when intent is unambiguous — Playwright + TypeScript project context, not Python, not Cypress. Scope isolation prevents leaking patterns into unrelated work.'],
+        ['POM scaffolding', 'Generates page objects with consistent selector hierarchy, readable locators, and chainable action APIs. Catches anti-patterns like raw CSS chaining and waits-on-timeout.'],
+        ['Typed fixture system', 'Custom fixture composition with full TS inference. Data builders, auth contexts, and network mocks compose without boilerplate.'],
+        ['API testing patterns', 'Request context builders, typed response models, contract assertions. Keeps API tests first-class citizens — not afterthoughts bolted onto UI suites.'],
+        ['Reporter & CI plumbing', 'Allure integration, shardable pipelines, quality gates. Produces test projects that drop into GitLab CI with zero friction.'],
+      ],
+      tags: ['TypeScript', 'Playwright', 'Claude Skills', 'POM', 'Fixtures', 'Allure', 'CI/CD'],
+      animation: 'terminal',
+    },
+    'confluence-rag': {
+      type: '// open source · AI · RAG · LangGraph · deep-dive',
+      name: 'Confluence LangChain Bot',
+      repo: 'https://github.com/MStroievus/confluence-lanchain-ts',
+      desc: 'A TypeScript chatbot that ingests <strong>Confluence</strong> pages, converts them into vector embeddings via <strong>LangChain</strong>, and serves RAG-based Q&A over your documentation. State and tool-use are orchestrated with <strong>LangGraph</strong> for multi-step agent flows.',
+      features: [
+        ['Confluence ingest', 'Authenticated crawl of spaces & pages, strips macros, preserves headings. Incremental sync — only re-embeds changed pages.'],
+        ['Chunking & embeddings', 'Token-aware chunking with overlap. Pluggable embedding backend (OpenAI/local). Persisted vector store with metadata: space, page-id, last-updated.'],
+        ['Retrieval pipeline', 'Hybrid retrieval — BM25 + vector similarity — with rerank. Source filters by space allow scoped knowledge domains.'],
+        ['LangGraph agent', 'Stateful multi-step flow: query → retrieve → critique → answer. Self-correction loop when grounding is weak.'],
+        ['Citation & grounding', 'Every answer carries page-level citations. Groundedness checker flags hallucinated claims against the retrieved context.'],
+      ],
+      tags: ['TypeScript', 'LangChain', 'LangGraph', 'RAG', 'Vector DB', 'Confluence API'],
+      animation: 'vector',
+    },
+    'foodie-bot': {
+      type: '// open source · AI · memO · observability · deep-dive',
+      name: 'my-foodie-bot',
+      repo: 'https://github.com/MStroievus/my-foodie-bot',
+      desc: 'An AI food assistant with persistent <strong>memO</strong> memory and long-term user context. Instrumented end-to-end with <strong>LangFuse</strong> for prompt tracing, cost tracking, and eval scoring — measuring hallucination rate, groundedness, and latency per release.',
+      features: [
+        ['Persistent memO memory', 'User preferences, dietary constraints, and conversation history stored as structured memories. Recalled contextually — not blindly injected into every prompt.'],
+        ['LangFuse tracing', 'Full prompt/response traces, token costs, latency histograms per endpoint. Release-over-release diffing catches regressions before users do.'],
+        ['Eval scoring harness', 'Automated eval suites: hallucination rate, grounding score, instruction adherence. Golden datasets versioned alongside code.'],
+        ['Prompt variation sweeps', 'Systematic A/B of system prompts. Statistical comparisons on eval metrics — not vibes.'],
+        ['Cost dashboards', 'Token budgets per user session, alerts on drift, attribution by feature. Keeps AI spend observable.'],
+      ],
+      tags: ['Python', 'memO', 'LangFuse', 'LangChain', 'Eval', 'Observability'],
+      animation: 'observability',
+    },
+  };
+
+  function openModal(key) {
+    const d = data[key];
+    if (!d) return;
+    typeEl.textContent = d.type;
+    nameEl.textContent = d.name;
+    descEl.innerHTML = d.desc;
+    featEl.innerHTML = d.features.map((f, i) =>
+      `<div class="pm-feat"><div class="pm-feat-idx">0${i+1}</div><div><div class="pm-feat-title">${f[0]}</div><div class="pm-feat-desc">${f[1]}</div></div></div>`
+    ).join('');
+    tagsEl.innerHTML = d.tags.map(t => `<span class="pm-tag">${t}</span>`).join('');
+    ghBtn.href = d.repo;
+    overlay.classList.add('on');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('pm-open');
+    startAnim(d.animation);
+  }
+
+  function closeModal() {
+    overlay.classList.remove('on');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('pm-open');
+    stopAnim();
+  }
+
+  document.querySelectorAll('.proj-card[data-project]').forEach(card => {
+    const key = card.getAttribute('data-project');
+    const trigger = (e) => {
+      if (e.target.closest('.proj-link')) return;
+      openModal(key);
+    };
+    card.addEventListener('click', trigger);
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(key); }
+    });
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('on')) closeModal(); });
+
+  // ── Extended "continues more functionality" canvas animation ──
+  let rafId = null;
+  function stopAnim() { if (rafId) { cancelAnimationFrame(rafId); rafId = null; } }
+
+  function startAnim(kind) {
+    stopAnim();
+    requestAnimationFrame(() => {
+      const dpr = window.devicePixelRatio || 1;
+      const W = canvas.offsetWidth || 900;
+      const H = canvas.offsetHeight || 300;
+      canvas.width = W * dpr;
+      canvas.height = H * dpr;
+      const ctx = canvas.getContext('2d');
+      ctx.scale(dpr, dpr);
+
+      if (kind === 'terminal')      return animTerminal(ctx, W, H);
+      if (kind === 'vector')        return animVector(ctx, W, H);
+      if (kind === 'observability') return animObservability(ctx, W, H);
+    });
+  }
+
+  // ── Shared helpers ──
+  function phaseLabel(ctx, W, phase, labels) {
+    ctx.font = '500 10px Geist Mono, monospace';
+    ctx.textAlign = 'right';
+    labels.forEach((lb, i) => {
+      const active = phase === i;
+      const x = W - 20 - (labels.length - 1 - i) * 98;
+      ctx.fillStyle = active ? 'rgba(37,99,235,.15)' : 'rgba(15,23,42,.04)';
+      const w = 90; const h = 18;
+      ctx.beginPath(); ctx.roundRect(x - w, 14, w, h, 9); ctx.fill();
+      ctx.fillStyle = active ? '#2563eb' : 'rgba(15,23,42,.45)';
+      ctx.fillText(lb, x - 8, 26);
+    });
+    ctx.textAlign = 'left';
+  }
+  function typeLen(full, startFrame, currentFrame, cps) {
+    if (currentFrame < startFrame) return 0;
+    return Math.min(full.length, Math.floor((currentFrame - startFrame) * cps / 60));
+  }
+  function drawCursor(ctx, x, y, h, frame, col) {
+    if (Math.floor(frame / 20) % 2 === 0) {
+      ctx.fillStyle = col;
+      ctx.fillRect(x, y - h + 2, 2, h - 3);
+    }
+  }
+  function wrapText(ctx, text, maxW) {
+    const words = text.split(' ');
+    const out = []; let cur = '';
+    for (const w of words) {
+      const test = cur ? cur + ' ' + w : w;
+      if (ctx.measureText(test).width > maxW && cur) { out.push(cur); cur = w; }
+      else cur = test;
+    }
+    if (cur) out.push(cur);
+    return out;
+  }
+
+  function animTerminal(ctx, W, H) {
+    const PHASE_F = 520;
+    let f = 0, phase = 0;
+
+    // Phase 0: Claude Code chat generating a test
+    const userMsg = 'Write an e2e test for login with MFA';
+    const botHeader = 'Skill: playwright-aqa@1.2.0 · POM + fixtures loaded';
+    const botIntro  = 'Generating test.spec.ts with test.step architecture…';
+    const code = [
+      "test('login with MFA', async ({ loginPage, authCtx }) => {",
+      "  await test.step('submit credentials', async () => {",
+      "    await loginPage.signIn(authCtx.user);",
+      "  });",
+      "  await test.step('enter MFA code', async () => {",
+      "    await loginPage.enterMFA(authCtx.mfaCode);",
+      "  });",
+      "  await test.step('verify dashboard', async () => {",
+      "    await expect(dashboard.welcome).toBeVisible();",
+      "  });",
+      "});",
+    ];
+
+    function drawChrome(title) {
+      ctx.fillStyle = '#f4f6fa'; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = 'rgba(15,23,42,.05)'; ctx.fillRect(0, 0, W, 40);
+      ctx.fillStyle = 'rgba(15,23,42,.12)'; ctx.fillRect(0, 40, W, 1);
+      [['#ef4444', 18],['#eab308', 34],['#22c55e', 50]].forEach(([c,x]) => {
+        ctx.fillStyle = c; ctx.beginPath(); ctx.arc(x, 20, 5, 0, Math.PI*2); ctx.fill();
+      });
+      ctx.font = '500 11px Geist Mono, monospace';
+      ctx.fillStyle = 'rgba(15,23,42,.55)';
+      ctx.textAlign = 'center';
+      ctx.fillText(title, W/2, 25);
+      ctx.textAlign = 'left';
+    }
+
+    function drawPhase0() {
+      drawChrome('Claude Code · playwright-aqa skill');
+      phaseLabel(ctx, W, 0, ['Demo', 'Architecture']);
+
+      // user bubble (right)
+      const uW = Math.min(360, ctx.measureText(userMsg).width + 28);
+      ctx.font = '500 13px Outfit, sans-serif';
+      const uw = ctx.measureText(userMsg).width + 28;
+      const ux = W - 20 - uw, uy = 56;
+      ctx.fillStyle = '#2563eb';
+      ctx.beginPath(); ctx.roundRect(ux, uy, uw, 32, 10); ctx.fill();
+      ctx.fillStyle = '#fff';
+      ctx.fillText(userMsg, ux + 14, uy + 21);
+
+      // bot response (left)
+      const bx = 20, by = 100;
+      // avatar
+      ctx.fillStyle = '#2563eb';
+      ctx.beginPath(); ctx.roundRect(bx, by, 22, 22, 6); ctx.fill();
+      ctx.font = '700 11px Outfit, sans-serif';
+      ctx.fillStyle = '#fff'; ctx.textAlign = 'center';
+      ctx.fillText('✦', bx + 11, by + 16);
+      ctx.textAlign = 'left';
+
+      // header line (typewriter)
+      const headerLen = typeLen(botHeader, 30, f, 55);
+      ctx.font = '600 12px Outfit, sans-serif';
+      ctx.fillStyle = '#0f172a';
+      const headShown = botHeader.slice(0, headerLen);
+      ctx.fillText(headShown, bx + 32, by + 16);
+      if (headerLen < botHeader.length) {
+        drawCursor(ctx, bx + 32 + ctx.measureText(headShown).width + 1, by + 16, 14, f, '#0f172a');
+      }
+
+      // intro
+      const introStart = 30 + (botHeader.length * 60 / 55);
+      const introLen = typeLen(botIntro, introStart, f, 60);
+      ctx.font = '500 11.5px Outfit, sans-serif';
+      ctx.fillStyle = 'rgba(15,23,42,.62)';
+      const introShown = botIntro.slice(0, introLen);
+      ctx.fillText(introShown, bx + 32, by + 34);
+
+      // code block with typewriter
+      const codeStart = introStart + (botIntro.length * 60 / 60) + 10;
+      const codeY = by + 50;
+      const codeH = H - codeY - 14;
+      ctx.fillStyle = '#0f172a';
+      ctx.beginPath(); ctx.roundRect(bx + 32, codeY, W - bx - 52, codeH, 10); ctx.fill();
+      ctx.fillStyle = 'rgba(255,255,255,.08)';
+      ctx.fillRect(bx + 32, codeY, W - bx - 52, 22);
+      ctx.font = '500 9.5px Geist Mono, monospace';
+      ctx.fillStyle = 'rgba(255,255,255,.55)';
+      ctx.fillText('tests/e2e/auth/login-mfa.spec.ts', bx + 44, codeY + 15);
+
+      ctx.font = '500 11.5px Geist Mono, monospace';
+      let cf = codeStart;
+      const lineH = 16;
+      for (let i = 0; i < code.length; i++) {
+        const lineFrames = code[i].length * 60 / 140;
+        const ln = typeLen(code[i], cf, f, 140);
+        const y = codeY + 40 + i * lineH;
+        if (y > H - 10) break;
+        // syntax-ish coloring
+        const shown = code[i].slice(0, ln);
+        let col = 'rgba(255,255,255,.75)';
+        if (/test\.step|test\(|expect/.test(shown)) col = '#f472b6';
+        else if (/await/.test(shown)) col = '#60a5fa';
+        else if (/\/\//.test(shown)) col = 'rgba(255,255,255,.4)';
+        ctx.fillStyle = col;
+        ctx.fillText(shown, bx + 44, y);
+        if (ln < code[i].length && f >= cf) {
+          drawCursor(ctx, bx + 44 + ctx.measureText(shown).width + 1, y, 13, f, '#fff');
+          break;
+        }
+        cf += lineFrames + 3;
+      }
+    }
+
+    // Phase 1: Architecture — skill internals
+    function drawPhase1() {
+      ctx.fillStyle = '#f4f6fa'; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = 'rgba(15,23,42,.05)'; ctx.fillRect(0, 0, W, 40);
+      ctx.fillStyle = 'rgba(15,23,42,.12)'; ctx.fillRect(0, 40, W, 1);
+      ctx.font = '500 11px Geist Mono, monospace';
+      ctx.fillStyle = 'rgba(15,23,42,.55)';
+      ctx.textAlign = 'center';
+      ctx.fillText('inside the skill · how test.spec.ts is composed', W/2, 25);
+      ctx.textAlign = 'left';
+      phaseLabel(ctx, W, 1, ['Demo', 'Architecture']);
+
+      // center node
+      const cx = W/2, cy = H/2 + 12;
+      const nodeW = 190, nodeH = 48;
+      ctx.fillStyle = '#2563eb';
+      ctx.beginPath(); ctx.roundRect(cx - nodeW/2, cy - nodeH/2, nodeW, nodeH, 10); ctx.fill();
+      ctx.font = '600 13px Outfit, sans-serif';
+      ctx.fillStyle = '#fff'; ctx.textAlign = 'center';
+      ctx.fillText('login-mfa.spec.ts', cx, cy - 2);
+      ctx.font = '500 10px Geist Mono, monospace';
+      ctx.fillStyle = 'rgba(255,255,255,.75)';
+      ctx.fillText('3× test.step · typed fixtures', cx, cy + 14);
+      ctx.textAlign = 'left';
+
+      // satellites with flowing arrows
+      const sats = [
+        { title: 'pages/',     sub: 'LoginPage · Dashboard', angle: Math.PI,        col: '#0284c7' },
+        { title: 'fixtures/',  sub: 'authCtx · seeded_user', angle: Math.PI * 1.5,  col: '#d97706' },
+        { title: 'api/',       sub: 'authClient builder',    angle: 0,              col: '#16a34a' },
+        { title: 'ci/',        sub: 'GitLab · allure',       angle: Math.PI * 0.5,  col: '#be185d' },
+      ];
+      const R = Math.min(W, H) * 0.36;
+      sats.forEach((s, i) => {
+        const sx = cx + Math.cos(s.angle) * R;
+        const sy = cy + Math.sin(s.angle) * R * 0.7;
+        // arrow from satellite to center
+        const phase = (f * 0.04 + i * 1.3) % 1;
+        ctx.strokeStyle = 'rgba(15,23,42,.15)';
+        ctx.lineWidth = 1.2;
+        ctx.setLineDash([4, 5]);
+        ctx.lineDashOffset = -f * 0.6;
+        ctx.beginPath(); ctx.moveTo(sx, sy); ctx.lineTo(cx + Math.cos(s.angle + Math.PI) * nodeW/2.2, cy + Math.sin(s.angle + Math.PI) * nodeH/1.8);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        // traveling dot
+        const tx = sx + (cx - sx) * phase;
+        const ty = sy + (cy - sy) * phase;
+        ctx.fillStyle = s.col;
+        ctx.beginPath(); ctx.arc(tx, ty, 3.5, 0, Math.PI*2); ctx.fill();
+        ctx.globalAlpha = 0.3;
+        ctx.beginPath(); ctx.arc(tx, ty, 7, 0, Math.PI*2); ctx.fill();
+        ctx.globalAlpha = 1;
+
+        // satellite card
+        const sw = 150, sh = 46;
+        const bx2 = sx - sw/2, by2 = sy - sh/2;
+        ctx.fillStyle = '#fff';
+        ctx.strokeStyle = 'rgba(15,23,42,.12)';
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.roundRect(bx2, by2, sw, sh, 10); ctx.fill(); ctx.stroke();
+        ctx.fillStyle = s.col;
+        ctx.fillRect(bx2, by2, 3, sh);
+        ctx.font = '700 12px Outfit, sans-serif';
+        ctx.fillStyle = '#0f172a';
+        ctx.fillText(s.title, bx2 + 14, by2 + 18);
+        ctx.font = '500 10.5px Geist Mono, monospace';
+        ctx.fillStyle = 'rgba(15,23,42,.55)';
+        ctx.fillText(s.sub, bx2 + 14, by2 + 34);
+      });
+
+      ctx.font = '500 10px Geist Mono, monospace';
+      ctx.fillStyle = 'rgba(15,23,42,.45)';
+      ctx.fillText('// scope isolation · trigger precision · zero anti-patterns', 20, H - 14);
+    }
+
+    function frame() {
+      if (phase === 0) drawPhase0(); else drawPhase1();
+      f++;
+      if (f >= PHASE_F) { f = 0; phase = 1 - phase; }
+      rafId = requestAnimationFrame(frame);
+    }
+    frame();
+  }
+
+  function animVector(ctx, W, H) {
+    const PHASE_F = 540;
+    let f = 0, phase = 0;
+    const docs = [
+      { title: 'Release-Notes-v3.1.md', tag: 'confluence · eng', col: '#2563eb' },
+      { title: 'QA-Test-Strategy.md',    tag: 'confluence · qa',  col: '#0284c7' },
+      { title: 'Oncall-Runbook.md',      tag: 'confluence · ops', col: '#d97706' },
+      { title: 'Migration-Plan-Q4.md',   tag: 'confluence · eng', col: '#16a34a' },
+    ];
+
+    // Phase 0: chat — user asks, bot replies with citations
+    const userQ = 'What changed in v3.1?';
+    const botHead = 'Answering from your Confluence space…';
+    const botReply = [
+      '• typed fixtures API — new fixture composition',
+      '• legacy auth flow removed · see migration notes',
+      '• breaking: config keys renamed (camelCase)',
+    ];
+    const citations = ['Release-Notes-v3.1.md', 'Migration-Plan-Q4.md'];
+
+    function drawChatChrome(title) {
+      ctx.fillStyle = '#f4f6fa'; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = 'rgba(15,23,42,.05)'; ctx.fillRect(0, 0, W, 40);
+      ctx.fillStyle = 'rgba(15,23,42,.12)'; ctx.fillRect(0, 40, W, 1);
+      [['#ef4444', 18],['#eab308', 34],['#22c55e', 50]].forEach(([c,x]) => {
+        ctx.fillStyle = c; ctx.beginPath(); ctx.arc(x, 20, 5, 0, Math.PI*2); ctx.fill();
+      });
+      ctx.font = '500 11px Geist Mono, monospace';
+      ctx.fillStyle = 'rgba(15,23,42,.55)';
+      ctx.textAlign = 'center';
+      ctx.fillText(title, W/2, 25);
+      ctx.textAlign = 'left';
+    }
+
+    function drawPhase0() {
+      drawChatChrome('Confluence LangChain Bot · ask your docs');
+      phaseLabel(ctx, W, 0, ['Chat demo', 'How it works']);
+
+      // user bubble right
+      ctx.font = '500 13px Outfit, sans-serif';
+      const uw = ctx.measureText(userQ).width + 28;
+      const ux = W - 20 - uw, uy = 58;
+      ctx.fillStyle = '#2563eb';
+      ctx.beginPath(); ctx.roundRect(ux, uy, uw, 32, 10); ctx.fill();
+      ctx.fillStyle = '#fff'; ctx.fillText(userQ, ux + 14, uy + 21);
+
+      // bot
+      const bx = 20, by = 104;
+      ctx.fillStyle = '#0284c7';
+      ctx.beginPath(); ctx.roundRect(bx, by, 22, 22, 6); ctx.fill();
+      ctx.font = '700 11px Outfit, sans-serif'; ctx.fillStyle = '#fff'; ctx.textAlign = 'center';
+      ctx.fillText('𝐂', bx + 11, by + 16); ctx.textAlign = 'left';
+
+      // head
+      const hl = typeLen(botHead, 28, f, 60);
+      ctx.font = '600 12px Outfit, sans-serif'; ctx.fillStyle = '#0f172a';
+      const hs = botHead.slice(0, hl);
+      ctx.fillText(hs, bx + 32, by + 16);
+      if (hl < botHead.length) drawCursor(ctx, bx + 32 + ctx.measureText(hs).width + 1, by + 16, 14, f, '#0f172a');
+
+      // bullets
+      let cursor = 28 + (botHead.length * 60 / 60) + 4;
+      const lineY0 = by + 40;
+      ctx.font = '500 12px Outfit, sans-serif';
+      for (let i = 0; i < botReply.length; i++) {
+        const ln = typeLen(botReply[i], cursor, f, 110);
+        const y = lineY0 + i * 20;
+        const shown = botReply[i].slice(0, ln);
+        ctx.fillStyle = 'rgba(15,23,42,.75)';
+        ctx.fillText(shown, bx + 32, y);
+        if (ln < botReply[i].length && f >= cursor) {
+          drawCursor(ctx, bx + 32 + ctx.measureText(shown).width + 1, y, 14, f, '#0f172a');
+          break;
+        }
+        cursor += botReply[i].length * 60 / 110 + 6;
+      }
+
+      // citation pills (appear after reply types)
+      const citStart = cursor + 10;
+      if (f > citStart) {
+        const pillY = lineY0 + botReply.length * 20 + 12;
+        ctx.font = '500 10.5px Geist Mono, monospace';
+        let px = bx + 32;
+        ctx.fillStyle = 'rgba(15,23,42,.45)';
+        ctx.fillText('sources:', px, pillY + 12);
+        px += ctx.measureText('sources:').width + 10;
+        citations.forEach((c, i) => {
+          const appear = Math.min(1, Math.max(0, (f - citStart - i * 18) / 16));
+          if (appear <= 0) return;
+          const cw = ctx.measureText(c).width + 22;
+          ctx.globalAlpha = appear;
+          ctx.fillStyle = 'rgba(37,99,235,.10)';
+          ctx.strokeStyle = 'rgba(37,99,235,.35)';
+          ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.roundRect(px, pillY, cw, 20, 10); ctx.fill(); ctx.stroke();
+          ctx.fillStyle = '#2563eb';
+          ctx.fillText(c, px + 10, pillY + 13);
+          ctx.globalAlpha = 1;
+          px += cw + 8;
+        });
+      }
+    }
+
+    function drawPhase1() {
+      const t = f;
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = '#f4f6fa'; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = 'rgba(15,23,42,.05)'; ctx.fillRect(0, 0, W, 40);
+      ctx.fillStyle = 'rgba(15,23,42,.12)'; ctx.fillRect(0, 40, W, 1);
+      ctx.font = '500 11px Geist Mono, monospace';
+      ctx.fillStyle = 'rgba(15,23,42,.55)';
+      ctx.textAlign = 'center';
+      ctx.fillText('ingest → embed → retrieve · powered by LangGraph', W/2, 25);
+      ctx.textAlign = 'left';
+      phaseLabel(ctx, W, 1, ['Chat demo', 'How it works']);
+
+      const topOffset = 52;
+      const innerH = H - topOffset;
+      // bg grid inside work area
+      ctx.strokeStyle = 'rgba(15,23,42,.05)';
+      for (let x = 0; x < W; x += 32) { ctx.beginPath(); ctx.moveTo(x, topOffset); ctx.lineTo(x, H); ctx.stroke(); }
+      for (let y = topOffset; y < H; y += 32) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+
+      // Left column: documents
+      const colW = W * 0.28;
+      ctx.font = '600 10.5px Geist Mono, monospace';
+      ctx.fillStyle = 'rgba(15,23,42,.55)';
+      ctx.fillText('[1] confluence pages', 20, topOffset + 16);
+
+      docs.forEach((d, i) => {
+        const y = topOffset + 28 + i * 48;
+        const pulse = (Math.sin(t * 0.04 + i * 1.2) + 1) * 0.5;
+        ctx.fillStyle = 'rgba(15,23,42,.03)';
+        ctx.strokeStyle = 'rgba(15,23,42,.12)';
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.roundRect(20, y, colW - 10, 40, 8); ctx.fill(); ctx.stroke();
+        ctx.fillStyle = d.col;
+        ctx.fillRect(20, y, 3, 40);
+        ctx.font = '600 11.5px Outfit, sans-serif';
+        ctx.fillStyle = '#0f172a';
+        ctx.fillText(d.title, 34, y + 17);
+        ctx.font = '500 10px Geist Mono, monospace';
+        ctx.fillStyle = 'rgba(15,23,42,.45)';
+        ctx.fillText(d.tag, 34, y + 30);
+        ctx.fillStyle = d.col;
+        ctx.globalAlpha = 0.4 + pulse * 0.6;
+        ctx.beginPath(); ctx.arc(colW + 2, y + 20, 3 + pulse * 2, 0, Math.PI*2); ctx.fill();
+        ctx.globalAlpha = 1;
+      });
+
+      // Middle: chunking + embedding
+      const midX = colW + 40;
+      const midW = W * 0.28;
+      ctx.font = '600 10.5px Geist Mono, monospace';
+      ctx.fillStyle = 'rgba(15,23,42,.55)';
+      ctx.fillText('[2] chunk → embed', midX, topOffset + 16);
+
+      for (let row = 0; row < 4; row++) {
+        for (let k = 0; k < 6; k++) {
+          const p = (t * 0.03 + row * 0.5 + k * 0.3) % (Math.PI * 2);
+          const intensity = (Math.sin(p) + 1) * 0.5;
+          ctx.fillStyle = `rgba(37,99,235,${0.15 + intensity * 0.6})`;
+          ctx.fillRect(midX + k * 22, topOffset + 34 + row * 44, 18, 38);
+        }
+      }
+
+      // Arrow
+      const arrX = midX + midW + 8;
+      const midY = topOffset + innerH / 2;
+      ctx.strokeStyle = 'rgba(15,23,42,.35)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(arrX, midY); ctx.lineTo(arrX + 40, midY);
+      ctx.stroke();
+      ctx.fillStyle = 'rgba(15,23,42,.55)';
+      ctx.beginPath();
+      ctx.moveTo(arrX + 40, midY); ctx.lineTo(arrX + 32, midY - 5); ctx.lineTo(arrX + 32, midY + 5); ctx.closePath(); ctx.fill();
+
+      // Right: retrieval + rerank
+      const rx = arrX + 50;
+      ctx.font = '600 10.5px Geist Mono, monospace';
+      ctx.fillStyle = 'rgba(15,23,42,.55)';
+      ctx.fillText('[3] retrieve · rerank · cite', rx, topOffset + 16);
+
+      ctx.font = '500 11px Outfit, sans-serif';
+      ctx.fillStyle = '#0f172a';
+      ctx.fillText('query:', rx, topOffset + 36);
+      ctx.font = '600 12px Outfit, sans-serif';
+      ctx.fillStyle = '#2563eb';
+      ctx.fillText('"what changed in v3.1?"', rx, topOffset + 54);
+
+      const hits = [
+        ['Release-Notes-v3.1.md', 0.92],
+        ['Migration-Plan-Q4.md',  0.71],
+        ['QA-Test-Strategy.md',   0.48],
+      ];
+      hits.forEach((h, i) => {
+        const yy = topOffset + 82 + i * 32;
+        ctx.font = '500 10.5px Geist Mono, monospace';
+        ctx.fillStyle = 'rgba(15,23,42,.55)';
+        ctx.fillText(h[0], rx, yy);
+        const bw = (W - rx - 40) * h[1];
+        ctx.fillStyle = 'rgba(37,99,235,.14)';
+        ctx.fillRect(rx, yy + 6, W - rx - 40, 6);
+        ctx.fillStyle = '#2563eb';
+        ctx.fillRect(rx, yy + 6, bw, 6);
+        ctx.font = '600 10px Geist Mono, monospace';
+        ctx.fillStyle = '#2563eb';
+        ctx.fillText(h[1].toFixed(2), W - 35, yy + 12);
+      });
+
+      ctx.font = '500 10px Geist Mono, monospace';
+      ctx.fillStyle = 'rgba(15,23,42,.45)';
+      ctx.fillText('// LangGraph: retrieve → critique → answer', rx, H - 14);
+    }
+
+    function frame() {
+      if (phase === 0) drawPhase0(); else drawPhase1();
+      f++;
+      if (f >= PHASE_F) { f = 0; phase = 1 - phase; }
+      rafId = requestAnimationFrame(frame);
+    }
+    frame();
+  }
+
+  function animObservability(ctx, W, H) {
+    const PHASE_F = 560;
+    let f = 0, phase = 0;
+
+    // Phase 0 — chat: user asks for a recipe, bot replies using memO memory
+    const userMsg = 'Recipe with chicken & ginger?';
+    const botHead = 'memO recall: low-sodium · 20-min meals ✓';
+    const botIntro = 'Here\'s a quick ginger-soy chicken stir-fry:';
+    const recipe = [
+      '1. Slice 250g chicken thigh — pat dry, salt lightly',
+      '2. Mince 1 tbsp fresh ginger + 2 garlic cloves',
+      '3. Sear chicken 4 min · add aromatics · 1 min',
+      '4. Deglaze with 2 tbsp low-sodium tamari + rice vinegar',
+      '5. Toss with scallions · serve over jasmine rice',
+    ];
+    const meta = '≈ 410 kcal · 18 min · fits your Tuesday-quick tag';
+
+    function drawChatChromeF(title) {
+      ctx.fillStyle = '#f4f6fa'; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = 'rgba(15,23,42,.05)'; ctx.fillRect(0, 0, W, 40);
+      ctx.fillStyle = 'rgba(15,23,42,.12)'; ctx.fillRect(0, 40, W, 1);
+      [['#ef4444', 18],['#eab308', 34],['#22c55e', 50]].forEach(([c,x]) => {
+        ctx.fillStyle = c; ctx.beginPath(); ctx.arc(x, 20, 5, 0, Math.PI*2); ctx.fill();
+      });
+      ctx.font = '500 11px Geist Mono, monospace';
+      ctx.fillStyle = 'rgba(15,23,42,.55)';
+      ctx.textAlign = 'center';
+      ctx.fillText(title, W/2, 25);
+      ctx.textAlign = 'left';
+    }
+
+    function drawPhase0() {
+      drawChatChromeF('my-foodie-bot · recipe assistant');
+      phaseLabel(ctx, W, 0, ['Chat demo', 'Observability']);
+
+      // user
+      ctx.font = '500 13px Outfit, sans-serif';
+      const uw = ctx.measureText(userMsg).width + 28;
+      const ux = W - 20 - uw, uy = 56;
+      ctx.fillStyle = '#d97706';
+      ctx.beginPath(); ctx.roundRect(ux, uy, uw, 32, 10); ctx.fill();
+      ctx.fillStyle = '#fff'; ctx.fillText(userMsg, ux + 14, uy + 21);
+
+      // bot
+      const bx = 20, by = 100;
+      ctx.fillStyle = '#d97706';
+      ctx.beginPath(); ctx.roundRect(bx, by, 22, 22, 6); ctx.fill();
+      ctx.font = '700 12px Outfit, sans-serif'; ctx.fillStyle = '#fff'; ctx.textAlign = 'center';
+      ctx.fillText('🍳', bx + 11, by + 17); ctx.textAlign = 'left';
+
+      // memory recall chip (typewriter)
+      const hl = typeLen(botHead, 28, f, 70);
+      const hs = botHead.slice(0, hl);
+      ctx.font = '500 10.5px Geist Mono, monospace';
+      const chipW = ctx.measureText(hs || botHead).width + 20;
+      ctx.fillStyle = 'rgba(22,163,74,.10)';
+      ctx.strokeStyle = 'rgba(22,163,74,.35)';
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.roundRect(bx + 32, by - 2, chipW, 20, 10); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = '#15803d';
+      ctx.fillText(hs, bx + 42, by + 11);
+      if (hl < botHead.length) drawCursor(ctx, bx + 42 + ctx.measureText(hs).width + 1, by + 11, 12, f, '#15803d');
+
+      // intro
+      const introStart = 28 + (botHead.length * 60 / 70) + 4;
+      const il = typeLen(botIntro, introStart, f, 70);
+      const is = botIntro.slice(0, il);
+      ctx.font = '600 13px Outfit, sans-serif';
+      ctx.fillStyle = '#0f172a';
+      ctx.fillText(is, bx + 32, by + 36);
+      if (il < botIntro.length && f >= introStart) drawCursor(ctx, bx + 32 + ctx.measureText(is).width + 1, by + 36, 14, f, '#0f172a');
+
+      // recipe lines
+      let cursor = introStart + (botIntro.length * 60 / 70) + 4;
+      const lineY0 = by + 58;
+      ctx.font = '500 12px Outfit, sans-serif';
+      for (let i = 0; i < recipe.length; i++) {
+        const ln = typeLen(recipe[i], cursor, f, 150);
+        const y = lineY0 + i * 19;
+        if (y > H - 30) break;
+        const shown = recipe[i].slice(0, ln);
+        ctx.fillStyle = 'rgba(15,23,42,.75)';
+        ctx.fillText(shown, bx + 32, y);
+        if (ln < recipe[i].length && f >= cursor) {
+          drawCursor(ctx, bx + 32 + ctx.measureText(shown).width + 1, y, 13, f, '#0f172a');
+          break;
+        }
+        cursor += recipe[i].length * 60 / 150 + 3;
+      }
+
+      // meta footer
+      const metaStart = cursor + 6;
+      if (f > metaStart) {
+        const ml = typeLen(meta, metaStart, f, 90);
+        ctx.font = '500 10.5px Geist Mono, monospace';
+        ctx.fillStyle = 'rgba(15,23,42,.5)';
+        ctx.fillText(meta.slice(0, ml), bx + 32, H - 18);
+      }
+    }
+
+    // Phase 1 — LangFuse scoreboard (existing)
+    const metrics = [
+      { label: 'hallucination rate',  col: '#dc2626', target: 0.08,  unit: '%',   fmt: v => (v*100).toFixed(1) + '%' },
+      { label: 'groundedness score',  col: '#16a34a', target: 0.89,  unit: '',    fmt: v => v.toFixed(2) },
+      { label: 'p95 latency',         col: '#d97706', target: 0.62,  unit: 'ms',  fmt: v => Math.round(v * 1800) + 'ms' },
+      { label: 'token cost / session',col: '#2563eb', target: 0.34,  unit: '$',   fmt: v => '$' + (v * 0.18).toFixed(3) },
+    ];
+    const series = metrics.map(m => Array.from({length: 40}, (_, i) => m.target + Math.sin(i * 0.3) * 0.08 + (Math.random() - .5) * 0.05));
+    let t = 0;
+    const topOffset = 44;
+    const rowH = (H - topOffset - 16) / metrics.length;
+
+    function drawPhase1() {
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = '#f4f6fa'; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = 'rgba(15,23,42,.05)'; ctx.fillRect(0, 0, W, 40);
+      ctx.fillStyle = 'rgba(15,23,42,.12)'; ctx.fillRect(0, 40, W, 1);
+      ctx.font = '500 11px Geist Mono, monospace';
+      ctx.fillStyle = 'rgba(15,23,42,.55)';
+      ctx.textAlign = 'center';
+      ctx.fillText('langfuse · release eval scoreboard · last 40 releases', W/2, 25);
+      ctx.textAlign = 'left';
+      phaseLabel(ctx, W, 1, ['Chat demo', 'Observability']);
+
+      metrics.forEach((m, i) => {
+        const y = topOffset + 8 + i * rowH;
+        // bg
+        ctx.fillStyle = 'rgba(15,23,42,.03)';
+        ctx.fillRect(20, y, W - 40, rowH - 8);
+        ctx.strokeStyle = 'rgba(15,23,42,.08)';
+        ctx.strokeRect(20, y, W - 40, rowH - 8);
+
+        // label
+        ctx.font = '600 11.5px Outfit, sans-serif';
+        ctx.fillStyle = '#0f172a';
+        ctx.fillText(m.label, 32, y + 18);
+
+        // current value
+        const cur = series[i][series[i].length - 1];
+        ctx.font = '700 13px Geist Mono, monospace';
+        ctx.fillStyle = m.col;
+        ctx.textAlign = 'right';
+        ctx.fillText(m.fmt(cur), W - 32, y + 18);
+        ctx.textAlign = 'left';
+
+        // sparkline
+        const plotX = 32, plotW = W - 64;
+        const plotY = y + 28, plotH = rowH - 44;
+        ctx.strokeStyle = m.col;
+        ctx.lineWidth = 1.8;
+        ctx.beginPath();
+        series[i].forEach((v, k) => {
+          const x = plotX + (k / (series[i].length - 1)) * plotW;
+          const yy = plotY + plotH - v * plotH;
+          if (k === 0) ctx.moveTo(x, yy); else ctx.lineTo(x, yy);
+        });
+        ctx.stroke();
+
+        // fill
+        ctx.lineTo(plotX + plotW, plotY + plotH);
+        ctx.lineTo(plotX, plotY + plotH);
+        ctx.closePath();
+        ctx.fillStyle = m.col + '22';
+        ctx.fill();
+
+        // latest dot
+        const lx = plotX + plotW;
+        const ly = plotY + plotH - cur * plotH;
+        ctx.fillStyle = m.col;
+        ctx.beginPath(); ctx.arc(lx, ly, 3.5, 0, Math.PI*2); ctx.fill();
+        ctx.globalAlpha = 0.35;
+        ctx.beginPath(); ctx.arc(lx, ly, 6 + (Math.sin(t*.08) + 1) * 3, 0, Math.PI*2); ctx.fill();
+        ctx.globalAlpha = 1;
+      });
+
+      t++;
+      if (t % 18 === 0) {
+        series.forEach((s, i) => {
+          s.shift();
+          s.push(metrics[i].target + Math.sin(t * 0.02 + i) * 0.08 + (Math.random() - .5) * 0.06);
+        });
+      }
+    }
+
+    function frame() {
+      if (phase === 0) drawPhase0(); else drawPhase1();
+      f++;
+      if (f >= PHASE_F) { f = 0; phase = 1 - phase; }
+      rafId = requestAnimationFrame(frame);
+    }
+    frame();
+  }
 })();
 </script>
 </body>
