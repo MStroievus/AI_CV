@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Maksym Stroievus · Senior QA Engineer</title>
+<meta name="description" content="Maksym Stroievus — Senior QA / Automation Engineer specialising in AI &amp; Platform Quality. Playwright · TypeScript · LLM evaluation."/>
+<meta property="og:title" content="Maksym Stroievus · Senior QA Engineer"/>
+<meta property="og:description" content="Senior QA Engineer specialising in AI &amp; Platform Quality."/>
+<meta property="og:type" content="website"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%238b5cf6'/><text x='16' y='21' font-size='14' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'>MS</text></svg>"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:       #06040f;
+  --bg2:      #0a0818;
+  --surface:  rgba(255,255,255,.04);
+  --surface2: rgba(255,255,255,.07);
+  --border:   rgba(255,255,255,.08);
+  --border2:  rgba(167,139,250,.25);
+  --violet:   #a78bfa;
+  --violet2:  #8b5cf6;
+  --cyan:     #06b6d4;
+  --green:    #22c55e;
+  --amber:    #f59e0b;
+  --text:     #f0eeff;
+  --text2:    rgba(255,255,255,.55);
+  --text3:    rgba(255,255,255,.28);
+  --glow:     rgba(139,92,246,.18);
+  --glow2:    rgba(167,139,250,.08);
+  --mono:     'JetBrains Mono', monospace;
+  --sans:     'Inter', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Atmosphere */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 20% 10%, rgba(139,92,246,.08) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(6,182,212,.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Subtle dot grid */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background-image: radial-gradient(rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 52px;
+  background: rgba(6,4,15,.8);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2rem;
+}
+.nav-name { font-size: 14px; font-weight: 600; color: var(--text); }
+.nav-name span { color: var(--violet); }
+.nav-links { display: flex; gap: 1.75rem; list-style: none; }
+.nav-links a { color: var(--text3); font-size: 13px; text-decoration: none; transition: color .2s; }
+.nav-links a:hover { color: var(--violet); }
+.nav-cta {
+  background: rgba(139,92,246,.15);
+  border: 1px solid rgba(139,92,246,.3);
+  color: var(--violet);
+  font-size: 12px; font-weight: 500;
+  padding: .35rem 1rem; border-radius: 6px;
+  text-decoration: none;
+  transition: background .2s, border-color .2s;
+}
+.nav-cta:hover { background: rgba(139,92,246,.25); border-color: var(--violet); }
+@media (max-width: 700px) { .nav-links { display: none; } }
+
+/* ── SHARED LAYOUT ── */
+.page { position: relative; z-index: 1; max-width: 1040px; margin: 0 auto; padding: 0 2rem; }
+section { padding: 5rem 0 3rem; }
+#hero { padding-top: calc(52px + 5rem); min-height: 100vh; display: flex; align-items: center; }
+
+.sec-label {
+  display: flex; align-items: center; gap: .75rem;
+  margin-bottom: 3rem;
+  font-size: 11px; font-weight: 600; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--text3);
+}
+.sec-label .hi { color: var(--violet); }
+.sec-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* ── GLASS CARD ── */
+.glass {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.glass-hover {
+  transition: transform .35s cubic-bezier(.2,0,.2,1), box-shadow .35s, border-color .35s;
+}
+.glass-hover:hover {
+  transform: translateY(-6px) translateZ(0);
+  box-shadow: 0 24px 60px rgba(139,92,246,.15), 0 0 0 1px rgba(167,139,250,.15);
+  border-color: rgba(167,139,250,.2);
+}
+
+/* ── HERO ── */
+.hero-inner { width: 100%; }
+.hero-top {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 3rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+@media (max-width: 720px) { .hero-top { grid-template-columns: 1fr; } }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: rgba(139,92,246,.1);
+  border: 1px solid rgba(139,92,246,.25);
+  color: var(--violet);
+  font-size: 11px; font-weight: 500;
+  padding: .3rem .9rem; border-radius: 20px;
+  margin-bottom: 1.5rem;
+  font-family: var(--mono);
+}
+.hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s ease infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
+
+.hero-name {
+  font-size: clamp(36px, 6vw, 68px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -.03em;
+  color: var(--text);
+  margin-bottom: .75rem;
+}
+.hero-name .accent { color: var(--violet); }
+
+.hero-role {
+  font-size: clamp(15px, 2vw, 19px);
+  color: var(--text2);
+  font-weight: 400;
+  margin-bottom: 1.75rem;
+  line-height: 1.5;
+}
+.hero-role strong { color: var(--text); font-weight: 600; }
+
+.hero-meta { display: flex; flex-wrap: wrap; gap: .75rem; margin-bottom: 2rem; }
+.meta-pill {
+  display: flex; align-items: center; gap: .4rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text2);
+  font-size: 12px; padding: .3rem .75rem; border-radius: 6px;
+  text-decoration: none;
+  transition: border-color .2s, color .2s;
+}
+.meta-pill:hover { border-color: var(--violet); color: var(--violet); }
+
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--violet2);
+  color: #fff; font-weight: 600; font-size: 14px;
+  padding: .7rem 1.75rem; border-radius: 10px;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: background .2s, box-shadow .2s, transform .15s;
+  box-shadow: 0 4px 20px rgba(139,92,246,.3);
+}
+.btn-primary:hover { background: var(--violet); box-shadow: 0 8px 30px rgba(139,92,246,.4); transform: translateY(-1px); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text2); font-weight: 500; font-size: 14px;
+  padding: .7rem 1.5rem; border-radius: 10px;
+  text-decoration: none; border: 1px solid var(--border);
+  transition: border-color .2s, color .2s;
+}
+.btn-ghost:hover { border-color: var(--violet); color: var(--violet); }
+
+/* 3D Floating card (hero right) */
+.hero-card-wrap {
+  perspective: 1000px;
+  flex-shrink: 0;
+}
+.hero-card {
+  width: 300px;
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: 20px;
+  padding: 24px;
+  backdrop-filter: blur(20px);
+  transform-style: preserve-3d;
+  animation: heroFloat 6s ease-in-out infinite;
+  box-shadow: 0 30px 80px rgba(139,92,246,.2), 0 0 0 1px rgba(167,139,250,.1) inset;
+  position: relative;
+}
+@keyframes heroFloat {
+  0%,100% { transform: rotateX(4deg) rotateY(-8deg) translateY(0px); }
+  33%      { transform: rotateX(2deg) rotateY(6deg) translateY(-10px); }
+  66%      { transform: rotateX(6deg) rotateY(-4deg) translateY(-6px); }
+}
+.hc-glow {
+  position: absolute; top: -1px; left: -1px; right: -1px; bottom: -1px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(167,139,250,.2), transparent 50%, rgba(6,182,212,.1));
+  pointer-events: none;
+}
+.hc-label { font-family: var(--mono); font-size: 10px; color: var(--violet); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 16px; }
+.hc-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+.hc-stat {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 10px; padding: 12px;
+}
+.hc-stat-n { font-size: 22px; font-weight: 700; color: var(--violet); line-height: 1; }
+.hc-stat-l { font-size: 9px; color: var(--text3); margin-top: 3px; line-height: 1.3; }
+.hc-divider { height: 1px; background: var(--border); margin: 12px 0; }
+.hc-tag { display: inline-flex; align-items: center; gap: .4rem; background: rgba(6,182,212,.1); border: 1px solid rgba(6,182,212,.2); color: var(--cyan); font-size: 10px; font-family: var(--mono); padding: .25rem .6rem; border-radius: 6px; margin: 2px; }
+.hc-status { display: flex; align-items: center; gap: .5rem; font-size: 11px; color: var(--text2); margin-top: 12px; }
+.hc-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); flex-shrink: 0; animation: pulse 2s ease infinite; }
+
+/* ── EXPERIENCE ── */
+.exp-stack { display: flex; flex-direction: column; gap: 1.25rem; }
+.job-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 32px;
+  transition: border-color .3s, box-shadow .3s, transform .3s;
+  position: relative;
+  overflow: hidden;
+}
+.job-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: linear-gradient(180deg, var(--violet), transparent);
+  opacity: 0;
+  transition: opacity .3s;
+}
+.job-card:hover { border-color: rgba(167,139,250,.2); box-shadow: 0 16px 40px rgba(139,92,246,.1); transform: translateX(4px); }
+.job-card:hover::before { opacity: 1; }
+
+.job-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.job-title { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: .2rem; }
+.job-company { color: var(--violet); font-size: 14px; font-weight: 500; }
+.job-sub { color: var(--text3); font-size: 12px; margin-top: .2rem; }
+.job-date {
+  background: rgba(139,92,246,.1);
+  border: 1px solid rgba(139,92,246,.2);
+  color: var(--violet); font-size: 11px; font-family: var(--mono);
+  padding: .25rem .75rem; border-radius: 6px; white-space: nowrap; flex-shrink: 0;
+}
+.job-date.past { background: var(--surface); border-color: var(--border); color: var(--text3); }
+
+.bullets { list-style: none; margin-top: .5rem; display: flex; flex-direction: column; gap: .3rem; }
+.bullets li { display: flex; gap: .75rem; color: var(--text2); font-size: 13.5px; line-height: 1.65; }
+.bullets li::before { content: '▸'; color: var(--violet); flex-shrink: 0; margin-top: .05rem; }
+
+.job-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.25rem; }
+.jtag {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.07);
+  color: var(--text3); font-size: 11px; font-family: var(--mono);
+  padding: .2rem .6rem; border-radius: 6px;
+  transition: border-color .2s, color .2s;
+}
+.job-card:hover .jtag { border-color: rgba(167,139,250,.15); color: var(--text2); }
+
+/* ── SKILLS ── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+@media (max-width: 900px) { .skills-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 480px) { .skills-grid { grid-template-columns: 1fr; } }
+
+.skill-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color .3s, box-shadow .3s, transform .3s;
+}
+.skill-card:hover {
+  border-color: rgba(167,139,250,.25);
+  box-shadow: 0 16px 40px rgba(139,92,246,.1);
+  transform: translateY(-4px) rotateX(2deg);
+}
+.sc-head {
+  padding: .75rem 1rem;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: .5rem;
+}
+.sc-icon { font-size: 14px; }
+.sc-title { font-size: 11px; font-weight: 600; color: var(--violet); font-family: var(--mono); }
+.sc-count { font-size: 10px; color: var(--text3); margin-left: auto; font-family: var(--mono); }
+.sc-body { padding: .5rem .5rem; }
+
+.sk {
+  display: flex; align-items: center; gap: .5rem;
+  padding: .28rem .5rem; border-radius: 6px;
+  cursor: pointer;
+  transition: background .15s;
+  position: relative;
+}
+.sk:hover { background: rgba(255,255,255,.04); }
+.sk-dot { font-size: 8px; flex-shrink: 0; }
+.sk-dot.c { color: var(--violet); }
+.sk-dot.w { color: var(--amber); }
+.sk-dot.e { color: var(--text3); }
+.sk-name { font-size: 12px; }
+.sk-name.c { color: var(--text); }
+.sk-name.w { color: var(--text2); }
+.sk-name.e { color: var(--text3); }
+
+.skills-legend { display: flex; gap: 1.5rem; margin-bottom: 1.5rem; font-size: 11px; color: var(--text3); flex-wrap: wrap; }
+.leg { display: flex; align-items: center; gap: .4rem; }
+
+/* Tooltip */
+.tip {
+  position: fixed;
+  background: rgba(15,10,28,.95);
+  border: 1px solid rgba(167,139,250,.3);
+  border-radius: 10px; padding: .75rem 1rem;
+  font-size: 12px; color: var(--text);
+  max-width: 260px; line-height: 1.55;
+  box-shadow: 0 16px 40px rgba(139,92,246,.2);
+  pointer-events: none; z-index: 9999;
+  opacity: 0; transition: opacity .15s;
+  backdrop-filter: blur(16px);
+}
+.tip.on { opacity: 1; }
+.tip strong { color: var(--violet); display: block; margin-bottom: .25rem; font-size: 12.5px; }
+
+/* Two-col tools */
+.tools-2col { display: grid; grid-template-columns: 1fr 1fr; }
+
+/* ── PROJECTS ── */
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem; }
+.proj-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px; overflow: hidden;
+  transition: border-color .3s, box-shadow .3s, transform .3s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.proj-card:hover {
+  border-color: rgba(167,139,250,.25);
+  box-shadow: 0 20px 50px rgba(139,92,246,.12);
+  transform: translateY(-5px);
+}
+.proj-preview {
+  height: 160px;
+  background: linear-gradient(135deg, rgba(139,92,246,.08) 0%, rgba(6,182,212,.05) 100%);
+  border-bottom: 1px solid var(--border);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: .5rem; position: relative; overflow: hidden;
+}
+.proj-preview::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+.gif-badge {
+  position: absolute; top: .6rem; right: .6rem;
+  background: rgba(0,0,0,.6); border: 1px solid rgba(255,255,255,.1);
+  color: var(--text3); font-size: 9px; font-family: var(--mono);
+  padding: .2rem .5rem; border-radius: 4px;
+  z-index: 2;
+}
+.proj-icon { font-size: 32px; position: relative; z-index: 1; }
+.proj-body { padding: 1.25rem 1.5rem; }
+.proj-type { font-size: 10px; color: var(--text3); font-family: var(--mono); margin-bottom: .4rem; }
+.proj-name { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: .5rem; }
+.proj-desc { font-size: 12.5px; color: var(--text2); line-height: 1.6; margin-bottom: 1rem; }
+.proj-links { display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; }
+.proj-link {
+  font-size: 11px; font-family: var(--mono);
+  color: var(--text3); border: 1px solid var(--border);
+  padding: .2rem .65rem; border-radius: 6px; text-decoration: none;
+  transition: color .2s, border-color .2s;
+}
+.proj-link:hover { color: var(--violet); border-color: rgba(167,139,250,.3); }
+
+/* ── METRICS ── */
+#metrics {
+  background: rgba(139,92,246,.04);
+  border-top: 1px solid rgba(139,92,246,.1);
+  border-bottom: 1px solid rgba(139,92,246,.1);
+  padding: 3.5rem 0;
+  position: relative; z-index: 1;
+}
+.metrics-inner {
+  max-width: 1040px; margin: 0 auto; padding: 0 2rem;
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem;
+}
+@media (max-width: 800px) { .metrics-inner { grid-template-columns: repeat(3,1fr); } }
+@media (max-width: 480px) { .metrics-inner { grid-template-columns: repeat(2,1fr); } }
+
+.metric-card {
+  background: var(--surface);
+  border: 1px solid rgba(139,92,246,.12);
+  border-radius: 14px; padding: 1.25rem 1rem;
+  text-align: center;
+  transition: border-color .25s, box-shadow .25s, transform .25s;
+}
+.metric-card:hover {
+  border-color: rgba(167,139,250,.3);
+  box-shadow: 0 12px 30px rgba(139,92,246,.12);
+  transform: translateY(-4px);
+}
+.metric-num {
+  font-size: clamp(24px, 3vw, 36px); font-weight: 800;
+  color: var(--violet);
+  text-shadow: 0 0 20px rgba(139,92,246,.4);
+  line-height: 1;
+}
+.metric-label { font-size: 10.5px; color: var(--text3); margin-top: .5rem; line-height: 1.4; }
+
+/* ── ACHIEVEMENTS ── */
+.ach-list { list-style: none; display: flex; flex-direction: column; gap: .75rem; }
+.ach-item {
+  display: flex; gap: 1.25rem; align-items: flex-start;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  padding: 1.1rem 1.25rem;
+  transition: border-color .25s, transform .25s;
+}
+.ach-item:hover { border-color: rgba(167,139,250,.2); transform: translateX(4px); }
+.ach-num {
+  background: rgba(139,92,246,.12); border: 1px solid rgba(139,92,246,.2);
+  color: var(--violet); font-family: var(--mono); font-size: 11px; font-weight: 600;
+  min-width: 2rem; height: 2rem; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.ach-text { font-size: 13.5px; color: var(--text2); line-height: 1.6; }
+.ach-text strong { color: var(--text); font-weight: 600; }
+
+/* ── LEARNING ── */
+.learning-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px; padding: 2rem;
+}
+.log-line {
+  display: flex; gap: 1rem; align-items: baseline;
+  font-size: 13px; padding: .5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+  line-height: 1.5;
+}
+.log-line:last-child { border-bottom: none; }
+.log-date { color: var(--text3); font-family: var(--mono); font-size: 11.5px; white-space: nowrap; flex-shrink: 0; }
+.log-verb { font-weight: 600; font-size: 12px; flex-shrink: 0; }
+.log-verb.r { color: var(--violet); }
+.log-verb.g { color: var(--green); }
+.log-verb.b { color: var(--cyan); }
+.log-verb.a { color: var(--amber); }
+.log-content { color: var(--text2); }
+
+.blink { display: inline-block; width: 2px; height: 1.1em; background: var(--violet); vertical-align: text-bottom; animation: blink 1s step-end infinite; }
+@keyframes blink { 50%{opacity:0} }
+
+/* ── CONTACT ── */
+.contact-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.5rem; }
+@media (max-width: 680px) { .contact-grid { grid-template-columns: 1fr; } }
+
+.contact-main {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px; padding: 2rem;
+}
+.contact-title { font-size: 22px; font-weight: 700; margin-bottom: .5rem; }
+.contact-sub { color: var(--text2); font-size: 14px; margin-bottom: 2rem; }
+.contact-links { display: flex; flex-direction: column; gap: .75rem; }
+.contact-link {
+  display: flex; align-items: center; gap: .75rem;
+  background: rgba(255,255,255,.03); border: 1px solid var(--border);
+  border-radius: 10px; padding: .8rem 1rem;
+  text-decoration: none; color: var(--text2);
+  transition: border-color .2s, color .2s, background .2s;
+  font-size: 13px;
+}
+.contact-link:hover { border-color: rgba(167,139,250,.3); color: var(--violet); background: rgba(139,92,246,.05); }
+.contact-link .icon { font-size: 16px; flex-shrink: 0; }
+.cta-big {
+  display: block; text-align: center;
+  background: var(--violet2); color: #fff; font-weight: 700; font-size: 15px;
+  padding: 1rem; border-radius: 12px; text-decoration: none;
+  margin-top: 1.5rem;
+  transition: background .2s, box-shadow .2s, transform .15s;
+  box-shadow: 0 4px 20px rgba(139,92,246,.3);
+}
+.cta-big:hover { background: var(--violet); box-shadow: 0 8px 30px rgba(139,92,246,.4); transform: translateY(-2px); }
+
+.contact-side { display: flex; flex-direction: column; gap: 1rem; }
+.side-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 1.25rem;
+  flex: 1;
+  transition: border-color .2s;
+}
+.side-card:hover { border-color: rgba(167,139,250,.2); }
+.side-title { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--text3); font-weight: 600; margin-bottom: .75rem; }
+.side-langs { display: flex; flex-direction: column; gap: .4rem; }
+.lang-row { display: flex; justify-content: space-between; font-size: 13px; }
+.lang-name { color: var(--text2); }
+.lang-level { color: var(--violet); font-size: 11px; font-family: var(--mono); }
+
+.footer-copy {
+  text-align: center; color: var(--text3); font-size: 11px;
+  padding: 2rem 0 1rem;
+  position: relative; z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-name">Maksym <span>Stroievus</span></div>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="mailto:Stroievus.Maksym@gmail.com">Hire me</a>
+</nav>
+
+<div class="page">
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-top">
+      <div class="hero-text">
+        <div class="hero-badge">Open to opportunities</div>
+        <h1 class="hero-name">Maksym<br><span class="accent">Stroievus</span></h1>
+        <p class="hero-role">
+          <strong>Senior QA Engineer</strong> specialising in<br>
+          AI &amp; Platform Quality · Senior AQA
+        </p>
+        <div class="hero-meta">
+          <span class="meta-pill">📍 Ternopil, Ukraine (Remote)</span>
+          <span class="meta-pill">✉️ Stroievus.Maksym@gmail.com</span>
+          <a class="meta-pill" href="https://github.com/MStroievus" target="_blank" rel="noopener">⌥ GitHub</a>
+          <a class="meta-pill" href="tel:+380970551307">📞 +380 97 055 1307</a>
+        </div>
+        <div class="hero-btns">
+          <a class="btn-primary" href="mailto:Stroievus.Maksym@gmail.com">Get in touch</a>
+          <a class="btn-ghost" href="#experience">View experience ↓</a>
+        </div>
+      </div>
+
+      <div class="hero-card-wrap">
+        <div class="hero-card">
+          <div class="hc-glow"></div>
+          <div class="hc-label">// profile.stats</div>
+          <div class="hc-stats">
+            <div class="hc-stat"><div class="hc-stat-n">4+</div><div class="hc-stat-l">years<br>in QA</div></div>
+            <div class="hc-stat"><div class="hc-stat-n">800+</div><div class="hc-stat-l">E2E<br>scenarios</div></div>
+            <div class="hc-stat"><div class="hc-stat-n">40%</div><div class="hc-stat-l">faster<br>CI runs</div></div>
+            <div class="hc-stat"><div class="hc-stat-n">95%+</div><div class="hc-stat-l">test-code<br>sync</div></div>
+          </div>
+          <div class="hc-divider"></div>
+          <div>
+            <span class="hc-tag">Playwright</span>
+            <span class="hc-tag">TypeScript</span>
+            <span class="hc-tag">AI Quality</span>
+            <span class="hc-tag">ISO 9001</span>
+            <span class="hc-tag">LangChain</span>
+            <span class="hc-tag">LangFuse</span>
+          </div>
+          <div class="hc-status"><div class="hc-dot"></div> Available · Ternopil, Ukraine 🇺🇦</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EXPERIENCE ══ -->
+<section id="experience">
+  <div class="sec-label"><span class="hi">Experience</span> — 3 positions · 4+ years</div>
+  <div class="exp-stack">
+
+    <div class="job-card">
+      <div class="job-head">
+        <div>
+          <div class="job-title">Senior Automation QA Engineer</div>
+          <div class="job-company">@ Triple A</div>
+          <div class="job-sub">AI-Powered Data-Driven Platform · B2B SaaS · Ternopil, Ukraine (Remote)</div>
+        </div>
+        <div class="job-date">Aug 2024 — Present</div>
+      </div>
+      <ul class="bullets">
+        <li>Owned quality validation for a complex, data-driven platform with multi-step execution workflows — designed test strategies covering end-to-end lifecycle from request intake through execution artifacts and state evolution.</li>
+        <li>Built validation approaches for non-deterministic, integration-heavy flows (payment processing, asynchronous events, RabbitMQ message broker) where correctness is probabilistic rather than binary — verified reproducibility, traceability, and attribution of outputs.</li>
+        <li>Designed and executed 200+ automated E2E scenarios covering critical user flows, edge cases, retries, and failure-recovery paths; reduced execution time by 40% via sharded parallel pipelines.</li>
+        <li>Established execution-log and artifact validation as part of CI/CD gates (Allure reports, failure tracking, quality thresholds) — ensuring completeness and consistency of audit events.</li>
+        <li>Integrated TestRail for structured test management with 95%+ test-code sync, providing stakeholders with clear traceability between requirements, test coverage, and execution results.</li>
+        <li>Partnered with Product and Business Analysis on defining quality standards; contributed structured feedback loops that improved workflow reliability.</li>
+        <li>Mentored 3+ QA engineers on validation best practices; delivered technical sessions on test design for complex platforms.</li>
+      </ul>
+      <div class="job-tags">
+        <span class="jtag">Playwright</span><span class="jtag">TypeScript</span><span class="jtag">Python</span>
+        <span class="jtag">RabbitMQ</span><span class="jtag">Docker</span><span class="jtag">GitLab CI/CD</span>
+        <span class="jtag">Allure</span><span class="jtag">TestRail</span><span class="jtag">LLM Quality</span>
+      </div>
+    </div>
+
+    <div class="job-card">
+      <div class="job-head">
+        <div>
+          <div class="job-title">Automation QA Engineer</div>
+          <div class="job-company">@ Meninx Group</div>
+          <div class="job-sub">SaaS / BPaaS Workflow Platforms · Remote</div>
+        </div>
+        <div class="job-date past">May 2023 — Aug 2024</div>
+      </div>
+      <ul class="bullets">
+        <li>Led QA for SaaS/BPaaS workflow platforms — validated business-process automation across UI, API, and database layers with a focus on cross-browser stability and data consistency.</li>
+        <li>Designed and maintained a comprehensive regression and integration testing suite; achieved 70% automation coverage on critical revenue flows.</li>
+        <li>Implemented API-level contract and data validation pipelines with Microsoft SQL checks — ensuring end-to-end integrity between services and persisted state.</li>
+        <li>Partnered with Product and Engineering on quality gates and release criteria in Agile delivery; tracked metrics on defect escape rate, regression stability, and release readiness.</li>
+        <li>Produced playbooks, test documentation, and migration guides — improving team onboarding and repeatability of QA processes.</li>
+      </ul>
+      <div class="job-tags">
+        <span class="jtag">Playwright</span><span class="jtag">TypeScript</span><span class="jtag">SQL</span>
+        <span class="jtag">Postman</span><span class="jtag">JIRA</span><span class="jtag">Confluence</span><span class="jtag">Agile</span>
+      </div>
+    </div>
+
+    <div class="job-card">
+      <div class="job-head">
+        <div>
+          <div class="job-title">QA Engineer</div>
+          <div class="job-company">@ Unicorn UA</div>
+          <div class="job-sub">Web Applications · Ternopil, Ukraine</div>
+        </div>
+        <div class="job-date past">Feb 2022 — Apr 2023</div>
+      </div>
+      <ul class="bullets">
+        <li>Performed comprehensive functional, integration, and regression testing of web applications — validated UI, REST APIs, databases, and server-side behavior.</li>
+        <li>Investigated defects via log analysis, HTTP request inspection, and server response tracing; delivered structured root-cause reports to the engineering team.</li>
+        <li>Automated regression and smoke suites; integrated API tests (Postman) into CI/CD workflows.</li>
+        <li>Authored and maintained test plans, test strategies, and test-case libraries — aligned with JIRA/Confluence delivery practices.</li>
+      </ul>
+      <div class="job-tags">
+        <span class="jtag">Functional Testing</span><span class="jtag">REST API</span><span class="jtag">Postman</span>
+        <span class="jtag">JIRA</span><span class="jtag">SQL</span><span class="jtag">CI/CD</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ PROJECTS ══ -->
+<section id="projects">
+  <div class="sec-label"><span class="hi">Projects</span></div>
+  <div class="projects-grid">
+
+    <a class="proj-card" href="https://github.com/MStroievus/playwright-aqa-plugin" target="_blank" rel="noopener">
+      <div class="proj-preview" style="padding:0;background:#07050f;position:relative;overflow:hidden;">
+        <canvas id="term-canvas" style="width:100%;height:160px;display:block;"></canvas>
+      </div>
+      <div class="proj-body">
+        <div class="proj-type">// open source · Claude Skill</div>
+        <div class="proj-name">playwright-aqa</div>
+        <div class="proj-desc">A Claude Skill encapsulating Page Object Model, fixtures, and API testing patterns. Lets Claude generate production-grade Playwright tests on demand. Focus on trigger precision and scope isolation.</div>
+        <div class="proj-links">
+          <span class="proj-link">github →</span>
+          <span style="font-size:11px;color:var(--text3);font-family:var(--mono)">TypeScript · Claude Skills</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="proj-card" href="https://github.com/MStroievus/confluence-lanchain-ts" target="_blank" rel="noopener">
+      <div class="proj-preview" style="padding:0;background:#060410;position:relative;overflow:hidden;">
+        <canvas id="vec-canvas" style="width:100%;height:160px;display:block;"></canvas>
+      </div>
+      <div class="proj-body">
+        <div class="proj-type">// open source · AI · RAG · LangGraph</div>
+        <div class="proj-name">Confluence LangChain Bot</div>
+        <div class="proj-desc">TypeScript chatbot that loads Confluence pages, converts them to vector embeddings via LangChain, and enables RAG-based Q&amp;A over your documentation. Built with LangGraph for stateful multi-step agent flows.</div>
+        <div class="proj-links">
+          <span class="proj-link">github →</span>
+          <span style="font-size:11px;color:var(--text3);font-family:var(--mono)">TypeScript · LangChain · LangGraph · RAG</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="proj-card" href="https://github.com/MStroievus/my-foodie-bot" target="_blank" rel="noopener">
+      <div class="proj-preview" style="padding:0;background:#07050f;position:relative;overflow:hidden;">
+        <canvas id="obs-canvas" style="width:100%;height:160px;display:block;"></canvas>
+      </div>
+      <div class="proj-body">
+        <div class="proj-type">// open source · AI · memO · observability</div>
+        <div class="proj-name">my-foodie-bot</div>
+        <div class="proj-desc">AI food assistant with persistent <strong style="color:var(--text)">memO</strong> memory and long-term user context. Instrumented with <strong style="color:var(--text)">LangFuse</strong> for prompt tracing, cost tracking, and eval scoring — measuring hallucination rate, groundedness, and latency per release.</div>
+        <div class="proj-links">
+          <span class="proj-link">github →</span>
+          <span style="font-size:11px;color:var(--text3);font-family:var(--mono)">Python · memO · LangFuse · LangChain · Eval</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ══ SKILLS ══ -->
+<section id="skills">
+  <div class="sec-label"><span class="hi">Skills</span> — hover any entry for context</div>
+  <div class="skills-legend">
+    <div class="leg"><span style="color:var(--violet)">●</span> core / daily</div>
+    <div class="leg"><span style="color:var(--amber)">◐</span> working knowledge</div>
+    <div class="leg"><span style="color:var(--text3)">○</span> exploring</div>
+  </div>
+  <div class="skills-grid">
+
+    <div class="skill-card">
+      <div class="sc-head"><span class="sc-icon">🤖</span><span class="sc-title">AI & LLM Quality</span><span class="sc-count">9</span></div>
+      <div class="sc-body">
+        <div class="sk" data-tip="Designed structured rubrics and test suites to assess AI output consistency, accuracy, and edge-case failure modes across LLM-powered features at Triple A."><span class="sk-dot c">●</span><span class="sk-name c">AI output validation</span></div>
+        <div class="sk" data-tip="Built repeatable validation for outputs that change per call — outcome ranges, semantic equivalence, and statistical consistency over exact-match assertions."><span class="sk-dot c">●</span><span class="sk-name c">Non-deterministic assessment</span></div>
+        <div class="sk" data-tip="Reviews AI outputs for factual drift, confabulation, and demographic bias. Defined internal checklists used by the team before AI feature releases."><span class="sk-dot c">●</span><span class="sk-name c">Hallucination & bias awareness</span></div>
+        <div class="sk" data-tip="Published playwright-aqa skill — encapsulates POM, fixtures, and API testing patterns so Claude generates production-grade tests on demand."><span class="sk-dot c">●</span><span class="sk-name c">Claude Skills authoring</span></div>
+        <div class="sk" data-tip="Designed systematic prompt variation suites to identify flakiness, instruction sensitivity, and model behavioural edge cases."><span class="sk-dot w">◐</span><span class="sk-name w">Prompt testing methodologies</span></div>
+        <div class="sk" data-tip="Familiar with BLEU/ROUGE metrics, human-eval frameworks, and model benchmarking concepts. Applied during internal AI feature reviews."><span class="sk-dot w">◐</span><span class="sk-name w">LLM evaluation concepts</span></div>
+        <div class="sk" data-tip="Assessing whether AI responses stay anchored to provided context. Raised and tracked source-drift issues in RAG-backed features."><span class="sk-dot w">◐</span><span class="sk-name w">Source grounding & explainability</span></div>
+        <div class="sk" data-tip="Studying multi-step AI agents: tool-use patterns, state management, retry logic, and validation across autonomous action chains."><span class="sk-dot w">◐</span><span class="sk-name w">Agentic AI frameworks</span></div>
+        <div class="sk" data-tip="Actively learning through Responsible AI literature — fairness, transparency, and accountability as applied to product QA."><span class="sk-dot e">○</span><span class="sk-name e">Responsible AI principles</span></div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="sc-head"><span class="sc-icon">🔬</span><span class="sc-title">QA Methodologies</span><span class="sc-count">8</span></div>
+      <div class="sc-body">
+        <div class="sk" data-tip="Owns end-to-end strategy at Triple A — from requirement analysis and risk mapping through execution, coverage reporting, and post-release monitoring."><span class="sk-dot c">●</span><span class="sk-name c">End-to-End test strategy</span></div>
+        <div class="sk" data-tip="Maintains full regression suite of 200+ Playwright scenarios. Triages failures by flakiness vs regression. Runs integration checks against staging on every merge."><span class="sk-dot c">●</span><span class="sk-name c">Integration & regression testing</span></div>
+        <div class="sk" data-tip="Systematically maps boundary values, race conditions, and invalid inputs. Found async ordering bugs in RabbitMQ payment flows before production."><span class="sk-dot c">●</span><span class="sk-name c">Edge case & failure mode analysis</span></div>
+        <div class="sk" data-tip="Validated entire user journeys: registration through payment through async fulfilment — including conditional branches and partial-success states."><span class="sk-dot c">●</span><span class="sk-name c">Multi-step workflow validation</span></div>
+        <div class="sk" data-tip="Tests object lifecycles through all state transitions (pending → active → complete → cancelled) including illegal transitions and concurrent state changes."><span class="sk-dot c">●</span><span class="sk-name c">Lifecycle & state-transition testing</span></div>
+        <div class="sk" data-tip="Uses charter-based exploratory sessions to find defects outside the happy path. Documents session notes and bug counts to make exploratory effort visible."><span class="sk-dot c">●</span><span class="sk-name c">Exploratory testing</span></div>
+        <div class="sk" data-tip="Applies test pyramid thinking: maximise unit/API coverage, minimise brittle UI tests. Risk-ranks features to prioritise automation effort."><span class="sk-dot c">●</span><span class="sk-name c">Test pyramid & risk-based planning</span></div>
+        <div class="sk" data-tip="Designed retry logic validation for async payment events in RabbitMQ — tests idempotency, duplicate processing, and partial-failure recovery."><span class="sk-dot c">●</span><span class="sk-name c">Recovery & retry scenario design</span></div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="sc-head"><span class="sc-icon">🛠</span><span class="sc-title">Tools & Stack</span><span class="sc-count">13</span></div>
+      <div class="sc-body tools-2col">
+        <div class="sk" data-tip="Built 200+ E2E scenarios at Triple A. Sharded pipelines cut execution time by 40%. Authored open-source plugin encapsulating POM, fixtures, and API builders."><span class="sk-dot c">●</span><span class="sk-name c">Playwright</span></div>
+        <div class="sk" data-tip="Primary language for test automation. TypeScript strict mode, custom type-safe fixture system, typed API response models."><span class="sk-dot c">●</span><span class="sk-name c">TypeScript / JS</span></div>
+        <div class="sk" data-tip="API testing and contract validation. Postman collections as living documentation shared with backend team."><span class="sk-dot c">●</span><span class="sk-name c">Postman</span></div>
+        <div class="sk" data-tip="Scripting test data generators, analysis scripts, and lightweight automation helpers. Used for LLM output batch analysis pipelines."><span class="sk-dot c">●</span><span class="sk-name c">Python</span></div>
+        <div class="sk" data-tip="Owns CI pipeline configuration at Triple A — scheduled runs, parallelism, artifact uploads, Allure report publishing, and quality gates."><span class="sk-dot c">●</span><span class="sk-name c">GitLab CI/CD</span></div>
+        <div class="sk" data-tip="Database validation — querying test data setup, asserting state changes, and verifying async operations completed correctly."><span class="sk-dot c">●</span><span class="sk-name c">SQL</span></div>
+        <div class="sk" data-tip="Used for open-source project CI and public workflow automation. Familiar with matrix builds and secrets management."><span class="sk-dot c">●</span><span class="sk-name c">GitHub Actions</span></div>
+        <div class="sk" data-tip="Containerised test environments for consistent local and CI runs. Docker Compose to spin up full app stacks."><span class="sk-dot c">●</span><span class="sk-name c">Docker</span></div>
+        <div class="sk" data-tip="Integrated with automation code for 95%+ sync between test cases and implementation — full requirement-to-test traceability."><span class="sk-dot c">●</span><span class="sk-name c">TestRail</span></div>
+        <div class="sk" data-tip="Rich HTML reporting with step-level screenshots, environment metadata, and history tracking. Embedded in GitLab Pages."><span class="sk-dot c">●</span><span class="sk-name c">Allure</span></div>
+        <div class="sk" data-tip="Full defect lifecycle in JIRA with custom QA workflows. Confluence for test plans, release notes, and QA runbooks."><span class="sk-dot c">●</span><span class="sk-name c">JIRA / Confluence</span></div>
+        <div class="sk" data-tip="Validated async message flows and non-deterministic event ordering in payment processing — idempotency checks, dead-letter queue handling."><span class="sk-dot c">●</span><span class="sk-name c">RabbitMQ</span></div>
+        <div class="sk" data-tip="Working knowledge from previous teams. Familiar with Cypress test structure and network stubbing — prefer Playwright for new projects."><span class="sk-dot w">◐</span><span class="sk-name w">Cypress</span></div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="sc-head"><span class="sc-icon">🤝</span><span class="sc-title">Governance & Collab</span><span class="sc-count">8</span></div>
+      <div class="sc-body">
+        <div class="sk" data-tip="At Triple A, coordinated with Legal to validate data handling and consent flows against policy requirements."><span class="sk-dot c">●</span><span class="sk-name c">Compliance-oriented QA</span></div>
+        <div class="sk" data-tip="Recognised as exemplary employee during external ISO 9001 audit for disciplined QA documentation — traceability matrices, controlled test plans."><span class="sk-dot c">●</span><span class="sk-name c">ISO 9001 practices</span></div>
+        <div class="sk" data-tip="Writes test plans, RTMs, and release sign-off reports readable by non-QA stakeholders. All test cases in TestRail have acceptance criteria mapped to requirements."><span class="sk-dot c">●</span><span class="sk-name c">Test documentation & traceability</span></div>
+        <div class="sk" data-tip="Tracks defect escape rate, automation coverage %, flakiness rate, and MTTD. Presents metrics in sprint reviews to justify QA investment."><span class="sk-dot c">●</span><span class="sk-name c">Quality metrics & reporting</span></div>
+        <div class="sk" data-tip="Translates QA risk into language Product and Legal understand. Runs collaborative risk workshops before major releases. Manages go/no-go criteria."><span class="sk-dot c">●</span><span class="sk-name c">Stakeholder alignment</span></div>
+        <div class="sk" data-tip="Active Scrum team member — runs QA ceremonies, participates in refinement to inject testability, maintains QA velocity metrics."><span class="sk-dot c">●</span><span class="sk-name c">Agile / Scrum delivery</span></div>
+        <div class="sk" data-tip="Runs retrospectives on escaped defects. Feeds findings back to engineering as actionable improvements — not just bug reports."><span class="sk-dot c">●</span><span class="sk-name c">Structured feedback loops</span></div>
+        <div class="sk" data-tip="Mentors 3+ junior QA engineers in test design, exploratory techniques, and automation best practices. Reviews PRs for test quality."><span class="sk-dot c">●</span><span class="sk-name c">Cross-functional mentorship</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</div><!-- /page -->
+
+<!-- ══ METRICS ══ -->
+<section id="metrics">
+  <div class="metrics-inner">
+    <div class="metric-card"><div class="metric-num">4+</div><div class="metric-label">years<br>in QA</div></div>
+    <div class="metric-card"><div class="metric-num">200+</div><div class="metric-label">E2E scenarios<br>shipped</div></div>
+    <div class="metric-card"><div class="metric-num">40%</div><div class="metric-label">faster CI<br>via sharding</div></div>
+    <div class="metric-card"><div class="metric-num">95%+</div><div class="metric-label">test-code<br>sync</div></div>
+    <div class="metric-card"><div class="metric-num">70%</div><div class="metric-label">automation<br>on revenue flows</div></div>
+    <div class="metric-card"><div class="metric-num">3+</div><div class="metric-label">engineers<br>mentored</div></div>
+  </div>
+</section>
+
+<div class="page">
+
+<!-- ══ ACHIEVEMENTS ══ -->
+<section id="achievements">
+  <div class="sec-label"><span class="hi">Achievements</span> — key impact</div>
+  <ul class="ach-list">
+    <li class="ach-item"><div class="ach-num">01</div><div class="ach-text"><strong>Platform Quality Ownership</strong> — Designed validation strategies for complex, multi-step workflows where correctness is probabilistic — improving output consistency and stakeholder trust across AI-powered features at Triple A.</div></li>
+    <li class="ach-item"><div class="ach-num">02</div><div class="ach-text"><strong>Auditability & Traceability</strong> — Embedded structured logging, reporting, and test-to-code traceability (95%+ sync in TestRail) to support review-ready, audit-friendly quality practices across the full delivery lifecycle.</div></li>
+    <li class="ach-item"><div class="ach-num">03</div><div class="ach-text"><strong>Process Design</strong> — Built team-level test strategies, quality gates, and documentation standards at Meninx Group — adopted as company-wide practice across multiple product squads.</div></li>
+    <li class="ach-item"><div class="ach-num">04</div><div class="ach-text"><strong>Knowledge Sharing</strong> — Founded an internal QA community with bi-weekly sessions; delivered multiple technical presentations on test architecture and quality mindset for automation and AI systems.</div></li>
+    <li class="ach-item"><div class="ach-num">05</div><div class="ach-text"><strong>ISO 9001 Recognition</strong> — Recognised as an exemplary employee during an external ISO 9001 certification audit for disciplined QA and documentation practices.</div></li>
+    <li class="ach-item"><div class="ach-num">06</div><div class="ach-text"><strong>Open Source</strong> — Published <em>playwright-aqa</em> Claude Skill — encapsulates POM, fixtures, and API testing patterns so Claude can generate production-grade Playwright tests on demand.</div></li>
+  </ul>
+</section>
+
+<!-- ══ LEARNING ══ -->
+<section id="learning">
+  <div class="sec-label"><span class="hi">Continuous Learning</span> — recent activity</div>
+  <div class="learning-card">
+    <div class="log-line"><span class="log-date">[2026-04-22]</span><span class="log-verb r">reading</span><span class="log-content">"Evaluating LLM outputs at scale"</span></div>
+    <div class="log-line"><span class="log-date">[2026-04-20]</span><span class="log-verb g">building</span><span class="log-content">Claude Skill for Playwright test generation</span></div>
+    <div class="log-line"><span class="log-date">[2026-04-18]</span><span class="log-verb b">exploring</span><span class="log-content">skill authoring &amp; agentic workflows</span></div>
+    <div class="log-line"><span class="log-date">[2026-04-15]</span><span class="log-verb a">studying</span><span class="log-content">prompt testing &amp; hallucination detection</span></div>
+    <div class="log-line"><span class="log-date">[2026-04-10]</span><span class="log-verb r">practicing</span><span class="log-content">non-deterministic output validation techniques</span></div>
+    <div class="log-line"><span class="log-date">[2026-04-05]</span><span class="log-verb b">exploring</span><span class="log-content">responsible AI &amp; explainability principles</span></div>
+    <div class="log-line"><span class="log-date"></span><span class="log-content"><span class="blink"></span></span></div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact">
+  <div class="sec-label"><span class="hi">Contact</span> — let's work together</div>
+  <div class="contact-grid">
+    <div class="contact-main">
+      <div class="contact-title">Get in touch</div>
+      <div class="contact-sub">Open to senior QA, AI quality, and automation engineering opportunities.</div>
+      <div class="contact-links">
+        <a class="contact-link" href="mailto:Stroievus.Maksym@gmail.com">
+          <span class="icon">✉️</span> Stroievus.Maksym@gmail.com
+        </a>
+        <a class="contact-link" href="tel:+380970551307">
+          <span class="icon">📞</span> +380 97 055 1307
+        </a>
+        <a class="contact-link" href="https://github.com/MStroievus" target="_blank" rel="noopener">
+          <span class="icon">⌥</span> github.com/MStroievus
+        </a>
+        <a class="contact-link" href="https://linkedin.com/in/maksym-stroievus" target="_blank" rel="noopener">
+          <span class="icon">🔗</span> linkedin.com/in/maksym-stroievus
+        </a>
+      </div>
+      <a class="cta-big" href="mailto:Stroievus.Maksym@gmail.com">Send a message →</a>
+    </div>
+    <div class="contact-side">
+      <div class="side-card">
+        <div class="side-title">Languages</div>
+        <div class="side-langs">
+          <div class="lang-row"><span class="lang-name">Ukrainian</span><span class="lang-level">Native</span></div>
+          <div class="lang-row"><span class="lang-name">English</span><span class="lang-level">B2 · Professional</span></div>
+        </div>
+      </div>
+      <div class="side-card" style="flex:1">
+        <div class="side-title">Currently interested in</div>
+        <div style="display:flex;flex-direction:column;gap:.5rem;margin-top:.25rem">
+          <div style="font-size:13px;color:var(--text2)">AI Quality Engineering</div>
+          <div style="font-size:13px;color:var(--text2)">LLM Evaluation & Testing</div>
+          <div style="font-size:13px;color:var(--text2)">Senior AQA / Automation Lead</div>
+          <div style="font-size:13px;color:var(--text2)">Remote / Hybrid roles</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="footer-copy">
+  Maksym Stroievus · Senior QA Engineer · Ternopil, Ukraine · 2026
+</div>
+
+</div><!-- /page -->
+
+<!-- TOOLTIP -->
+<div class="tip" id="tip"><strong id="tip-name"></strong><span id="tip-text"></span></div>
+
+<script>
+// ── TOOLTIP ──
+const tip = document.getElementById('tip');
+const tipName = document.getElementById('tip-name');
+const tipText = document.getElementById('tip-text');
+
+document.querySelectorAll('.sk[data-tip]').forEach(el => {
+  const name = el.querySelector('.sk-name')?.textContent?.trim() || '';
+  el.addEventListener('mouseenter', e => { tipName.textContent = name; tipText.textContent = el.dataset.tip; tip.classList.add('on'); move(e); });
+  el.addEventListener('mousemove', move);
+  el.addEventListener('mouseleave', () => tip.classList.remove('on'));
+});
+function move(e) {
+  const x = e.clientX + 14, y = e.clientY - 8;
+  const tw = tip.offsetWidth, th = tip.offsetHeight;
+  tip.style.left = (x + tw > window.innerWidth ? x - tw - 28 : x) + 'px';
+  tip.style.top = (y + th > window.innerHeight ? y - th : y) + 'px';
+}
+
+// ── 3D TILT on hero card ──
+const heroCard = document.querySelector('.hero-card');
+const heroWrap = document.querySelector('.hero-card-wrap');
+if (heroWrap && heroCard) {
+  heroWrap.addEventListener('mousemove', e => {
+    const r = heroWrap.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - .5;
+    const y = (e.clientY - r.top) / r.height - .5;
+    heroCard.style.animation = 'none';
+    heroCard.style.transform = `rotateX(${y * -16}deg) rotateY(${x * 20}deg) translateZ(10px)`;
+  });
+  heroWrap.addEventListener('mouseleave', () => {
+    heroCard.style.transform = '';
+    heroCard.style.animation = '';
+  });
+}
+
+// ── WORD → VECTOR CANVAS ANIMATION (Confluence LangChain project preview) ──
+(function() {
+  const canvas = document.getElementById('vec-canvas');
+  if (!canvas) return;
+  const dpr = window.devicePixelRatio || 1;
+  const W = canvas.offsetWidth || 300;
+  const H = 160;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  const words = ['test plan', 'confluence', 'QA report', 'bug ticket', 'release note'];
+  const colors = ['#a78bfa','#06b6d4','#f59e0b','#22c55e','#f472b6'];
+  let wordIdx = 0;
+  let phase = 0; // 0=word, 1=arrow, 2=vector
+  let phaseT = 0;
+
+  function makeVec() {
+    return Array.from({length: 8}, () => (Math.random() * 2 - 1).toFixed(2));
+  }
+  let currentVec = makeVec();
+
+  function ease(t) { return t < .5 ? 2*t*t : -1+(4-2*t)*t; }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    // Background grid
+    ctx.strokeStyle = 'rgba(167,139,250,.06)';
+    ctx.lineWidth = 1;
+    for (let x = 0; x < W; x += 24) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke(); }
+    for (let y = 0; y < H; y += 24) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke(); }
+
+    const col = colors[wordIdx % colors.length];
+    const word = words[wordIdx % words.length];
+    const prog = ease(Math.min(phaseT, 1));
+
+    if (phase === 0) {
+      const alpha = phaseT < .2 ? phaseT/.2 : phaseT > .8 ? 1-(phaseT-.8)/.2 : 1;
+      ctx.globalAlpha = alpha;
+      ctx.font = 'bold 22px Inter, sans-serif';
+      ctx.fillStyle = col;
+      ctx.textAlign = 'center';
+      ctx.fillText('"' + word + '"', W/2, H/2 + 8);
+      ctx.font = '10px JetBrains Mono, monospace';
+      ctx.fillStyle = 'rgba(255,255,255,.3)';
+      ctx.fillText('input text', W/2, H/2 + 28);
+      ctx.globalAlpha = 1;
+    } else if (phase === 1) {
+      ctx.globalAlpha = 1;
+      const cx = W/2, cy = H/2;
+      const len = prog * (W * .32);
+      ctx.globalAlpha = 1 - prog;
+      ctx.font = 'bold 18px Inter, sans-serif';
+      ctx.fillStyle = col;
+      ctx.textAlign = 'center';
+      ctx.fillText('"' + word + '"', cx - 90, cy + 6);
+      ctx.globalAlpha = 1;
+      ctx.strokeStyle = col;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(cx - 60 + prog*20, cy);
+      ctx.lineTo(cx - 60 + prog*20 + len, cy);
+      ctx.stroke();
+      if (prog > .3) {
+        const ax = cx - 60 + prog*20 + len;
+        ctx.beginPath(); ctx.moveTo(ax, cy); ctx.lineTo(ax-7, cy-5); ctx.lineTo(ax-7, cy+5); ctx.closePath();
+        ctx.fillStyle = col; ctx.fill();
+      }
+      ctx.font = '9px JetBrains Mono, monospace';
+      ctx.fillStyle = 'rgba(255,255,255,.35)';
+      ctx.textAlign = 'center';
+      ctx.fillText('embedding', cx, cy - 12);
+    } else {
+      const vec = currentVec;
+      const barW = 22, gap = 6;
+      const total = vec.length * (barW + gap) - gap;
+      const startX = (W - total) / 2;
+      const maxH = 60;
+
+      ctx.globalAlpha = Math.min(phaseT * 3, 1);
+      vec.forEach((v, i) => {
+        const val = parseFloat(v);
+        const bh = Math.abs(val) * maxH * prog;
+        const x = startX + i * (barW + gap);
+        const y = H/2;
+        const barCol = val >= 0 ? col : '#ff6b6b';
+        ctx.fillStyle = barCol + '33';
+        ctx.fillRect(x, y - maxH, barW, maxH * 2);
+        ctx.fillStyle = barCol;
+        ctx.fillRect(x, val >= 0 ? y - bh : y, barW, bh);
+        ctx.font = '7px JetBrains Mono, monospace';
+        ctx.fillStyle = 'rgba(255,255,255,.4)';
+        ctx.textAlign = 'center';
+        ctx.fillText(v, x + barW/2, val >= 0 ? y - bh - 3 : y + bh + 10);
+      });
+      ctx.font = '9px JetBrains Mono, monospace';
+      ctx.fillStyle = 'rgba(255,255,255,.25)';
+      ctx.textAlign = 'center';
+      ctx.fillText('vector[' + vec.length + '] → Confluence RAG', W/2, H - 10);
+      ctx.globalAlpha = 1;
+    }
+
+    phaseT += .012;
+    if (phaseT > 1.2) {
+      phaseT = 0;
+      phase++;
+      if (phase > 2) { phase = 0; wordIdx++; currentVec = makeVec(); }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── TERMINAL ANIMATION (playwright-aqa Claude Skill workflow) ──
+(function() {
+  const canvas = document.getElementById('term-canvas');
+  if (!canvas) return;
+  const dpr = window.devicePixelRatio || 1;
+  const W = canvas.offsetWidth || 320;
+  const H = 160;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  // Script: sequence of lines. Each line has a type:
+  //   'prompt'  — user prompt with $ prefix, typewriter in green
+  //   'claude'  — "Claude >" prefix in violet
+  //   'skill'   — skill-loaded row, monospace, cyan highlight
+  //   'code'    — code line, faint
+  //   'ok'      — green ✓ success line
+  //   'wait'    — pause only (no text)
+  const script = [
+    { type: 'prompt', text: '$ write a login e2e test' },
+    { type: 'claude', text: 'Claude → loading skill…' },
+    { type: 'skill',  text: '● playwright-aqa @1.2.0' },
+    { type: 'code',   text: "test('login', async ({ page }) => {" },
+    { type: 'code',   text: "  await loginPage.signIn(user);" },
+    { type: 'code',   text: '  await expect(dashboard).toBeVisible();' },
+    { type: 'code',   text: '});' },
+    { type: 'ok',     text: '✓ test generated · POM + fixtures' },
+    { type: 'wait',   text: '' },
+  ];
+
+  const COLORS = {
+    bg:     '#07050f',
+    border: 'rgba(167,139,250,.12)',
+    prompt: '#22c55e',
+    user:   'rgba(255,255,255,.92)',
+    claude: '#a78bfa',
+    claudeMuted: 'rgba(167,139,250,.75)',
+    skill:  '#06b6d4',
+    code:   'rgba(255,255,255,.55)',
+    codeKw: '#f472b6',
+    ok:     '#22c55e',
+    dim:    'rgba(255,255,255,.3)',
+  };
+
+  const LINE_H = 15;
+  const PAD_L = 14;
+  const PAD_T = 14;
+
+  let idx = 0;           // current line index
+  let charI = 0;         // typed chars on current line
+  let typeAcc = 0;       // accumulator for typing speed
+  let holdAcc = 0;       // accumulator for line-complete hold
+  let loopHoldAcc = 0;   // hold after the whole sequence
+  let typed = [];        // array of { type, text } already fully typed
+  let cursorBlink = 0;
+
+  // Typing speeds (chars per frame-unit); prompt is slower/user-like
+  function typingRate(type) {
+    if (type === 'prompt') return 0.35;  // fast-ish user typing
+    if (type === 'claude') return 0.45;
+    if (type === 'skill')  return 0.50;
+    if (type === 'code')   return 0.55;
+    if (type === 'ok')     return 0.50;
+    return 0;
+  }
+
+  function drawLine(y, line, charsShown) {
+    const shown = line.text.slice(0, charsShown);
+    let x = PAD_L;
+
+    if (line.type === 'prompt') {
+      // split into "$" and rest
+      ctx.font = '500 11.5px JetBrains Mono, monospace';
+      ctx.textBaseline = 'middle';
+      const m = shown.match(/^(\$)(.*)$/);
+      if (m) {
+        ctx.fillStyle = COLORS.prompt;
+        ctx.fillText('$', x, y);
+        ctx.fillStyle = COLORS.user;
+        ctx.fillText(m[2], x + 10, y);
+      } else {
+        ctx.fillStyle = COLORS.user;
+        ctx.fillText(shown, x, y);
+      }
+    } else if (line.type === 'claude') {
+      ctx.font = '500 11.5px JetBrains Mono, monospace';
+      ctx.textBaseline = 'middle';
+      // "Claude →" prefix in violet, rest muted
+      const prefix = 'Claude →';
+      if (shown.length <= prefix.length) {
+        ctx.fillStyle = COLORS.claude;
+        ctx.fillText(shown, x, y);
+      } else {
+        ctx.fillStyle = COLORS.claude;
+        ctx.fillText(prefix, x, y);
+        ctx.fillStyle = COLORS.claudeMuted;
+        ctx.fillText(shown.slice(prefix.length), x + ctx.measureText(prefix).width, y);
+      }
+    } else if (line.type === 'skill') {
+      ctx.font = '600 11.5px JetBrains Mono, monospace';
+      ctx.textBaseline = 'middle';
+      // "● " dot in cyan, name in white-ish
+      const dot = '● ';
+      if (shown.length <= dot.length) {
+        ctx.fillStyle = COLORS.skill;
+        ctx.fillText(shown, x, y);
+      } else {
+        ctx.fillStyle = COLORS.skill;
+        ctx.fillText(dot, x, y);
+        ctx.fillStyle = '#f0eeff';
+        ctx.fillText(shown.slice(dot.length), x + ctx.measureText(dot).width, y);
+      }
+    } else if (line.type === 'code') {
+      ctx.font = '400 11px JetBrains Mono, monospace';
+      ctx.textBaseline = 'middle';
+      // Simple keyword highlight: test, await, expect, async
+      const kw = /\b(test|await|expect|async|const|await)\b/g;
+      let cursor = 0;
+      let lastIdx = 0;
+      let dx = x;
+      // Render char-by-char in chunks to support partial highlighting while typing
+      const s = shown;
+      let i = 0;
+      kw.lastIndex = 0;
+      const tokens = [];
+      let m;
+      while ((m = kw.exec(line.text)) !== null) {
+        tokens.push({ start: m.index, end: m.index + m[0].length });
+      }
+      let t = 0;
+      for (let c = 0; c < s.length; c++) {
+        const isKw = tokens.some(tk => c >= tk.start && c < tk.end);
+        ctx.fillStyle = isKw ? COLORS.codeKw : COLORS.code;
+        ctx.fillText(s[c], dx, y);
+        dx += ctx.measureText(s[c]).width;
+      }
+    } else if (line.type === 'ok') {
+      ctx.font = '600 11.5px JetBrains Mono, monospace';
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = COLORS.ok;
+      ctx.fillText(shown, x, y);
+    }
+
+    // cursor on actively-typing line
+    return ctx.measureText(shown).width;
+  }
+
+  function frame() {
+    // clear
+    ctx.fillStyle = COLORS.bg;
+    ctx.fillRect(0, 0, W, H);
+
+    // Top fake window chrome
+    ctx.fillStyle = 'rgba(255,255,255,.03)';
+    ctx.fillRect(0, 0, W, 22);
+    ctx.fillStyle = 'rgba(255,255,255,.06)';
+    ctx.fillRect(0, 22, W, 1);
+    // traffic lights
+    const dots = [ ['#ff5f57', 12], ['#febc2e', 26], ['#28c840', 40] ];
+    dots.forEach(([c, dx]) => {
+      ctx.beginPath();
+      ctx.arc(dx, 11, 4, 0, Math.PI*2);
+      ctx.fillStyle = c;
+      ctx.fill();
+    });
+    ctx.font = '500 9.5px JetBrains Mono, monospace';
+    ctx.fillStyle = COLORS.dim;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('~/playwright-aqa — claude', W / 2, 11);
+    ctx.textAlign = 'left';
+
+    // Viewport area
+    const viewTop = 30;
+    const maxLines = Math.floor((H - viewTop - 6) / LINE_H);
+
+    // Decide which lines to render: show a rolling window of last maxLines
+    const allLines = [...typed];
+    if (idx < script.length && script[idx].type !== 'wait') {
+      allLines.push({ type: script[idx].type, text: script[idx].text.slice(0, charI) });
+    }
+    const renderLines = allLines.slice(-maxLines);
+
+    // Draw lines
+    renderLines.forEach((line, i) => {
+      const y = viewTop + i * LINE_H + LINE_H / 2;
+      drawLine(y, line, line.text.length);
+    });
+
+    // Cursor blinking on the *last* line only while typing or waiting
+    cursorBlink += 1;
+    const showCursor = Math.floor(cursorBlink / 30) % 2 === 0;
+    if (showCursor && renderLines.length > 0) {
+      const lastLine = renderLines[renderLines.length - 1];
+      const y = viewTop + (renderLines.length - 1) * LINE_H + LINE_H / 2;
+      const w = ctx.measureText(lastLine.text).width;
+      let baseX = PAD_L;
+      // for prompt type, prefix rendered separately
+      ctx.fillStyle = 'rgba(167,139,250,.9)';
+      ctx.fillRect(baseX + w + 2, y - 6, 6, 12);
+    }
+
+    // Advance state
+    if (idx < script.length) {
+      const cur = script[idx];
+      if (cur.type === 'wait') {
+        holdAcc += 1;
+        if (holdAcc > 70) {
+          holdAcc = 0;
+          idx++;
+          charI = 0;
+        }
+      } else if (charI < cur.text.length) {
+        typeAcc += typingRate(cur.type);
+        while (typeAcc >= 1 && charI < cur.text.length) {
+          charI++;
+          typeAcc -= 1;
+        }
+      } else {
+        // line complete → small hold, then commit & move on
+        holdAcc += 1;
+        const delay = cur.type === 'prompt' ? 28 : cur.type === 'claude' ? 36 : cur.type === 'ok' ? 60 : 12;
+        if (holdAcc >= delay) {
+          typed.push({ type: cur.type, text: cur.text });
+          idx++;
+          charI = 0;
+          holdAcc = 0;
+        }
+      }
+    } else {
+      // done — hold the frame then loop
+      loopHoldAcc += 1;
+      if (loopHoldAcc > 180) {
+        loopHoldAcc = 0;
+        idx = 0;
+        charI = 0;
+        typed = [];
+      }
+    }
+
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+// ── LANGSMITH-STYLE OBSERVABILITY DASHBOARD (my-foodie-bot) ──
+(function() {
+  const canvas = document.getElementById('obs-canvas');
+  if (!canvas) return;
+  const dpr = window.devicePixelRatio || 1;
+  const W = canvas.offsetWidth || 320;
+  const H = 160;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  // Fake trace rows: simulates LangSmith prompt runs.
+  // each run has latency (ms), tokens, cost, eval-score, and status.
+  const promptPool = [
+    { name: 'recipe_suggest', user: 'what can I cook with salmon?' },
+    { name: 'memory_recall',  user: 'remember — I\'m vegan' },
+    { name: 'plan_weekly',    user: 'weekly meal plan for me' },
+    { name: 'nutrition_qa',   user: 'carbs in quinoa?' },
+    { name: 'allergy_check',  user: 'does this contain nuts?' },
+    { name: 'grocery_list',   user: 'make a grocery list' },
+  ];
+
+  // Active trace animation state
+  const NUM_ROWS = 3;
+  let rows = [];
+  function mkRow(seedPhase) {
+    const p = promptPool[Math.floor(Math.random() * promptPool.length)];
+    // random eval metrics — weighted toward good
+    const latency = 420 + Math.random() * 1900;      // ms
+    const tokens  = 180 + Math.floor(Math.random() * 700);
+    const cost    = (tokens * 0.00002 * (Math.random()*0.8+0.6)).toFixed(4);
+    const score   = (0.72 + Math.random() * 0.27).toFixed(2);
+    const statusRoll = Math.random();
+    const status = statusRoll < 0.82 ? 'ok' : statusRoll < 0.94 ? 'warn' : 'flag';
+    return {
+      name: p.name,
+      latency, tokens, cost, score, status,
+      progress: seedPhase ?? 0,        // 0→1 bar fill
+      phase: seedPhase ?? 0,           // fade-in
+      lifetime: 0,
+      // jitter so they don't all fire together
+      delay: Math.random() * 0.25,
+    };
+  }
+  for (let i = 0; i < NUM_ROWS; i++) rows.push(mkRow(i * 0.33));
+
+  // Eval score bar (aggregate) — breathes
+  let aggScore = 0.88;
+  let aggT = 0;
+
+  // colors
+  const C = {
+    bg:        '#07050f',
+    chrome:    'rgba(255,255,255,.03)',
+    line:      'rgba(255,255,255,.05)',
+    dim:       'rgba(255,255,255,.3)',
+    label:     'rgba(255,255,255,.55)',
+    violet:    '#a78bfa',
+    cyan:      '#06b6d4',
+    green:     '#22c55e',
+    amber:     '#f59e0b',
+    red:       '#f87171',
+    text:      '#f0eeff',
+    trackBg:   'rgba(255,255,255,.05)',
+  };
+
+  function statusColor(s) {
+    return s === 'ok' ? C.green : s === 'warn' ? C.amber : C.red;
+  }
+  function statusDot(s) {
+    return s === 'ok' ? '●' : s === 'warn' ? '◐' : '⚠';
+  }
+
+  function drawHeader() {
+    // title bar
+    ctx.fillStyle = C.chrome;
+    ctx.fillRect(0, 0, W, 22);
+    ctx.fillStyle = 'rgba(255,255,255,.06)';
+    ctx.fillRect(0, 22, W, 1);
+
+    // live dot
+    ctx.beginPath();
+    ctx.arc(12, 11, 3.2, 0, Math.PI * 2);
+    const pulse = 0.6 + 0.4 * Math.sin(aggT * 0.06);
+    ctx.fillStyle = `rgba(34,197,94,${pulse})`;
+    ctx.fill();
+
+    ctx.font = '600 9.5px JetBrains Mono, monospace';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = C.violet;
+    ctx.fillText('LangFuse', 22, 11);
+    ctx.fillStyle = C.dim;
+    ctx.fillText('·', 76, 11);
+    ctx.fillStyle = C.label;
+    ctx.fillText('my-foodie-bot', 84, 11);
+
+    // right side: aggregate score
+    const rightX = W - 8;
+    ctx.textAlign = 'right';
+    ctx.fillStyle = C.dim;
+    ctx.font = '500 9px JetBrains Mono, monospace';
+    ctx.fillText('eval', rightX - 34, 11);
+    // mini bar
+    const barW = 28, barH = 5;
+    const bx = rightX - 30;
+    const by = 8.5;
+    ctx.fillStyle = C.trackBg;
+    ctx.fillRect(bx, by, barW, barH);
+    ctx.fillStyle = C.green;
+    ctx.fillRect(bx, by, barW * aggScore, barH);
+    ctx.textAlign = 'left';
+  }
+
+  function drawRow(row, idx, topY) {
+    const rowH = 34;
+    const y = topY + idx * rowH;
+
+    // fade in
+    const alpha = Math.min(1, row.phase * 1.6);
+    ctx.globalAlpha = alpha;
+
+    // top label: prompt name + status dot + latency
+    ctx.font = '600 10px JetBrains Mono, monospace';
+    ctx.textBaseline = 'middle';
+
+    // status dot
+    ctx.fillStyle = statusColor(row.status);
+    ctx.fillText(statusDot(row.status), 10, y + 7);
+
+    // prompt name
+    ctx.fillStyle = C.text;
+    ctx.font = '500 10px JetBrains Mono, monospace';
+    ctx.fillText(row.name, 22, y + 7);
+
+    // right-side: latency + tokens + cost
+    ctx.textAlign = 'right';
+    ctx.font = '400 9px JetBrains Mono, monospace';
+    const rightX = W - 10;
+    const lat = row.latency < 1000 ? Math.round(row.latency) + 'ms' : (row.latency/1000).toFixed(1) + 's';
+    const latCol = row.latency < 700 ? C.green : row.latency < 1500 ? C.amber : C.red;
+
+    ctx.fillStyle = C.dim;
+    ctx.fillText('$' + row.cost, rightX, y + 7);
+    const costW = ctx.measureText('$' + row.cost).width;
+
+    ctx.fillStyle = C.cyan;
+    ctx.fillText(row.tokens + 'tok', rightX - costW - 10, y + 7);
+    const tokW = ctx.measureText(row.tokens + 'tok').width;
+
+    ctx.fillStyle = latCol;
+    ctx.fillText(lat, rightX - costW - 10 - tokW - 10, y + 7);
+    ctx.textAlign = 'left';
+
+    // progress bar (latency / trace running)
+    const barY = y + 18;
+    const barX = 10;
+    const barW = W - 20;
+    const barH = 4;
+
+    // track
+    ctx.fillStyle = C.trackBg;
+    roundRect(ctx, barX, barY, barW, barH, 2);
+    ctx.fill();
+
+    // filled
+    const p = Math.min(1, Math.max(0, row.progress));
+    const grad = ctx.createLinearGradient(barX, 0, barX + barW, 0);
+    if (row.status === 'ok') {
+      grad.addColorStop(0, 'rgba(167,139,250,.9)');
+      grad.addColorStop(1, 'rgba(6,182,212,.9)');
+    } else if (row.status === 'warn') {
+      grad.addColorStop(0, 'rgba(245,158,11,.9)');
+      grad.addColorStop(1, 'rgba(167,139,250,.6)');
+    } else {
+      grad.addColorStop(0, 'rgba(248,113,113,.9)');
+      grad.addColorStop(1, 'rgba(245,158,11,.7)');
+    }
+    ctx.fillStyle = grad;
+    roundRect(ctx, barX, barY, barW * p, barH, 2);
+    ctx.fill();
+
+    // eval score pill (once bar is mostly done)
+    if (p > 0.85) {
+      const pillAlpha = Math.min(1, (p - 0.85) / 0.15);
+      ctx.globalAlpha = alpha * pillAlpha;
+      ctx.font = '500 8.5px JetBrains Mono, monospace';
+      ctx.textAlign = 'right';
+      ctx.fillStyle = C.label;
+      ctx.fillText('score', W - 44, y + 30.5);
+      ctx.fillStyle = parseFloat(row.score) > 0.85 ? C.green : parseFloat(row.score) > 0.75 ? C.amber : C.red;
+      ctx.fillText(row.score, W - 10, y + 30.5);
+      ctx.textAlign = 'left';
+    }
+
+    ctx.globalAlpha = 1;
+  }
+
+  function roundRect(ctx, x, y, w, h, r) {
+    if (w < 0) w = 0;
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+
+  function drawFooter() {
+    // a subtle token-cost sparkline at the very bottom
+    const y0 = H - 14;
+    const y1 = H - 2;
+    ctx.strokeStyle = 'rgba(167,139,250,.25)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    const pts = 40;
+    for (let i = 0; i < pts; i++) {
+      const x = (i / (pts - 1)) * (W - 2) + 1;
+      const phase = aggT * 0.05 + i * 0.4;
+      const v = 0.5 + 0.5 * (Math.sin(phase) * 0.6 + Math.sin(phase * 0.73) * 0.4);
+      const y = y0 + (1 - v) * (y1 - y0 - 2);
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    ctx.font = '500 8px JetBrains Mono, monospace';
+    ctx.textBaseline = 'bottom';
+    ctx.fillStyle = C.dim;
+    ctx.fillText('cost · 24h', 8, H - 2);
+  }
+
+  function draw() {
+    ctx.fillStyle = C.bg;
+    ctx.fillRect(0, 0, W, H);
+
+    drawHeader();
+    const rowsTop = 28;
+    rows.forEach((r, i) => drawRow(r, i, rowsTop));
+    drawFooter();
+
+    // advance
+    aggT += 1;
+    // breathe agg
+    aggScore = 0.84 + 0.06 * Math.sin(aggT * 0.02);
+
+    rows.forEach((r, i) => {
+      if (r.delay > 0) { r.delay -= 0.02; return; }
+      r.lifetime += 1;
+      // progress fills over ~90 frames, then holds, then replaces
+      if (r.progress < 1) {
+        r.progress += 0.014;
+      }
+      if (r.phase < 1) r.phase += 0.03;
+      if (r.lifetime > 220) {
+        // retire → recycle with a new prompt
+        rows[i] = mkRow(0);
+      }
+    });
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+</body>
+</html>
