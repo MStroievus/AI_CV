@@ -103,7 +103,8 @@ nav {
 /* ── SHARED LAYOUT ── */
 .page { position: relative; z-index: 1; max-width: 1040px; margin: 0 auto; padding: 0 2rem; }
 section { padding: 5rem 0 3rem; }
-#hero { padding-top: calc(52px + 5rem); min-height: 100vh; display: flex; align-items: center; }
+#hero { padding: calc(52px + 2rem) 0 0; }
+#hero + section { padding-top: 2rem; }
 
 .sec-label {
   display: flex; align-items: center; gap: .75rem;
@@ -283,7 +284,13 @@ section { padding: 5rem 0 3rem; }
 }
 .job-date.past { background: var(--surface); border-color: var(--border); color: var(--text3); }
 
-.bullets { list-style: none; margin-top: .5rem; display: flex; flex-direction: column; gap: .3rem; }
+.job-summary { color: var(--text2); font-size: 14px; line-height: 1.55; margin-top: .25rem; }
+.job-metrics { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .9rem; }
+.job-metric { font-family: var(--mono); font-size: 11px; color: var(--text2); background: rgba(124,58,237,.08); border: 1px solid rgba(124,58,237,.2); padding: .25rem .65rem; border-radius: 6px; }
+.job-toggle { margin-top: .9rem; background: transparent; border: 1px solid var(--border); color: var(--text2); font-family: var(--mono); font-size: 11px; padding: .35rem .8rem; border-radius: 6px; cursor: pointer; transition: all .18s; }
+.job-toggle:hover { border-color: var(--violet); color: var(--violet); }
+.bullets[hidden] { display: none; }
+.bullets { list-style: none; margin-top: .9rem; display: flex; flex-direction: column; gap: .3rem; }
 .bullets li { display: flex; gap: .75rem; color: var(--text2); font-size: 13.5px; line-height: 1.65; }
 .bullets li::before { content: '▸'; color: var(--violet); flex-shrink: 0; margin-top: .05rem; }
 
@@ -486,28 +493,34 @@ section { padding: 5rem 0 3rem; }
 .ach-text strong { color: var(--text); font-weight: 600; }
 
 /* ── LEARNING ── */
-.learning-card {
+.certs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+.cert-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 16px; padding: 2rem;
+  border-radius: 12px; padding: 1.25rem 1.25rem 1.1rem;
+  display: flex; flex-direction: column; gap: .5rem;
+  text-decoration: none; color: inherit;
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+  position: relative; overflow: hidden;
 }
-.log-line {
-  display: flex; gap: 1rem; align-items: baseline;
-  font-size: 13px; padding: .5rem 0;
-  border-bottom: 1px solid rgba(15,23,42,.04);
-  line-height: 1.5;
+.cert-card::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%;
+  background: var(--violet); opacity: .55;
 }
-.log-line:last-child { border-bottom: none; }
-.log-date { color: var(--text3); font-family: var(--mono); font-size: 11.5px; white-space: nowrap; flex-shrink: 0; }
-.log-verb { font-weight: 600; font-size: 12px; flex-shrink: 0; }
-.log-verb.r { color: var(--violet); }
-.log-verb.g { color: var(--green); }
-.log-verb.b { color: var(--cyan); }
-.log-verb.a { color: var(--amber); }
-.log-content { color: var(--text2); }
-
-.blink { display: inline-block; width: 2px; height: 1.1em; background: var(--violet); vertical-align: text-bottom; animation: blink 1s step-end infinite; }
-@keyframes blink { 50%{opacity:0} }
+.cert-card:hover { transform: translateY(-2px); border-color: var(--violet); box-shadow: 0 10px 24px rgba(124,58,237,.08); }
+.cert-issuer { font-family: var(--mono); font-size: 11px; color: var(--violet); text-transform: uppercase; letter-spacing: .08em; }
+.cert-name { font-family: var(--display); font-weight: 600; font-size: 15px; color: var(--text); line-height: 1.35; }
+.cert-meta { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: .6rem; border-top: 1px solid rgba(15,23,42,.06); font-family: var(--mono); font-size: 11px; color: var(--text3); }
+.cert-verify { color: var(--cyan); }
+.cert-card.soon { border-style: dashed; opacity: .85; }
+.cert-card.soon::before { background: var(--amber); opacity: .5; }
+.certs-footer {
+  margin-top: 1.5rem; padding-top: 1rem;
+  font-size: 13px; color: var(--text2);
+  display: flex; align-items: center; gap: .5rem; flex-wrap: wrap;
+}
+.certs-footer a { color: var(--violet); text-decoration: none; border-bottom: 1px dashed rgba(124,58,237,.4); }
+.certs-footer a:hover { border-bottom-color: var(--violet); }
 
 /* ── CONTACT ── */
 .contact-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.5rem; }
@@ -659,7 +672,6 @@ body.pm-open { overflow: hidden; }
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#skills">Skills</a></li>
-    <li><a href="#contact">Contact</a></li>
   </ul>
   <a class="nav-cta" href="mailto:Stroievus.Maksym@gmail.com">Hire me</a>
 </nav>
@@ -682,10 +694,6 @@ body.pm-open { overflow: hidden; }
           <span class="meta-pill">✉️ Stroievus.Maksym@gmail.com</span>
           <a class="meta-pill" href="https://github.com/MStroievus" target="_blank" rel="noopener">⌥ GitHub</a>
           <a class="meta-pill" href="tel:+380970551307">📞 +380 97 055 1307</a>
-        </div>
-        <div class="hero-btns">
-          <a class="btn-primary" href="mailto:Stroievus.Maksym@gmail.com">Get in touch</a>
-          <a class="btn-ghost" href="#experience">View experience ↓</a>
         </div>
       </div>
 
@@ -729,7 +737,15 @@ body.pm-open { overflow: hidden; }
         </div>
         <div class="job-date">Aug 2024 — Present</div>
       </div>
-      <ul class="bullets">
+      <div class="job-summary">QA ownership of an AI-powered, data-driven B2B SaaS platform — E2E strategy for non-deterministic, integration-heavy workflows across payments, async events, and LLM outputs.</div>
+      <div class="job-metrics">
+        <span class="job-metric">200+ E2E scenarios</span>
+        <span class="job-metric">40% faster CI</span>
+        <span class="job-metric">95%+ test-code sync</span>
+        <span class="job-metric">Mentored 3+ QAs</span>
+      </div>
+      <button class="job-toggle" type="button" aria-expanded="false">Show details ↓</button>
+      <ul class="bullets" hidden>
         <li>Owned quality validation for a complex, data-driven platform with multi-step execution workflows — designed test strategies covering end-to-end lifecycle from request intake through execution artifacts and state evolution.</li>
         <li>Built validation approaches for non-deterministic, integration-heavy flows (payment processing, asynchronous events, RabbitMQ message broker) where correctness is probabilistic rather than binary — verified reproducibility, traceability, and attribution of outputs.</li>
         <li>Designed and executed 200+ automated E2E scenarios covering critical user flows, edge cases, retries, and failure-recovery paths; reduced execution time by 40% via sharded parallel pipelines.</li>
@@ -754,7 +770,14 @@ body.pm-open { overflow: hidden; }
         </div>
         <div class="job-date past">May 2023 — Aug 2024</div>
       </div>
-      <ul class="bullets">
+      <div class="job-summary">QA lead for SaaS/BPaaS workflow platforms — validated business-process automation across UI, API, and database layers with focus on data consistency and release readiness.</div>
+      <div class="job-metrics">
+        <span class="job-metric">70% automation coverage</span>
+        <span class="job-metric">Cross-browser stability</span>
+        <span class="job-metric">API + SQL contracts</span>
+      </div>
+      <button class="job-toggle" type="button" aria-expanded="false">Show details ↓</button>
+      <ul class="bullets" hidden>
         <li>Led QA for SaaS/BPaaS workflow platforms — validated business-process automation across UI, API, and database layers with a focus on cross-browser stability and data consistency.</li>
         <li>Designed and maintained a comprehensive regression and integration testing suite; achieved 70% automation coverage on critical revenue flows.</li>
         <li>Implemented API-level contract and data validation pipelines with Microsoft SQL checks — ensuring end-to-end integrity between services and persisted state.</li>
@@ -776,7 +799,14 @@ body.pm-open { overflow: hidden; }
         </div>
         <div class="job-date past">Feb 2022 — Apr 2023</div>
       </div>
-      <ul class="bullets">
+      <div class="job-summary">Functional, integration and regression testing of web applications — UI, REST APIs, databases, and server-side behaviour with structured defect investigation.</div>
+      <div class="job-metrics">
+        <span class="job-metric">Regression + smoke automation</span>
+        <span class="job-metric">Postman in CI</span>
+        <span class="job-metric">Root-cause reports</span>
+      </div>
+      <button class="job-toggle" type="button" aria-expanded="false">Show details ↓</button>
+      <ul class="bullets" hidden>
         <li>Performed comprehensive functional, integration, and regression testing of web applications — validated UI, REST APIs, databases, and server-side behavior.</li>
         <li>Investigated defects via log analysis, HTTP request inspection, and server response tracing; delivered structured root-cause reports to the engineering team.</li>
         <li>Automated regression and smoke suites; integrated API tests (Postman) into CI/CD workflows.</li>
@@ -880,7 +910,7 @@ body.pm-open { overflow: hidden; }
   <div class="skills-grid">
 
     <div class="skill-card">
-      <div class="sc-head"><span class="sc-icon">🤖</span><span class="sc-title">AI & LLM Quality</span><span class="sc-count">9</span></div>
+      <div class="sc-head"><span class="sc-icon">🤖</span><span class="sc-title">AI & LLM Quality</span><span class="sc-count">10</span></div>
       <div class="sc-body">
         <div class="sk" data-tip="Designed structured rubrics and test suites to assess AI output consistency, accuracy, and edge-case failure modes across LLM-powered features at Triple A."><span class="sk-dot c">●</span><span class="sk-name c">AI output validation</span></div>
         <div class="sk" data-tip="Built repeatable validation for outputs that change per call — outcome ranges, semantic equivalence, and statistical consistency over exact-match assertions."><span class="sk-dot c">●</span><span class="sk-name c">Non-deterministic assessment</span></div>
@@ -891,11 +921,12 @@ body.pm-open { overflow: hidden; }
         <div class="sk" data-tip="Assessing whether AI responses stay anchored to provided context. Raised and tracked source-drift issues in RAG-backed features."><span class="sk-dot w">◐</span><span class="sk-name w">Source grounding & explainability</span></div>
         <div class="sk" data-tip="Studying multi-step AI agents: tool-use patterns, state management, retry logic, and validation across autonomous action chains."><span class="sk-dot w">◐</span><span class="sk-name w">Agentic AI frameworks</span></div>
         <div class="sk" data-tip="Actively learning through Responsible AI literature — fairness, transparency, and accountability as applied to product QA."><span class="sk-dot e">○</span><span class="sk-name e">Responsible AI principles</span></div>
+        <div class="sk" data-tip="Crafts structured prompts with role, constraints, few-shot examples, and output schemas. Applied to generating deterministic test data and validation rubrics."><span class="sk-dot c">●</span><span class="sk-name c">Prompt Engineering</span></div>
       </div>
     </div>
 
     <div class="skill-card">
-      <div class="sc-head"><span class="sc-icon">🔬</span><span class="sc-title">QA Methodologies</span><span class="sc-count">8</span></div>
+      <div class="sc-head"><span class="sc-icon">🔬</span><span class="sc-title">QA Methodologies</span><span class="sc-count">12</span></div>
       <div class="sc-body">
         <div class="sk" data-tip="Owns end-to-end strategy at Triple A — from requirement analysis and risk mapping through execution, coverage reporting, and post-release monitoring."><span class="sk-dot c">●</span><span class="sk-name c">End-to-End test strategy</span></div>
         <div class="sk" data-tip="Maintains full regression suite of 200+ Playwright scenarios. Triages failures by flakiness vs regression. Runs integration checks against staging on every merge."><span class="sk-dot c">●</span><span class="sk-name c">Integration & regression testing</span></div>
@@ -905,11 +936,15 @@ body.pm-open { overflow: hidden; }
         <div class="sk" data-tip="Uses charter-based exploratory sessions to find defects outside the happy path. Documents session notes and bug counts to make exploratory effort visible."><span class="sk-dot c">●</span><span class="sk-name c">Exploratory testing</span></div>
         <div class="sk" data-tip="Applies test pyramid thinking: maximise unit/API coverage, minimise brittle UI tests. Risk-ranks features to prioritise automation effort."><span class="sk-dot c">●</span><span class="sk-name c">Test pyramid & risk-based planning</span></div>
         <div class="sk" data-tip="Designed retry logic validation for async payment events in RabbitMQ — tests idempotency, duplicate processing, and partial-failure recovery."><span class="sk-dot c">●</span><span class="sk-name c">Recovery & retry scenario design</span></div>
+        <div class="sk" data-tip="Full end-to-end test automation covering UI, API, and data layers — validated across browsers and environments with CI-integrated execution."><span class="sk-dot c">●</span><span class="sk-name c">E2E Testing</span></div>
+        <div class="sk" data-tip="Contract, schema, and behaviour validation of REST APIs — positive/negative paths, auth flows, rate-limit and error-handling scenarios."><span class="sk-dot c">●</span><span class="sk-name c">REST API Testing</span></div>
+        <div class="sk" data-tip="Designs release-level test strategies: scope, risk assessment, coverage targets, and entry/exit criteria aligned to business priorities."><span class="sk-dot c">●</span><span class="sk-name c">Test Strategy Design</span></div>
+        <div class="sk" data-tip="Familiar with load/stress testing basics — response time baselines, throughput measurement, and bottleneck identification under concurrent load."><span class="sk-dot w">◐</span><span class="sk-name w">Performance Testing Basics</span></div>
       </div>
     </div>
 
     <div class="skill-card">
-      <div class="sc-head"><span class="sc-icon">🛠</span><span class="sc-title">Tools & Stack</span><span class="sc-count">13</span></div>
+      <div class="sc-head"><span class="sc-icon">🛠</span><span class="sc-title">Tools & Stack</span><span class="sc-count">19</span></div>
       <div class="sc-body tools-2col">
         <div class="sk" data-tip="Built 200+ E2E scenarios at Triple A. Sharded pipelines cut execution time by 40%. Authored open-source plugin encapsulating POM, fixtures, and API builders."><span class="sk-dot c">●</span><span class="sk-name c">Playwright</span></div>
         <div class="sk" data-tip="Primary language for test automation. TypeScript strict mode, custom type-safe fixture system, typed API response models."><span class="sk-dot c">●</span><span class="sk-name c">TypeScript / JS</span></div>
@@ -924,6 +959,40 @@ body.pm-open { overflow: hidden; }
         <div class="sk" data-tip="Full defect lifecycle in JIRA with custom QA workflows. Confluence for test plans, release notes, and QA runbooks."><span class="sk-dot c">●</span><span class="sk-name c">JIRA / Confluence</span></div>
         <div class="sk" data-tip="Validated async message flows and non-deterministic event ordering in payment processing — idempotency checks, dead-letter queue handling."><span class="sk-dot c">●</span><span class="sk-name c">RabbitMQ</span></div>
         <div class="sk" data-tip="Working knowledge from previous teams. Familiar with Cypress test structure and network stubbing — prefer Playwright for new projects."><span class="sk-dot w">◐</span><span class="sk-name w">Cypress</span></div>
+        <div class="sk" data-tip="Used as an alternative API client for debugging — collection organisation, environment management, and request-response inspection."><span class="sk-dot c">●</span><span class="sk-name c">Insomnia</span></div>
+        <div class="sk" data-tip="Microsoft SQL Server — stored procedures, transactional queries, and data validation for test setup and assertion logic."><span class="sk-dot c">●</span><span class="sk-name c">Microsoft SQL</span></div>
+        <div class="sk" data-tip="Familiar with sharded database architecture — routing, consistency boundaries, and cross-shard query validation in distributed platforms."><span class="sk-dot w">◐</span><span class="sk-name w">Sharding</span></div>
+        <div class="sk" data-tip="Dashboards and queries for service health, pipeline metrics, and real-time alerting on CI/CD and application KPIs."><span class="sk-dot c">●</span><span class="sk-name c">Grafana</span></div>
+        <div class="sk" data-tip="Log exploration and triage for complex distributed flows — used during defect investigation and async event tracing."><span class="sk-dot c">●</span><span class="sk-name c">Kibana</span></div>
+        <div class="sk" data-tip="Monitors Kubernetes workloads and release rollouts — used to verify deployment state during QA sign-off."><span class="sk-dot w">◐</span><span class="sk-name w">Argo</span></div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="sc-head"><span class="sc-icon">💻</span><span class="sc-title">Languages & Engineering</span><span class="sc-count">6</span></div>
+      <div class="sc-body tools-2col">
+        <div class="sk" data-tip="Primary automation language — strict mode, type-safe fixtures, typed API response models across 200+ E2E scenarios."><span class="sk-dot c">●</span><span class="sk-name c">TypeScript</span></div>
+        <div class="sk" data-tip="Core scripting across tests, fixtures, and tooling. Comfortable with async patterns, modules, and browser runtime."><span class="sk-dot c">●</span><span class="sk-name c">JavaScript</span></div>
+        <div class="sk" data-tip="Test data generators, LLM output batch analysis, and lightweight automation scripts. Used for eval harness tooling."><span class="sk-dot c">●</span><span class="sk-name c">Python</span></div>
+        <div class="sk" data-tip="Applies OOP principles — encapsulation and composition — in POM, fixture hierarchies, and domain-driven test abstractions."><span class="sk-dot c">●</span><span class="sk-name c">OOP</span></div>
+        <div class="sk" data-tip="Applies SOLID principles to automation architecture — single-responsibility pages, extensible fixtures, inversion of test dependencies."><span class="sk-dot c">●</span><span class="sk-name c">SOLID</span></div>
+        <div class="sk" data-tip="Sharded pipelines and worker-parallel Playwright execution — cut CI runtime by 40% while preserving ordering guarantees."><span class="sk-dot c">●</span><span class="sk-name c">Parallel Execution</span></div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="sc-head"><span class="sc-icon">✨</span><span class="sc-title">AI & Dev Tooling</span><span class="sc-count">10</span></div>
+      <div class="sc-body tools-2col">
+        <div class="sk" data-tip="Daily driver for code generation, refactoring, and test-authoring flows. Authored playwright-aqa skill that guides Claude to produce production-grade tests."><span class="sk-dot c">●</span><span class="sk-name c">Claude</span></div>
+        <div class="sk" data-tip="Claude Code CLI — pair-programming in terminal, skills, hooks, and sub-agent orchestration for QA automation tasks."><span class="sk-dot c">●</span><span class="sk-name c">Claude Code</span></div>
+        <div class="sk" data-tip="AI-first editor for rapid iteration — composer, codebase chat, and multi-file edits across QA and tooling repos."><span class="sk-dot c">●</span><span class="sk-name c">Cursor</span></div>
+        <div class="sk" data-tip="Inline code completion across editors — used alongside Claude for routine boilerplate and scaffolding."><span class="sk-dot c">●</span><span class="sk-name c">GitHub Copilot</span></div>
+        <div class="sk" data-tip="Direct OpenAI API integrations for eval harnesses, batch scoring, and prompt-variation sweeps on LLM-backed features."><span class="sk-dot c">●</span><span class="sk-name c">OpenAI APIs</span></div>
+        <div class="sk" data-tip="Framework of choice for RAG and agentic pipelines — chains, retrievers, memory, and tool-use composition."><span class="sk-dot c">●</span><span class="sk-name c">LangChain</span></div>
+        <div class="sk" data-tip="End-to-end observability for LLM apps — prompt/response traces, token cost tracking, latency histograms, release-over-release eval diffs."><span class="sk-dot c">●</span><span class="sk-name c">LangFuse</span></div>
+        <div class="sk" data-tip="Instrumentation for AI/ML workloads — tracing, embedding drift, and evaluation visualisation during QA of LLM features."><span class="sk-dot w">◐</span><span class="sk-name w">Arize Phoenix</span></div>
+        <div class="sk" data-tip="Persistent agent memory layer — structured user preferences and conversational context recalled contextually across sessions."><span class="sk-dot c">●</span><span class="sk-name c">Mem0</span></div>
+        <div class="sk" data-tip="Typed TypeScript framework for building agentic AI workflows — workflows, tools, and evals composed as first-class citizens."><span class="sk-dot w">◐</span><span class="sk-name w">Mastra Framework</span></div>
       </div>
     </div>
 
@@ -950,10 +1019,10 @@ body.pm-open { overflow: hidden; }
 <section id="metrics">
   <div class="metrics-inner">
     <div class="metric-card"><div class="metric-num">4+</div><div class="metric-label">years<br>in QA</div></div>
-    <div class="metric-card"><div class="metric-num">200+</div><div class="metric-label">E2E scenarios<br>shipped</div></div>
-    <div class="metric-card"><div class="metric-num">40%</div><div class="metric-label">faster CI<br>via sharding</div></div>
+    <div class="metric-card"><div class="metric-num">800+</div><div class="metric-label">E2E scenarios<br>shipped</div></div>
+    <div class="metric-card"><div class="metric-num">40%</div><div class="metric-label">faster CI<br>via Playwright<br>sharding</div></div>
     <div class="metric-card"><div class="metric-num">95%+</div><div class="metric-label">test-code<br>sync</div></div>
-    <div class="metric-card"><div class="metric-num">70%</div><div class="metric-label">automation<br>on revenue flows</div></div>
+    <div class="metric-card"><div class="metric-num">2h</div><div class="metric-label">regression cut<br>from 2 days</div></div>
     <div class="metric-card"><div class="metric-num">3+</div><div class="metric-label">engineers<br>mentored</div></div>
   </div>
 </section>
@@ -961,73 +1030,53 @@ body.pm-open { overflow: hidden; }
 <div class="page">
 
 <!-- ══ ACHIEVEMENTS ══ -->
+<!--
 <section id="achievements">
   <div class="sec-label"><span class="hi">Achievements</span> — key impact</div>
   <ul class="ach-list">
     <li class="ach-item"><div class="ach-num">01</div><div class="ach-text"><strong>Platform Quality Ownership</strong> — Designed validation strategies for complex, multi-step workflows where correctness is probabilistic — improving output consistency and stakeholder trust across AI-powered features at Triple A.</div></li>
-    <li class="ach-item"><div class="ach-num">02</div><div class="ach-text"><strong>Auditability & Traceability</strong> — Embedded structured logging, reporting, and test-to-code traceability (95%+ sync in TestRail) to support review-ready, audit-friendly quality practices across the full delivery lifecycle.</div></li>
+    <li class="ach-item"><div class="ach-num">02</div><div class="ach-text"><strong>Auditability &amp; Traceability</strong> — Embedded structured logging, reporting, and test-to-code traceability (95%+ sync in TestRail) to support review-ready, audit-friendly quality practices across the full delivery lifecycle.</div></li>
     <li class="ach-item"><div class="ach-num">03</div><div class="ach-text"><strong>Process Design</strong> — Built team-level test strategies, quality gates, and documentation standards at Meninx Group — adopted as company-wide practice across multiple product squads.</div></li>
     <li class="ach-item"><div class="ach-num">04</div><div class="ach-text"><strong>Knowledge Sharing</strong> — Founded an internal QA community with bi-weekly sessions; delivered multiple technical presentations on test architecture and quality mindset for automation and AI systems.</div></li>
     <li class="ach-item"><div class="ach-num">05</div><div class="ach-text"><strong>ISO 9001 Recognition</strong> — Recognised as an exemplary employee during an external ISO 9001 certification audit for disciplined QA and documentation practices.</div></li>
     <li class="ach-item"><div class="ach-num">06</div><div class="ach-text"><strong>Open Source</strong> — Published <em>playwright-aqa</em> Claude Skill — encapsulates POM, fixtures, and API testing patterns so Claude can generate production-grade Playwright tests on demand.</div></li>
   </ul>
 </section>
+-->
 
 <!-- ══ LEARNING ══ -->
 <section id="learning">
-  <div class="sec-label"><span class="hi">Continuous Learning</span> — recent activity</div>
-  <div class="learning-card">
-    <div class="log-line"><span class="log-date">[2026-04-22]</span><span class="log-verb r">reading</span><span class="log-content">"Evaluating LLM outputs at scale"</span></div>
-    <div class="log-line"><span class="log-date">[2026-04-20]</span><span class="log-verb g">building</span><span class="log-content">Claude Skill for Playwright test generation</span></div>
-    <div class="log-line"><span class="log-date">[2026-04-18]</span><span class="log-verb b">exploring</span><span class="log-content">skill authoring &amp; agentic workflows</span></div>
-    <div class="log-line"><span class="log-date">[2026-04-15]</span><span class="log-verb a">studying</span><span class="log-content">prompt testing &amp; hallucination detection</span></div>
-    <div class="log-line"><span class="log-date">[2026-04-10]</span><span class="log-verb r">practicing</span><span class="log-content">non-deterministic output validation techniques</span></div>
-    <div class="log-line"><span class="log-date">[2026-04-05]</span><span class="log-verb b">exploring</span><span class="log-content">responsible AI &amp; explainability principles</span></div>
-    <div class="log-line"><span class="log-date"></span><span class="log-content"><span class="blink"></span></span></div>
-  </div>
-</section>
+  <div class="sec-label"><span class="hi">Continuous Learning</span> — certifications</div>
+  <div class="certs-grid">
 
-<!-- ══ CONTACT ══ -->
-<section id="contact">
-  <div class="sec-label"><span class="hi">Contact</span> — let's work together</div>
-  <div class="contact-grid">
-    <div class="contact-main">
-      <div class="contact-title">Get in touch</div>
-      <div class="contact-sub">Open to senior QA, AI quality, and automation engineering opportunities.</div>
-      <div class="contact-links">
-        <a class="contact-link" href="mailto:Stroievus.Maksym@gmail.com">
-          <span class="icon">✉️</span> Stroievus.Maksym@gmail.com
-        </a>
-        <a class="contact-link" href="tel:+380970551307">
-          <span class="icon">📞</span> +380 97 055 1307
-        </a>
-        <a class="contact-link" href="https://github.com/MStroievus" target="_blank" rel="noopener">
-          <span class="icon">⌥</span> github.com/MStroievus
-        </a>
-        <a class="contact-link" href="https://linkedin.com/in/maksym-stroievus" target="_blank" rel="noopener">
-          <span class="icon">🔗</span> linkedin.com/in/maksym-stroievus
-        </a>
-      </div>
-      <a class="cta-big" href="mailto:Stroievus.Maksym@gmail.com">Send a message →</a>
+    <a class="cert-card" href="https://verify.skilljar.com/c/dpyqmbtd5e78" target="_blank" rel="noopener">
+      <div class="cert-issuer">Anthropic</div>
+      <div class="cert-name">Introduction to Agent Skills</div>
+      <div class="cert-meta"><span>Apr 2026</span><span class="cert-verify">verify →</span></div>
+    </a>
+
+    <a class="cert-card" href="https://www.credly.com/badges/413a094c-0d01-4dc8-ab21-be31307d4679/linked_in_profile" target="_blank" rel="noopener">
+      <div class="cert-issuer">MongoDB</div>
+      <div class="cert-name">Schema Design Patterns &amp; Anti-patterns — Skill Badge</div>
+      <div class="cert-meta"><span>Feb 2026</span><span class="cert-verify">verify →</span></div>
+    </a>
+
+    <a class="cert-card" href="https://academy.langchain.com/certificates/espn5pxuj5" target="_blank" rel="noopener">
+      <div class="cert-issuer">LangChain</div>
+      <div class="cert-name">Foundation: Introduction to Agent Observability &amp; Evaluations</div>
+      <div class="cert-meta"><span>Nov 2025</span><span class="cert-verify">verify →</span></div>
+    </a>
+
+    <div class="cert-card soon">
+      <div class="cert-issuer" style="color:var(--amber)">Coming soon</div>
+      <div class="cert-name">More certifications in progress</div>
+      <div class="cert-meta"><span>2026 →</span><span>in progress</span></div>
     </div>
-    <div class="contact-side">
-      <div class="side-card">
-        <div class="side-title">Languages</div>
-        <div class="side-langs">
-          <div class="lang-row"><span class="lang-name">Ukrainian</span><span class="lang-level">Native</span></div>
-          <div class="lang-row"><span class="lang-name">English</span><span class="lang-level">B2 · Professional</span></div>
-        </div>
-      </div>
-      <div class="side-card" style="flex:1">
-        <div class="side-title">Currently interested in</div>
-        <div style="display:flex;flex-direction:column;gap:.5rem;margin-top:.25rem">
-          <div style="font-size:13px;color:var(--text2)">AI Quality Engineering</div>
-          <div style="font-size:13px;color:var(--text2)">LLM Evaluation & Testing</div>
-          <div style="font-size:13px;color:var(--text2)">Senior AQA / Automation Lead</div>
-          <div style="font-size:13px;color:var(--text2)">Remote / Hybrid roles</div>
-        </div>
-      </div>
-    </div>
+
+  </div>
+  <div class="certs-footer">
+    Full list on
+    <a href="https://www.linkedin.com/in/maksym-stroievus/" target="_blank" rel="noopener">linkedin.com/in/maksym-stroievus</a>
   </div>
 </section>
 
@@ -1721,14 +1770,8 @@ if (heroWrap && heroCard) {
       type: '// open source · Claude Skill · deep-dive',
       name: 'playwright-aqa',
       repo: 'https://github.com/MStroievus/playwright-aqa-plugin',
-      desc: 'A <strong>Claude Skill</strong> that encapsulates Page Object Model, typed fixtures, and API-testing patterns so Claude generates production-grade Playwright suites on demand — without re-inventing folder structure, selector strategy, or reporter plumbing every time.',
-      features: [
-        ['Trigger precision', 'Loads only when intent is unambiguous — Playwright + TypeScript project context, not Python, not Cypress. Scope isolation prevents leaking patterns into unrelated work.'],
-        ['POM scaffolding', 'Generates page objects with consistent selector hierarchy, readable locators, and chainable action APIs. Catches anti-patterns like raw CSS chaining and waits-on-timeout.'],
-        ['Typed fixture system', 'Custom fixture composition with full TS inference. Data builders, auth contexts, and network mocks compose without boilerplate.'],
-        ['API testing patterns', 'Request context builders, typed response models, contract assertions. Keeps API tests first-class citizens — not afterthoughts bolted onto UI suites.'],
-        ['Reporter & CI plumbing', 'Allure integration, shardable pipelines, quality gates. Produces test projects that drop into GitLab CI with zero friction.'],
-      ],
+      desc: 'A <strong>Claude Skill</strong> that teaches Claude Code CLI how to build production-grade Playwright suites — POM, typed fixtures, and API-testing patterns loaded on demand.',
+      features: [],
       tags: ['TypeScript', 'Playwright', 'Claude Skills', 'POM', 'Fixtures', 'Allure', 'CI/CD'],
       animation: 'terminal',
     },
@@ -1736,14 +1779,8 @@ if (heroWrap && heroCard) {
       type: '// open source · AI · RAG · LangGraph · deep-dive',
       name: 'Confluence LangChain Bot',
       repo: 'https://github.com/MStroievus/confluence-lanchain-ts',
-      desc: 'A TypeScript chatbot that ingests <strong>Confluence</strong> pages, converts them into vector embeddings via <strong>LangChain</strong>, and serves RAG-based Q&A over your documentation. State and tool-use are orchestrated with <strong>LangGraph</strong> for multi-step agent flows.',
-      features: [
-        ['Confluence ingest', 'Authenticated crawl of spaces & pages, strips macros, preserves headings. Incremental sync — only re-embeds changed pages.'],
-        ['Chunking & embeddings', 'Token-aware chunking with overlap. Pluggable embedding backend (OpenAI/local). Persisted vector store with metadata: space, page-id, last-updated.'],
-        ['Retrieval pipeline', 'Hybrid retrieval — BM25 + vector similarity — with rerank. Source filters by space allow scoped knowledge domains.'],
-        ['LangGraph agent', 'Stateful multi-step flow: query → retrieve → critique → answer. Self-correction loop when grounding is weak.'],
-        ['Citation & grounding', 'Every answer carries page-level citations. Groundedness checker flags hallucinated claims against the retrieved context.'],
-      ],
+      desc: 'TypeScript chatbot that embeds <strong>Confluence</strong> pages via <strong>LangChain</strong> and serves RAG-based Q&A over your docs, with <strong>LangGraph</strong> orchestrating multi-step agent flows.',
+      features: [],
       tags: ['TypeScript', 'LangChain', 'LangGraph', 'RAG', 'Vector DB', 'Confluence API'],
       animation: 'vector',
     },
@@ -1751,14 +1788,8 @@ if (heroWrap && heroCard) {
       type: '// open source · AI · memO · observability · deep-dive',
       name: 'my-foodie-bot',
       repo: 'https://github.com/MStroievus/my-foodie-bot',
-      desc: 'An AI food assistant with persistent <strong>memO</strong> memory and long-term user context. Instrumented end-to-end with <strong>LangFuse</strong> for prompt tracing, cost tracking, and eval scoring — measuring hallucination rate, groundedness, and latency per release.',
-      features: [
-        ['Persistent memO memory', 'User preferences, dietary constraints, and conversation history stored as structured memories. Recalled contextually — not blindly injected into every prompt.'],
-        ['LangFuse tracing', 'Full prompt/response traces, token costs, latency histograms per endpoint. Release-over-release diffing catches regressions before users do.'],
-        ['Eval scoring harness', 'Automated eval suites: hallucination rate, grounding score, instruction adherence. Golden datasets versioned alongside code.'],
-        ['Prompt variation sweeps', 'Systematic A/B of system prompts. Statistical comparisons on eval metrics — not vibes.'],
-        ['Cost dashboards', 'Token budgets per user session, alerts on drift, attribution by feature. Keeps AI spend observable.'],
-      ],
+      desc: 'AI food assistant with persistent <strong>memO</strong> memory, instrumented end-to-end with <strong>LangFuse</strong> for prompt tracing, cost tracking, and eval scoring across releases.',
+      features: [],
       tags: ['Python', 'memO', 'LangFuse', 'LangChain', 'Eval', 'Observability'],
       animation: 'observability',
     },
@@ -1863,24 +1894,25 @@ if (heroWrap && heroCard) {
   }
 
   function animTerminal(ctx, W, H) {
-    const PHASE_F = 520;
-    let f = 0, phase = 0;
+    const LOOP_F = 900;
+    let f = 0;
 
-    // Phase 0: Claude Code chat generating a test
-    const userMsg = 'Write an e2e test for login with MFA';
-    const botHeader = 'Skill: playwright-aqa@1.2.0 · POM + fixtures loaded';
-    const botIntro  = 'Generating test.spec.ts with test.step architecture…';
+    const userMsg = '> create test for api login';
+    const skillHeader = 'Reading skill: playwright-aqa/SKILL.md';
+    const skillInstr = [
+      '✓ API fixture pattern (request context)',
+      '✓ Typed response models',
+      '✓ Contract assertions',
+      '✓ auth.login.api.spec.ts scaffold',
+    ];
+    const writeLine = '→ writing tests/api/auth/login.api.spec.ts';
     const code = [
-      "test('login with MFA', async ({ loginPage, authCtx }) => {",
-      "  await test.step('submit credentials', async () => {",
-      "    await loginPage.signIn(authCtx.user);",
-      "  });",
-      "  await test.step('enter MFA code', async () => {",
-      "    await loginPage.enterMFA(authCtx.mfaCode);",
-      "  });",
-      "  await test.step('verify dashboard', async () => {",
-      "    await expect(dashboard.welcome).toBeVisible();",
-      "  });",
+      "import { test, expect } from '@fixtures/api';",
+      "",
+      "test('POST /auth/login · valid creds', async ({ api }) => {",
+      "  const res = await api.auth.login({ email, password });",
+      "  expect(res.status()).toBe(200);",
+      "  expect(await res.json()).toMatchObject({ token: expect.any(String) });",
       "});",
     ];
 
@@ -1898,7 +1930,102 @@ if (heroWrap && heroCard) {
       ctx.textAlign = 'left';
     }
 
-    function drawPhase0() {
+    function drawTerm() {
+      // dark terminal background
+      ctx.fillStyle = '#0b1020'; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = 'rgba(255,255,255,.04)'; ctx.fillRect(0, 0, W, 32);
+      ctx.fillStyle = 'rgba(255,255,255,.08)'; ctx.fillRect(0, 32, W, 1);
+      [['#ef4444', 16],['#eab308', 32],['#22c55e', 48]].forEach(([c,x]) => {
+        ctx.fillStyle = c; ctx.beginPath(); ctx.arc(x, 16, 5, 0, Math.PI*2); ctx.fill();
+      });
+      ctx.font = '500 11px Geist Mono, monospace';
+      ctx.fillStyle = 'rgba(255,255,255,.55)';
+      ctx.textAlign = 'center';
+      ctx.fillText('~/tests — claude code', W / 2, 20);
+      ctx.textAlign = 'left';
+
+      const bx = 20;
+      let y = 58;
+      const lineH = 18;
+      ctx.font = '500 12.5px Geist Mono, monospace';
+
+      // 1. User prompt
+      const userLen = typeLen(userMsg, 10, f, 38);
+      const userShown = userMsg.slice(0, userLen);
+      ctx.fillStyle = '#a5f3fc';
+      ctx.fillText(userShown, bx, y);
+      if (userLen < userMsg.length) {
+        drawCursor(ctx, bx + ctx.measureText(userShown).width + 1, y, 14, f, '#a5f3fc');
+        return;
+      }
+      y += lineH + 6;
+
+      // 2. Reading skill
+      const headerStart = 10 + userMsg.length * 60 / 38 + 20;
+      const headerLen = typeLen(skillHeader, headerStart, f, 55);
+      const headerShown = skillHeader.slice(0, headerLen);
+      ctx.fillStyle = '#c084fc';
+      ctx.fillText('✦ ' + headerShown, bx, y);
+      if (headerLen < skillHeader.length) {
+        drawCursor(ctx, bx + ctx.measureText('✦ ' + headerShown).width + 1, y, 14, f, '#c084fc');
+        return;
+      }
+      y += lineH + 4;
+
+      // 3. Skill instructions list
+      const instrStart = headerStart + skillHeader.length * 60 / 55 + 15;
+      for (let i = 0; i < skillInstr.length; i++) {
+        const lineStart = instrStart + i * 25;
+        if (f < lineStart) return;
+        const line = skillInstr[i];
+        const ln = typeLen(line, lineStart, f, 90);
+        ctx.fillStyle = '#86efac';
+        ctx.fillText(line.slice(0, ln), bx + 14, y);
+        if (ln < line.length) {
+          drawCursor(ctx, bx + 14 + ctx.measureText(line.slice(0, ln)).width + 1, y, 13, f, '#86efac');
+          return;
+        }
+        y += lineH - 2;
+      }
+      y += 6;
+
+      // 4. Write line
+      const writeStart = instrStart + skillInstr.length * 25 + 10;
+      if (f < writeStart) return;
+      const writeLen = typeLen(writeLine, writeStart, f, 80);
+      const writeShown = writeLine.slice(0, writeLen);
+      ctx.fillStyle = '#fbbf24';
+      ctx.fillText(writeShown, bx, y);
+      if (writeLen < writeLine.length) {
+        drawCursor(ctx, bx + ctx.measureText(writeShown).width + 1, y, 14, f, '#fbbf24');
+        return;
+      }
+      y += lineH + 2;
+
+      // 5. Code block
+      const codeStart = writeStart + writeLine.length * 60 / 80 + 10;
+      let cf = codeStart;
+      for (let i = 0; i < code.length; i++) {
+        const line = code[i];
+        const lineFrames = Math.max(line.length, 6) * 60 / 160;
+        const ln = typeLen(line, cf, f, 160);
+        const shown = line.slice(0, ln);
+        let col = 'rgba(226,232,240,.85)';
+        if (/import|test\(|expect/.test(shown)) col = '#f472b6';
+        else if (/await|const/.test(shown)) col = '#60a5fa';
+        ctx.fillStyle = col;
+        if (y > H - 8) break;
+        ctx.fillText(shown, bx, y);
+        if (ln < line.length && f >= cf) {
+          drawCursor(ctx, bx + ctx.measureText(shown).width + 1, y, 13, f, '#fff');
+          return;
+        }
+        cf += lineFrames + 3;
+        y += lineH - 2;
+      }
+    }
+
+    function _legacyDrawPhase0_unused() {
       drawChrome('Claude Code · playwright-aqa skill');
       phaseLabel(ctx, W, 0, ['Demo', 'Architecture']);
 
@@ -2053,9 +2180,9 @@ if (heroWrap && heroCard) {
     }
 
     function frame() {
-      if (phase === 0) drawPhase0(); else drawPhase1();
+      drawTerm();
       f++;
-      if (f >= PHASE_F) { f = 0; phase = 1 - phase; }
+      if (f >= LOOP_F) f = 0;
       rafId = requestAnimationFrame(frame);
     }
     frame();
@@ -2097,7 +2224,6 @@ if (heroWrap && heroCard) {
 
     function drawPhase0() {
       drawChatChrome('Confluence LangChain Bot · ask your docs');
-      phaseLabel(ctx, W, 0, ['Chat demo', 'How it works']);
 
       // user bubble right
       ctx.font = '500 13px Outfit, sans-serif';
@@ -2175,7 +2301,6 @@ if (heroWrap && heroCard) {
       ctx.textAlign = 'center';
       ctx.fillText('ingest → embed → retrieve · powered by LangGraph', W/2, 25);
       ctx.textAlign = 'left';
-      phaseLabel(ctx, W, 1, ['Chat demo', 'How it works']);
 
       const topOffset = 52;
       const innerH = H - topOffset;
@@ -2319,7 +2444,6 @@ if (heroWrap && heroCard) {
 
     function drawPhase0() {
       drawChatChromeF('my-foodie-bot · recipe assistant');
-      phaseLabel(ctx, W, 0, ['Chat demo', 'Observability']);
 
       // user
       ctx.font = '500 13px Outfit, sans-serif';
@@ -2386,88 +2510,173 @@ if (heroWrap && heroCard) {
       }
     }
 
-    // Phase 1 — LangFuse scoreboard (existing)
-    const metrics = [
-      { label: 'hallucination rate',  col: '#dc2626', target: 0.08,  unit: '%',   fmt: v => (v*100).toFixed(1) + '%' },
-      { label: 'groundedness score',  col: '#16a34a', target: 0.89,  unit: '',    fmt: v => v.toFixed(2) },
-      { label: 'p95 latency',         col: '#d97706', target: 0.62,  unit: 'ms',  fmt: v => Math.round(v * 1800) + 'ms' },
-      { label: 'token cost / session',col: '#2563eb', target: 0.34,  unit: '$',   fmt: v => '$' + (v * 0.18).toFixed(3) },
+    // Phase 1 — LangFuse-style trace view: chains with cost + scorers
+    const spans = [
+      { name: 'foodie-bot.chat',           depth: 0, dur: 1.00, cost: 0.0089, tokens: 2680, model: null,            col: '#0f172a' },
+      { name: 'memO.recall_preferences',   depth: 1, dur: 0.08, cost: 0.0002, tokens:  120, model: 'memO',          col: '#16a34a' },
+      { name: 'retrieve_recipes',          depth: 1, dur: 0.18, cost: 0.0008, tokens:  340, model: 'vector.search', col: '#2563eb' },
+      { name: 'llm.chat_openai',           depth: 1, dur: 0.58, cost: 0.0071, tokens: 2100, model: 'gpt-4o-mini',   col: '#d97706' },
+      { name: 'memO.persist_context',      depth: 1, dur: 0.06, cost: 0.0008, tokens:  120, model: 'memO',          col: '#16a34a' },
     ];
-    const series = metrics.map(m => Array.from({length: 40}, (_, i) => m.target + Math.sin(i * 0.3) * 0.08 + (Math.random() - .5) * 0.05));
+    const scorers = [
+      { name: 'groundedness',   val: 0.91, col: '#16a34a' },
+      { name: 'hallucination',  val: 0.04, col: '#dc2626' },
+      { name: 'helpfulness',    val: 0.88, col: '#2563eb' },
+      { name: 'instruct-adh.',  val: 0.93, col: '#7c3aed' },
+    ];
     let t = 0;
-    const topOffset = 44;
-    const rowH = (H - topOffset - 16) / metrics.length;
 
     function drawPhase1() {
       ctx.clearRect(0, 0, W, H);
       ctx.fillStyle = '#f4f6fa'; ctx.fillRect(0, 0, W, H);
+      // chrome
       ctx.fillStyle = 'rgba(15,23,42,.05)'; ctx.fillRect(0, 0, W, 40);
       ctx.fillStyle = 'rgba(15,23,42,.12)'; ctx.fillRect(0, 40, W, 1);
+      [['#ef4444', 18],['#eab308', 34],['#22c55e', 50]].forEach(([c,x]) => {
+        ctx.fillStyle = c; ctx.beginPath(); ctx.arc(x, 20, 5, 0, Math.PI*2); ctx.fill();
+      });
       ctx.font = '500 11px Geist Mono, monospace';
       ctx.fillStyle = 'rgba(15,23,42,.55)';
       ctx.textAlign = 'center';
-      ctx.fillText('langfuse · release eval scoreboard · last 40 releases', W/2, 25);
+      ctx.fillText('langfuse · trace · foodie-bot.chat', W/2, 25);
       ctx.textAlign = 'left';
-      phaseLabel(ctx, W, 1, ['Chat demo', 'Observability']);
 
-      metrics.forEach((m, i) => {
-        const y = topOffset + 8 + i * rowH;
-        // bg
-        ctx.fillStyle = 'rgba(15,23,42,.03)';
-        ctx.fillRect(20, y, W - 40, rowH - 8);
-        ctx.strokeStyle = 'rgba(15,23,42,.08)';
-        ctx.strokeRect(20, y, W - 40, rowH - 8);
+      // trace summary bar
+      const sumY = 52;
+      ctx.font = '600 11px Geist Mono, monospace';
+      ctx.fillStyle = 'rgba(15,23,42,.55)';
+      ctx.fillText('trace_id · 8f2e·a1b3·92c4', 20, sumY);
+      ctx.textAlign = 'right';
+      const blink = Math.floor(t / 40) % 2 === 0 ? 1 : 0.3;
+      ctx.fillStyle = '#16a34a';
+      ctx.globalAlpha = blink;
+      ctx.beginPath(); ctx.arc(W - 160, sumY - 4, 3.5, 0, Math.PI*2); ctx.fill();
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = '#16a34a';
+      ctx.fillText('200 OK', W - 130, sumY);
+      ctx.fillStyle = 'rgba(15,23,42,.55)';
+      ctx.fillText('1.24s · $0.0089', W - 20, sumY);
+      ctx.textAlign = 'left';
 
-        // label
-        ctx.font = '600 11.5px Outfit, sans-serif';
+      // column headers
+      const headY = 74;
+      ctx.font = '600 9.5px Geist Mono, monospace';
+      ctx.fillStyle = 'rgba(15,23,42,.45)';
+      ctx.fillText('SPAN', 20, headY);
+      ctx.fillText('TIMELINE', W * 0.42, headY);
+      ctx.textAlign = 'right';
+      ctx.fillText('TOKENS', W - 130, headY);
+      ctx.fillText('COST', W - 20, headY);
+      ctx.textAlign = 'left';
+      ctx.strokeStyle = 'rgba(15,23,42,.12)';
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(20, headY + 6); ctx.lineTo(W - 20, headY + 6); ctx.stroke();
+
+      // span rows
+      const rowY0 = headY + 18;
+      const rowH = 22;
+      const barX = W * 0.42;
+      const barW = W * 0.42;
+      // cumulative offset for timeline bars
+      let cursorDur = 0;
+      spans.forEach((s, i) => {
+        const y = rowY0 + i * rowH;
+        const active = Math.floor(t / 60) % spans.length === i;
+
+        // row bg (active highlight)
+        if (active) {
+          ctx.fillStyle = 'rgba(217,119,6,.08)';
+          ctx.fillRect(12, y - 12, W - 24, rowH - 2);
+        }
+
+        // indent guide
+        if (s.depth > 0) {
+          ctx.strokeStyle = 'rgba(15,23,42,.15)';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(28, y - 6);
+          ctx.lineTo(28, y + 2);
+          ctx.lineTo(36, y + 2);
+          ctx.stroke();
+        }
+        // colored dot
+        ctx.fillStyle = s.col;
+        ctx.beginPath(); ctx.arc(s.depth === 0 ? 26 : 40, y + 2, 3, 0, Math.PI*2); ctx.fill();
+
+        // name
+        ctx.font = (s.depth === 0 ? '700 11.5px' : '500 11px') + ' Geist Mono, monospace';
         ctx.fillStyle = '#0f172a';
-        ctx.fillText(m.label, 32, y + 18);
+        const nameX = s.depth === 0 ? 34 : 48;
+        ctx.fillText(s.name, nameX, y + 6);
 
-        // current value
-        const cur = series[i][series[i].length - 1];
-        ctx.font = '700 13px Geist Mono, monospace';
-        ctx.fillStyle = m.col;
+        // model badge
+        if (s.model) {
+          ctx.font = '500 9px Geist Mono, monospace';
+          const mw = ctx.measureText(s.model).width + 10;
+          const mx = nameX + ctx.measureText(s.name).width + 10;
+          ctx.fillStyle = 'rgba(124,58,237,.12)';
+          ctx.strokeStyle = 'rgba(124,58,237,.3)';
+          ctx.beginPath(); ctx.roundRect(mx, y - 5, mw, 14, 4); ctx.fill(); ctx.stroke();
+          ctx.fillStyle = '#6d28d9';
+          ctx.fillText(s.model, mx + 5, y + 5);
+        }
+
+        // timeline bar
+        if (s.depth === 0) {
+          ctx.fillStyle = 'rgba(15,23,42,.08)';
+          ctx.fillRect(barX, y - 4, barW, 8);
+        } else {
+          const bx = barX + cursorDur * barW;
+          const bw = s.dur * barW;
+          ctx.fillStyle = s.col + '33';
+          ctx.fillRect(bx, y - 4, bw, 8);
+          ctx.fillStyle = s.col;
+          // animate fill if active
+          const fill = active ? ((t % 60) / 60) : 1;
+          ctx.fillRect(bx, y - 4, bw * fill, 8);
+          ctx.font = '500 9px Geist Mono, monospace';
+          ctx.fillStyle = 'rgba(15,23,42,.55)';
+          ctx.fillText(Math.round(s.dur * 1240) + 'ms', bx + 2, y + 16);
+          cursorDur += s.dur;
+          if (cursorDur > 0.98) cursorDur = 0;
+        }
+
+        // tokens + cost
         ctx.textAlign = 'right';
-        ctx.fillText(m.fmt(cur), W - 32, y + 18);
+        ctx.font = '500 10.5px Geist Mono, monospace';
+        ctx.fillStyle = 'rgba(15,23,42,.7)';
+        ctx.fillText(s.tokens.toLocaleString(), W - 130, y + 6);
+        ctx.fillStyle = '#0f172a';
+        ctx.font = '600 10.5px Geist Mono, monospace';
+        ctx.fillText('$' + s.cost.toFixed(4), W - 20, y + 6);
         ctx.textAlign = 'left';
+      });
 
-        // sparkline
-        const plotX = 32, plotW = W - 64;
-        const plotY = y + 28, plotH = rowH - 44;
-        ctx.strokeStyle = m.col;
-        ctx.lineWidth = 1.8;
-        ctx.beginPath();
-        series[i].forEach((v, k) => {
-          const x = plotX + (k / (series[i].length - 1)) * plotW;
-          const yy = plotY + plotH - v * plotH;
-          if (k === 0) ctx.moveTo(x, yy); else ctx.lineTo(x, yy);
-        });
-        ctx.stroke();
-
-        // fill
-        ctx.lineTo(plotX + plotW, plotY + plotH);
-        ctx.lineTo(plotX, plotY + plotH);
-        ctx.closePath();
-        ctx.fillStyle = m.col + '22';
-        ctx.fill();
-
-        // latest dot
-        const lx = plotX + plotW;
-        const ly = plotY + plotH - cur * plotH;
-        ctx.fillStyle = m.col;
-        ctx.beginPath(); ctx.arc(lx, ly, 3.5, 0, Math.PI*2); ctx.fill();
-        ctx.globalAlpha = 0.35;
-        ctx.beginPath(); ctx.arc(lx, ly, 6 + (Math.sin(t*.08) + 1) * 3, 0, Math.PI*2); ctx.fill();
-        ctx.globalAlpha = 1;
+      // scorers row at bottom
+      const scY = H - 36;
+      ctx.strokeStyle = 'rgba(15,23,42,.12)';
+      ctx.beginPath(); ctx.moveTo(20, scY - 10); ctx.lineTo(W - 20, scY - 10); ctx.stroke();
+      ctx.font = '600 9.5px Geist Mono, monospace';
+      ctx.fillStyle = 'rgba(15,23,42,.45)';
+      ctx.fillText('SCORERS', 20, scY);
+      const sgap = (W - 140) / scorers.length;
+      scorers.forEach((s, i) => {
+        const sx = 100 + i * sgap;
+        ctx.font = '500 10px Geist Mono, monospace';
+        ctx.fillStyle = 'rgba(15,23,42,.6)';
+        ctx.fillText(s.name, sx, scY - 2);
+        // bar
+        const sbw = sgap - 30;
+        ctx.fillStyle = 'rgba(15,23,42,.08)';
+        ctx.fillRect(sx, scY + 4, sbw, 5);
+        ctx.fillStyle = s.col;
+        ctx.fillRect(sx, scY + 4, sbw * s.val, 5);
+        ctx.font = '700 10px Geist Mono, monospace';
+        ctx.fillStyle = s.col;
+        ctx.fillText(s.val.toFixed(2), sx + sbw + 4, scY + 9);
       });
 
       t++;
-      if (t % 18 === 0) {
-        series.forEach((s, i) => {
-          s.shift();
-          s.push(metrics[i].target + Math.sin(t * 0.02 + i) * 0.08 + (Math.random() - .5) * 0.06);
-        });
-      }
     }
 
     function frame() {
@@ -2479,6 +2688,24 @@ if (heroWrap && heroCard) {
     frame();
   }
 })();
+
+// ── EXPERIENCE: show/hide bullet details ──
+document.querySelectorAll('.job-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const card = btn.closest('.job-card');
+    const bullets = card.querySelector('.bullets');
+    const isHidden = bullets.hasAttribute('hidden');
+    if (isHidden) {
+      bullets.removeAttribute('hidden');
+      btn.textContent = 'Hide details ↑';
+      btn.setAttribute('aria-expanded', 'true');
+    } else {
+      bullets.setAttribute('hidden', '');
+      btn.textContent = 'Show details ↓';
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+});
 </script>
 </body>
 </html>
